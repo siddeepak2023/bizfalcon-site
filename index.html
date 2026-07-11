@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <style>
 /* ============ TOKENS ============ */
 :root{
@@ -30,7 +30,7 @@
   color-scheme:dark;
 }
 [data-theme="light"]{
-  --bg:#FAFAF8;
+  --bg:#F8F7F3;
   --bg2:#F2F2EF;
   --fg:#111110;
   --mut:#5C5C57;
@@ -70,10 +70,10 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 :focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 
-h1,h2,h3{font-family:"Sora",sans-serif;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+h1,h2,h3{font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-weight:600;letter-spacing:-.03em;line-height:1.05}
 .mono{font-family:"JetBrains Mono",monospace}
 
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 24px;min-width:0}
 section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 
 /* eyebrow + chips */
@@ -151,10 +151,6 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 /* ============ HERO ============ */
 .hero{min-height:100svh;padding:0;border-top:none;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .hero-canvas{position:absolute;left:0;right:0;bottom:0;height:82%;width:100%;display:block;pointer-events:none}
-.hero-fade{position:absolute;left:0;right:0;bottom:0;height:82%;pointer-events:none;
-  background:
-    linear-gradient(90deg,var(--bg) 4%,transparent 52%),
-    linear-gradient(to bottom,var(--bg) 0%,transparent 32%)}
 .hero-in{position:relative;z-index:2;padding-top:150px}
 .hero h1{font-size:clamp(2.9rem,7.2vw,5.6rem);max-width:13ch}
 .hero h1 .est{color:var(--mut);position:relative}
@@ -358,6 +354,53 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
   .chip .pulse,.caret,.scroll-hint::after{animation:none}
   *{transition-duration:.01ms!important}
 }
+
+/* Design-system footer */
+.footer{border-top:1px solid var(--line-soft);padding:64px 0 36px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:48px}
+@media(max-width:920px){.foot-grid{grid-template-columns:1fr 1fr;gap:28px}}
+.foot-brand .foot-logo{display:flex;align-items:center;gap:9px;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.14em;color:var(--fg)}
+.foot-brand .foot-logo span{color:var(--mut);font-size:10.5px}
+.foot-brand p{margin-top:14px;max-width:30ch;font-size:13.5px;line-height:1.6;color:var(--mut)}
+.foot-col{display:flex;flex-direction:column;gap:10px}
+.foot-col h4{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin:0 0 4px;font-weight:500}
+.foot-col a{font-size:13.5px;color:var(--fg);opacity:.78;text-decoration:none}
+.foot-col a:hover{opacity:1;color:var(--signal)}
+.foot-base{border-top:1px solid var(--line-soft);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}
+.foot-sig{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--mut)}
+/* Art edge fades — full transparency at every border */
+.art--inline,.art--sphere,.art--faqfield,.art--dome{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent),linear-gradient(transparent,#000 14%,#000 86%,transparent);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent),linear-gradient(transparent,#000 14%,#000 86%,transparent);
+  mask-composite:intersect}
+
+
+/* ── Editorial pass: Instrument Sans for interactive voice; mono reserved
+   for true instrument labels (eyebrows, HUD bars, data readouts). ── */
+.btn,.promptbox .pb-go{font-family:"Instrument Sans","Hanken Grotesk",sans-serif;
+  text-transform:none;letter-spacing:.005em;font-size:14.5px;font-weight:600}
+.promptbox .pb-go{padding:10px 18px}
+.btn--primary:hover{background:var(--fg);color:var(--bg);box-shadow:inset 0 -2px 0 var(--signal)}
+.promptbox .pb-go:hover{background:var(--fg);color:var(--bg);box-shadow:inset 0 -2px 0 var(--signal)}
+.nav-links a{font-family:"Instrument Sans","Hanken Grotesk",sans-serif;
+  text-transform:none;letter-spacing:.01em;font-size:13.5px;font-weight:500}
+.demo-tab{font-family:"Instrument Sans","Hanken Grotesk",sans-serif;
+  text-transform:none;letter-spacing:.005em;font-size:12.5px;font-weight:600}
+.chip .pulse{border-radius:0;animation:none}
+.shot-bar .dots{display:none}
+
+
+.hero-canvas--follow{position:fixed;top:0;left:0;bottom:auto;width:100%;height:100vh;z-index:-1}
+.art--eclipse{animation:eclipse-pulse 5.5s ease-in-out infinite}
+@keyframes eclipse-pulse{0%,100%{opacity:.82}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.art--eclipse{animation:none}}
+
+</style>
+<style>
+.accent-serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:#B0453B}
+body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var(--bg)}
+[data-theme="light"] body{background:url(textures/halftone-ink.png) repeat fixed 0 0/720px 720px,var(--bg)}
 </style>
 </head>
 <body>
@@ -388,7 +431,6 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 <!-- ============ HERO ============ -->
 <section class="hero">
   <canvas class="hero-canvas" id="terrain" aria-hidden="true"></canvas>
-  <div class="hero-fade" aria-hidden="true"></div>
 
   <div class="rail rail--l" aria-hidden="true">
     ENGINE&nbsp;<b>TALON&nbsp;CORE</b><br>
@@ -427,12 +469,11 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 <section id="products" class="dotbg">
   <div class="wrap">
     <div class="sec-row">
-      <div class="sec-head rv">
+      <div class="sec-head rv" data-dock>
         <div class="eyebrow">Products</div>
         <h2>Three instruments.<br>One engine.</h2>
         <p>Everything below runs on the same core: upload data, the analyst writes Python, runs it in your browser, and shows the math behind every answer.</p>
       </div>
-      <canvas class="art art--sphere rv d1" data-art="sphere" aria-hidden="true"></canvas>
     </div>
 
     <div class="prod-grid">
@@ -501,10 +542,13 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 <!-- ============ METHOD ============ -->
 <section id="method">
   <div class="wrap">
-    <div class="sec-head rv">
-      <div class="eyebrow">Method</div>
-      <h2>Every number shows its work.</h2>
-      <p>Most AI analytics tools ask a language model to guess at your numbers. Ours makes it write code instead — and then we run the code.</p>
+    <div class="sec-row">
+      <div class="sec-head rv">
+        <div class="eyebrow">Method</div>
+        <h2>Every number shows its work.</h2>
+        <p>Most AI analytics tools ask a language model to guess at your numbers. Ours makes it write code instead — and then we run the code.</p>
+      </div>
+      <canvas class="art art--sphere rv d1" data-art="glitchsphere" aria-hidden="true"></canvas>
     </div>
     <div class="steps">
       <div class="step rv">
@@ -519,9 +563,6 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
         <h3>Decide</h3>
         <p>KPIs, forecasts, and anomalies — each one linked to the exact computation that produced it. Click any number, see its math.</p>
       </div>
-    </div>
-    <div class="obs rv" aria-hidden="true">
-      <canvas class="art" data-art="massif"></canvas>
     </div>
   </div>
 </section>
@@ -540,7 +581,7 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
           <span>ACCEPTED <b>71%</b></span>
           <span>OUTCOMES <b>TRACKED 7/30D</b></span>
         </div>
-        <canvas class="art art--dome" data-art="dome" aria-hidden="true"></canvas>
+        <canvas class="art art--dome art--eclipse" data-art="eclipse" aria-hidden="true"></canvas>
       </div>
       <div class="rv d1">
         <div class="queue-head">
@@ -571,7 +612,6 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 
 <!-- ============ STUDIO ============ -->
 <section id="studio" class="studio">
-  <canvas class="studio-falcon" data-art="falcon" aria-hidden="true"></canvas>
   <div class="wrap studio-in">
     <div class="eyebrow rv">Studio</div>
     <h2 class="rv" style="font-size:clamp(2rem,4.4vw,3.2rem);margin-bottom:24px">Built by one.<br>Shipped like ten.</h2>
@@ -596,239 +636,41 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
-  <div class="wrap foot-in">
-    <span>© 2026 BIZFALCON AI — AI PRODUCT STUDIO</span>
-    <nav class="foot-links" aria-label="Footer">
-      <a href="https://talon.bizfalconai.com">Talon</a>
-      <a href="https://talon.bizfalconai.com/talonomic">Talonomic</a>
-      <a href="https://talon.bizfalconai.com/talonmark">Talonmark</a>
-      <a href="mailto:hello@bizfalconai.com">Contact</a>
-    </nav>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo"><img src="./falcon-bird-white.png" alt="" style="width:20px;height:20px;background:#0A0A0B;border-radius:5px;padding:3px;box-sizing:border-box"><b>BIZFALCON AI</b><span>/ BIZFALCON AI</span></div>
+        <p>An AI product studio. One analysis engine — Talon — packaged into vertical instruments.</p>
+      </div>
+      <nav class="foot-col" aria-label="Products">
+        <h4>Products</h4>
+        <a href="https://talon.bizfalconai.com">Talon</a>
+        <a href="https://talon.bizfalconai.com/talonomic">Talonomic</a>
+        <a href="https://talon.bizfalconai.com/talonmark">Talonmark</a>
+      </nav>
+      <nav class="foot-col" aria-label="Company">
+        <h4>Company</h4>
+        <a href="https://bizfalconai.com">BizFalcon AI</a>
+        <a href="mailto:hello@bizfalconai.com">Contact</a>
+      </nav>
+      <nav class="foot-col" aria-label="Legal">
+        <h4>Legal</h4>
+        <a href="https://talon.bizfalconai.com/privacy">Privacy</a>
+        <a href="https://talon.bizfalconai.com/terms">Terms</a>
+      </nav>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 BizFalcon AI. All rights reserved.</span>
+      <span class="foot-sig">ONE ENGINE, MANY INSTRUMENTS</span>
+    </div>
   </div>
 </footer>
 
+<script src="./dusk-art.js"></script>
 <script>
 (function(){
 "use strict";
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-/* ---------- THEME ---------- */
-var root = document.documentElement;
-var stored = null;
-try { stored = localStorage.getItem("bf-theme"); } catch(e){}
-if (stored === "light" || (!stored && window.matchMedia("(prefers-color-scheme: light)").matches)) {
-  root.setAttribute("data-theme","light");
-}
-document.getElementById("themeToggle").addEventListener("click", function(){
-  var light = root.getAttribute("data-theme") === "light";
-  if (light) root.removeAttribute("data-theme");
-  else root.setAttribute("data-theme","light");
-  try { localStorage.setItem("bf-theme", light ? "dark" : "light"); } catch(e){}
-  syncCanvasColors();
-});
-
-/* ---------- DITHERED ART (ordered Bayer 4x4, drawn once) ---------- */
-var BAYER = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
-function bayer(x, y){ return (BAYER[y % 4][x % 4] + 0.5) / 16; }
-function ditherField(cv, field, cell){
-  var w = cv.clientWidth, h = cv.clientHeight;
-  if (!w || !h) return;
-  cv.width = w; cv.height = h;
-  var c2 = cv.getContext("2d");
-  c2.clearRect(0, 0, w, h);
-  c2.fillStyle = getComputedStyle(root).getPropertyValue("--fg").trim();
-  for (var y = 0; y < h; y += cell) {
-    for (var x = 0; x < w; x += cell) {
-      var b = field(x / w, y / h);
-      if (b > bayer((x / cell) | 0, (y / cell) | 0)) c2.fillRect(x, y, cell - 1, cell - 1);
-    }
-  }
-}
-function sphereField(u, v){
-  var dx = u - 0.5, dy = v - 0.5;
-  var r = Math.sqrt(dx * dx + dy * dy);
-  if (r > 0.47) return 0;
-  var z = Math.sqrt(Math.max(0, 0.47 * 0.47 - r * r)) / 0.47;
-  /* lambert shading, light from upper-left-front */
-  var lum = Math.max(0, (-dx / 0.47) * -0.45 + (-dy / 0.47) * 0.55 + z * 0.72);
-  return Math.pow(lum, 1.6) * 0.95;
-}
-var falconImg = new Image();
-var falconData = null;
-falconImg.onload = function(){
-  var off = document.createElement("canvas");
-  off.width = 128; off.height = Math.round(128 * falconImg.height / falconImg.width);
-  off.getContext("2d").drawImage(falconImg, 0, 0, off.width, off.height);
-  falconData = { d: off.getContext("2d").getImageData(0, 0, off.width, off.height), w: off.width, h: off.height };
-  renderArts();
-};
-falconImg.src = "falcon-lines-dark.png";
-function falconField(u, v){
-  if (!falconData) return 0;
-  var x = Math.min(falconData.w - 1, (u * falconData.w) | 0);
-  var y = Math.min(falconData.h - 1, (v * falconData.h) | 0);
-  var i = (y * falconData.w + x) * 4;
-  var a = falconData.d.data[i + 3] / 255;
-  /* line-art alpha × soft vertical falloff */
-  return a * (0.85 - v * 0.25);
-}
-/* still massif — hero technique, single frame, fixed seed */
-function drawMassifStill(cv){
-  var w = cv.clientWidth, h = cv.clientHeight;
-  if (!w || !h) return;
-  var dpr = Math.min(window.devicePixelRatio || 1, 2);
-  cv.width = w * dpr; cv.height = h * dpr;
-  var c2 = cv.getContext("2d");
-  c2.setTransform(dpr, 0, 0, dpr, 0, 0);
-  var fg = getComputedStyle(root).getPropertyValue("--fg").trim();
-  var sg = getComputedStyle(root).getPropertyValue("--signal").trim();
-  var ROWS = 88, COLS = Math.max(140, Math.floor(w / 4));
-  var horizon = h * 0.18, spread = h * 0.74, maxH = h * 0.95, stepX = w / COLS;
-  var SEED = 7.31; /* fixed — still image */
-  for (var r = 0; r < ROWS; r++) {
-    var d = r / (ROWS - 1);
-    var base = horizon + d * spread;
-    for (var q = 0; q <= COLS; q++) {
-      var jx = (hash2(q, r) - 0.5) * stepX * 1.8;
-      var jy = (hash2(q + 57, r + 91) - 0.5) * 6;
-      var u = (q + jx / stepX) / COLS;
-      /* sharp central peak + two shoulders — ref: seismic massif */
-      var env = Math.exp(-Math.pow((u - 0.5) / 0.13, 2))
-              + 0.4 * Math.exp(-Math.pow((u - 0.31) / 0.09, 2))
-              + 0.34 * Math.exp(-Math.pow((u - 0.69) / 0.08, 2));
-      env = Math.min(1, env);
-      var hh = Math.pow(fbm(u * 6.5, d * 4.2, SEED), 1.15) * env;
-      if (hh < 0.02) continue;
-      var y = base - hh * maxH * (0.3 + 0.7 * d) + jy;
-      if (y < 0) continue;
-      var alpha = Math.min(0.95, 0.04 + Math.pow(hh, 1.3) * 1.7) * (0.28 + 0.72 * d);
-      if (hh > 0.6 && ((q * 7 + r * 13) % 131) === 0) {
-        c2.fillStyle = sg; c2.globalAlpha = 0.85; c2.fillRect(u * w, y, 2, 2);
-      } else {
-        c2.fillStyle = fg; c2.globalAlpha = alpha; c2.fillRect(u * w, y, 1.3, 1.3);
-      }
-    }
-  }
-  c2.globalAlpha = 1;
-}
-/* dithered diamond — brilliant-cut rhombus, same register as the sphere */
-function domeField(u, v){
-  var dx = (u - 0.5) * 2.15, dy = (v - 0.5) * 1.95;
-  var m = Math.abs(dx) + Math.abs(dy);
-  if (m > 0.95) return 0;
-  var b = 0.10 + 0.45 * Math.pow(m / 0.95, 3.0);
-  b += 0.38 * Math.exp(-Math.pow((Math.abs(dx) - Math.abs(dy)) / 0.05, 2));
-  b += 0.30 * Math.exp(-Math.pow(dx / 0.035, 2));
-  b += 0.26 * Math.exp(-Math.pow((dy + 0.12) / 0.035, 2));
-  b += 0.45 * Math.exp(-Math.pow((dx + 0.18) / 0.10, 2)) * Math.exp(-Math.pow((dy + 0.30) / 0.10, 2));
-  b *= dy < -0.12 ? 1.18 : 0.82;
-  return Math.min(1, b);
-}
-function renderArts(){
-  document.querySelectorAll("[data-art]").forEach(function(cv){
-    var kind = cv.getAttribute("data-art");
-    if (kind === "sphere") ditherField(cv, sphereField, 3);
-    else if (kind === "falcon") ditherField(cv, falconField, 3);
-    else if (kind === "dome") ditherField(cv, domeField, 2);
-    else if (kind === "massif") drawMassifStill(cv);
-  });
-}
-window.addEventListener("resize", renderArts);
-
-/* ---------- PARTICLE TERRAIN ---------- */
-var canvas = document.getElementById("terrain");
-var ctx = canvas.getContext("2d");
-var W = 0, H = 0, dotColor = "#EDECE8", sigColor = "#FF3B30";
-var running = true, heroVisible = true, last = 0;
-
-function syncCanvasColors(){
-  var cs = getComputedStyle(root);
-  dotColor = cs.getPropertyValue("--fg").trim() || dotColor;
-  sigColor = cs.getPropertyValue("--signal").trim() || sigColor;
-  drawFrame(last / 1000); /* re-render current frame on theme change */
-  renderArts();
-}
-function resize(){
-  var dpr = Math.min(window.devicePixelRatio || 1, 2);
-  W = canvas.clientWidth; H = canvas.clientHeight;
-  canvas.width = W * dpr; canvas.height = H * dpr;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  drawFrame(0); /* always paint one frame — rAF is paused in background tabs */
-}
-function n2(x, y){
-  return Math.sin(x * 1.7 + Math.sin(y * 0.8) * 1.3) * Math.cos(y * 1.1 + Math.sin(x * 0.6));
-}
-function fbm(x, y, t){
-  var v = 0, a = 0.55, f = 1;
-  for (var i = 0; i < 4; i++) {
-    v += a * n2(x * f + t * 0.25, y * f - t * 0.18);
-    f *= 2.05; a *= 0.5;
-  }
-  return v * 0.5 + 0.5; /* 0..1 */
-}
-function hash2(a, b){
-  var s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
-  return s - Math.floor(s);
-}
-function drawFrame(t){
-  ctx.clearRect(0, 0, W, H);
-  var ROWS = 70, COLS = Math.min(260, Math.max(120, Math.floor(W / 5)));
-  var horizon = H * 0.24, spread = H * 0.68, maxH = H * 0.78;
-  var stepX = W / COLS;
-  for (var r = 0; r < ROWS; r++) {
-    var d = r / (ROWS - 1);                 /* 0 = back, 1 = front */
-    var base = horizon + d * spread;
-    for (var c = 0; c <= COLS; c++) {
-      var jx = (hash2(c, r) - 0.5) * stepX * 1.8;       /* break grid alignment */
-      var jy = (hash2(c + 57, r + 91) - 0.5) * 7;
-      var u = (c + jx / stepX) / COLS;
-      /* twin-peak envelope so terrain forms a massif, not a wall */
-      var e1 = Math.exp(-Math.pow((u - 0.62) / 0.16, 2));
-      var e2 = 0.55 * Math.exp(-Math.pow((u - 0.86) / 0.10, 2));
-      var env = Math.min(1, e1 + e2);
-      var h = fbm(u * 4.2, d * 3.1, t) * env;
-      if (h < 0.02) continue;
-      var y = base - h * maxH * (0.35 + 0.65 * d) + jy;
-      var alpha = Math.min(0.95, 0.05 + Math.pow(h, 1.25) * 1.5) * (0.3 + 0.7 * d);
-      /* rare red signal dots near the peak */
-      if (h > 0.62 && ((c * 7 + r * 13) % 97) === 0) {
-        ctx.fillStyle = sigColor;
-        ctx.globalAlpha = 0.9;
-        ctx.fillRect(u * W, y, 2, 2);
-      } else {
-        ctx.fillStyle = dotColor;
-        ctx.globalAlpha = alpha;
-        ctx.fillRect(u * W, y, 1.4, 1.4);
-      }
-    }
-  }
-  ctx.globalAlpha = 1;
-}
-function loop(ts){
-  if (!running) return;
-  requestAnimationFrame(loop);
-  if (!heroVisible || document.hidden) return;
-  if (ts - last < 33) return; /* ~30fps is plenty for grain */
-  last = ts;
-  drawFrame(ts / 1000);
-}
-window.addEventListener("resize", resize);
-resize();
-syncCanvasColors();
-if (reduceMotion) { drawFrame(0); }
-else {
-  new IntersectionObserver(function(en){ heroVisible = en[0].isIntersecting; })
-    .observe(document.querySelector(".hero"));
-  requestAnimationFrame(loop);
-}
-
-/* ---------- SCROLL REVEALS ---------- */
-var io = new IntersectionObserver(function(entries){
-  entries.forEach(function(en){
-    if (en.isIntersecting) { en.target.classList.add("on"); io.unobserve(en.target); }
-  });
-}, { threshold: 0.15 });
-document.querySelectorAll(".rv").forEach(function(el){ io.observe(el); });
 
 /* ---------- TALON DEMO SEQUENCE ---------- */
 var qEl = document.getElementById("demoQ");
