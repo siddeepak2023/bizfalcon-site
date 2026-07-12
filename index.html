@@ -396,6 +396,174 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 @keyframes eclipse-pulse{0%,100%{opacity:.82}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.art--eclipse{animation:none}}
 
+/* ── Panel-grade card minis (v2) — each bento/step card gets its own
+      mini gradient stage with an accurate in-app fragment. ───────── */
+.scm{
+  position:relative;margin-top:18px;border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;padding:14px 15px 13px;
+  background:
+    radial-gradient(130% 170% at 90% 125%, rgba(176,69,59,.15), transparent 60%),
+    linear-gradient(155deg, var(--bg2), var(--bg) 70%);
+}
+[data-theme="light"] .scm{
+  background:
+    radial-gradient(130% 170% at 90% 125%, rgba(142,42,34,.07), transparent 60%),
+    linear-gradient(155deg, #FFFFFF, var(--bg) 72%);
+}
+.scm::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(var(--dot) 1px,transparent 1px);
+  background-size:22px 22px;opacity:.3;
+}
+.scm > *{position:relative}
+.scm-tag{
+  position:absolute;top:9px;right:11px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);
+}
+.scm .mono, .scm-row, .scm-meta{font-family:"JetBrains Mono",monospace}
+
+/* verified formula mini (A1) */
+.scm-vbadge{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--signal) 45%,transparent);
+  color:var(--signal);border-radius:6px;padding:3px 8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.16em;text-transform:uppercase}
+.scm-vbadge::before{content:"✓"}
+.scm-formula{margin:10px 0 2px;font-size:14.5px;color:var(--fg);font-weight:600;letter-spacing:-.01em}
+.scm-formula em{font-style:normal;color:var(--signal)}
+.scm-code{margin-top:9px;border:1px solid var(--line-soft);background:color-mix(in srgb,var(--fg) 3.5%,transparent);
+  border-radius:7px;padding:7px 10px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--mut)}
+.scm-code b{color:var(--fg);font-weight:500}
+.scm-meta{display:flex;gap:14px;margin-top:10px;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);flex-wrap:wrap}
+.scm-meta b{color:var(--fg);font-weight:500}
+
+/* model picker mini (A2) — rows cycle highlight */
+.scm-modl{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-modl .mr{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;
+  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--mut)}
+.scm-modl .mr::before{content:"";width:7px;height:7px;border-radius:50%;border:1px solid var(--line);flex:none}
+.scm-modl .mr .tag2{margin-left:auto;font-size:8px;letter-spacing:.14em;text-transform:uppercase;opacity:0;color:var(--signal)}
+.rv.on .scm-modl .mr{animation:scmModl 12s infinite}
+.rv.on .scm-modl .mr:nth-child(2){animation-delay:3s}
+.rv.on .scm-modl .mr:nth-child(3){animation-delay:6s}
+.rv.on .scm-modl .mr:nth-child(4){animation-delay:9s}
+@keyframes scmModl{
+  0%,22%{border-color:color-mix(in srgb,var(--signal) 45%,transparent);color:var(--fg)}
+  25%,100%{border-color:var(--line-soft);color:var(--mut)}
+}
+.rv.on .scm-modl .mr::before{animation:scmModlDot 12s infinite}
+.rv.on .scm-modl .mr:nth-child(2)::before{animation-delay:3s}
+.rv.on .scm-modl .mr:nth-child(3)::before{animation-delay:6s}
+.rv.on .scm-modl .mr:nth-child(4)::before{animation-delay:9s}
+@keyframes scmModlDot{
+  0%,22%{background:var(--signal);border-color:var(--signal)}
+  25%,100%{background:transparent;border-color:var(--line)}
+}
+.rv.on .scm-modl .mr .tag2{animation:scmModlTag 12s infinite}
+.rv.on .scm-modl .mr:nth-child(2) .tag2{animation-delay:3s}
+.rv.on .scm-modl .mr:nth-child(3) .tag2{animation-delay:6s}
+.rv.on .scm-modl .mr:nth-child(4) .tag2{animation-delay:9s}
+@keyframes scmModlTag{0%,22%{opacity:1}25%,100%{opacity:0}}
+
+/* privacy / masking mini (A3) */
+.scm-mask{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-mask .mk{display:flex;align-items:center;gap:8px;border:1px solid var(--line-soft);border-radius:7px;
+  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--mut)}
+.scm-mask .mk b{color:var(--fg);font-weight:500}
+.scm-mask .mk .mtag{margin-left:auto;font-size:8px;letter-spacing:.14em;color:var(--signal)}
+.scm-mask .sum{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);padding:2px 2px 0}
+.scm-mask .sum::before{content:"✓";color:var(--signal)}
+
+/* chart + forecast mini (A4) — bars grow, forecast dashes draw */
+.scm-chart{display:block;width:100%;height:86px;margin-top:6px}
+.scm-chart .bar{fill:color-mix(in srgb,var(--fg) 16%,transparent);transform-origin:bottom;transform-box:fill-box}
+.scm-chart .bar.hot{fill:color-mix(in srgb,var(--signal) 75%,transparent)}
+.rv.on .scm-chart .bar{animation:scmBar .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i)*90ms)}
+@keyframes scmBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.scm-chart .fc{fill:none;stroke:var(--signal);stroke-width:1.5;stroke-dasharray:4 4}
+.rv.on .scm-chart .fc{stroke-dashoffset:160;animation:scmFc 2.2s ease-out .8s forwards}
+@keyframes scmFc{to{stroke-dashoffset:0}}
+.scm-exp{display:flex;align-items:center;gap:10px;margin-top:8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
+.scm-exp b{color:var(--fg);font-weight:500}
+.scm-exp .x{margin-left:auto;color:var(--signal)}
+
+/* agents / schedule mini (A5) — one row live */
+.scm-sched{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-sched .sr2{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;
+  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.scm-sched .sr2 b{color:var(--fg);font-weight:500;letter-spacing:.1em}
+.scm-sched .sr2 .st{margin-left:auto;color:var(--signal);display:flex;align-items:center;gap:5px}
+.scm-sched .sr2 .st.live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal)}
+.rv.on .scm-sched .sr2 .st.live::before{animation:scmPulse 1.6s ease-in-out infinite}
+@keyframes scmPulse{0%,100%{opacity:1}50%{opacity:.25}}
+.scm-sched .add{border-style:dashed;justify-content:center;color:var(--mut);letter-spacing:.14em}
+
+/* upload / parse mini (step 1) — progress loop */
+.scm-up{margin-top:4px}
+.scm-up .fchip2{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:6px;
+  padding:4px 9px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--fg);
+  background:color-mix(in srgb,var(--fg) 4%,transparent)}
+.scm-up .track{height:3px;border-radius:2px;background:var(--line-soft);margin-top:10px;overflow:hidden}
+.scm-up .fill{height:100%;width:100%;background:var(--signal);transform-origin:left;transform:scaleX(1)}
+.rv.on .scm-up .fill{animation:scmFill 5s cubic-bezier(.3,.6,.3,1) infinite}
+@keyframes scmFill{0%{transform:scaleX(0)}55%,100%{transform:scaleX(1)}}
+.scm-up .lbl{position:relative;height:14px;margin-top:8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
+.scm-up .lbl span{position:absolute;left:0;top:0}
+.scm-up .lbl .done{color:var(--fg);opacity:1}
+.scm-up .lbl .busy{opacity:0}
+.rv.on .scm-up .lbl .busy{animation:scmLblA 5s infinite}
+.rv.on .scm-up .lbl .done{animation:scmLblB 5s infinite}
+@keyframes scmLblA{0%,50%{opacity:1}56%,100%{opacity:0}}
+@keyframes scmLblB{0%,50%{opacity:0}56%,100%{opacity:1}}
+
+/* ask / typing mini (step 2) */
+.scm-askr{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:8px;
+  padding:8px 11px;margin-top:4px;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--fg)}
+.scm-askr .q{overflow:hidden;white-space:nowrap;max-width:100%}
+.rv.on .scm-askr .q{width:31ch;animation:scmType 7s steps(31) infinite}
+@keyframes scmType{0%{width:0}45%,100%{width:31ch}}
+.scm-askr .cur{width:1px;height:13px;background:var(--signal);flex:none}
+.rv.on .scm-askr .cur{animation:scmCur 1s steps(1) infinite}
+@keyframes scmCur{50%{opacity:0}}
+.scm-askr .send2{margin-left:auto;color:var(--signal)}
+.scm-ans{display:flex;align-items:center;gap:8px;margin-top:8px;font-family:"JetBrains Mono",monospace;
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.scm-ans b{color:var(--fg);font-weight:500}
+.rv.on .scm-ans{opacity:0;animation:scmAns 7s infinite}
+@keyframes scmAns{0%,48%{opacity:0}58%,100%{opacity:1}}
+
+/* act mini (step 3) — priced action rows */
+.scm-acts{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-acts .ar{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;padding:7px 10px}
+.scm-acts .ar .pri{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.12em;color:var(--signal);
+  border:1px solid color-mix(in srgb,var(--signal) 40%,transparent);border-radius:5px;padding:2px 6px;flex:none}
+.scm-acts .ar p{margin:0;font-size:11.5px;color:var(--fg);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scm-acts .ar .imp{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--signal);flex:none}
+
+@media(prefers-reduced-motion:reduce){
+  .rv.on .scm-modl .mr,.rv.on .scm-modl .mr::before,.rv.on .scm-modl .mr .tag2,
+  .rv.on .scm-chart .bar,.rv.on .scm-chart .fc,.rv.on .scm-sched .sr2 .st.live::before,
+  .rv.on .scm-up .fill,.rv.on .scm-up .lbl .busy,.rv.on .scm-up .lbl .done,
+  .rv.on .scm-askr .q,.rv.on .scm-askr .cur,.rv.on .scm-ans{animation:none}
+  .rv.on .scm-askr .q{width:auto}
+  .rv.on .scm-ans{opacity:1}
+}
+
+
+/* drift float for scm minis */
+.rv.on .sc-drift{animation:scDrift 7s ease-in-out infinite alternate}
+.rv.on .sc-drift.dr2{animation-duration:9s;animation-delay:.8s}
+@keyframes scDrift{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){.rv.on .sc-drift{animation:none}}
+
+
+/* scm act anim */
+/* act rows slide in on loop (step 03) */
+.rv.on .scm-acts--anim .ar{opacity:0;animation:scmAct 7s infinite}
+.rv.on .scm-acts--anim .ar:nth-child(2){animation-delay:.9s}
+@keyframes scmAct{0%{opacity:0;transform:translateY(7px)}9%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.rv.on .scm-acts--anim .ar{animation:none;opacity:1}}
 </style>
 <style>
 .accent-serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:#B0453B}
@@ -433,24 +601,13 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   <canvas class="hero-canvas" id="terrain" aria-hidden="true"></canvas>
 
   <div class="rail rail--l" aria-hidden="true">
-    ENGINE&nbsp;<b>TALON&nbsp;CORE</b><br>
-    RUNTIME&nbsp;<b>PYODIDE&nbsp;/&nbsp;WASM</b><br>
-    MODELS&nbsp;<b>MULTI-LLM&nbsp;ROUTE</b><br>
-    <hr>
-    TESTS&nbsp;<b>200+&nbsp;·&nbsp;CI&nbsp;<span class="sig">●</span>&nbsp;GREEN</b><br>
-    ESTIMATES&nbsp;<b>0</b><br>
-    <hr>
-    MODE&nbsp;<b class="sig">COMPUTED</b>
+    MODE&nbsp;<b class="sig">COMPUTED</b><br>
+    ESTIMATES&nbsp;<b>0</b>
   </div>
   <div class="rail rail--r" aria-hidden="true">
     <b>TALON</b>&nbsp;— DATA&nbsp;ANALYST<br>
     <b>TALONOMIC</b>&nbsp;— UNIT&nbsp;ECON<br>
-    <b>TALONMARK</b>&nbsp;— AGENCY&nbsp;REPORTS<br>
-    <hr>
-    AGENTIC&nbsp;LAYER&nbsp;<b class="sig">SHADOW&nbsp;MODE</b><br>
-    EXECUTION&nbsp;<b>HUMAN-GATED</b><br>
-    <hr>
-    STUDIO&nbsp;OF&nbsp;<b>ONE</b>
+    <b>TALONMARK</b>&nbsp;— AGENCY&nbsp;REPORTS
   </div>
 
   <div class="wrap hero-in">
@@ -476,6 +633,14 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       </div>
     </div>
 
+    <!-- onboarding walkthrough video — appears when ./media/onboarding.mp4 ships -->
+    <style>.onb-video{border:1px solid var(--line);background:var(--bg);margin-bottom:26px}.onb-video video{display:block;width:100%;height:auto}</style>
+    <div class="onb-video rv" id="onbVideo" style="display:none">
+      <div class="demo-bar"><span>bizfalcon — onboarding walkthrough</span><span style="margin-left:auto">REAL SESSION · 90 SEC</span></div>
+      <video src="./media/onboarding.mp4" controls playsinline preload="metadata"
+             aria-label="BizFalcon walkthrough: uploading a spreadsheet and reading the computed answer"></video>
+    </div>
+
     <div class="prod-grid">
       <!-- TALON -->
       <article class="prod prod--hero frame rv"><i></i><i></i><i></i><i></i>
@@ -486,7 +651,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
           <span class="prod-link">Open Talon</span>
         </div>
         <div class="demo" aria-label="Talon demo: analyst answers a question by running Python">
-          <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span><span>talon — live session</span></div>
+          <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span><span>talon — sample session</span></div>
           <div class="demo-body">
             <div class="demo-q" id="demoQ"></div>
             <div class="demo-code" id="demoCode"></div>
@@ -546,7 +711,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       <div class="sec-head rv">
         <div class="eyebrow">Method</div>
         <h2>Every number shows its work.</h2>
-        <p>Most AI analytics tools ask a language model to guess at your numbers. Ours makes it write code instead — and then we run the code.</p>
+        <p>Most AI analytics tools ask a language model to guess at your numbers — and ask you to trust the dashboard. Ours makes the model write code, runs the code, and shows you both. Any figure, any report: click it and see the line that produced it.</p>
       </div>
       <canvas class="art art--sphere rv d1" data-art="glitchsphere" aria-hidden="true"></canvas>
     </div>
@@ -554,14 +719,37 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       <div class="step rv">
         <h3>Upload</h3>
         <p>Drop a CSV or a platform export. Your spreadsheet loads into a Python runtime that lives <code>in your browser</code> — not on a GPU somewhere.</p>
+        <div class="scm" aria-hidden="true">
+          <span class="scm-tag">Upload</span>
+          <div class="scm-up"><span class="fchip2">⌁ orders_june.csv</span>
+            <div class="track"><div class="fill"></div></div>
+            <div class="lbl">
+              <span class="busy">parsing…</span>
+              <span class="done">✓ 1,616 rows · runtime ready</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="step rv d1">
         <h3>Compute</h3>
         <p>The analyst writes real <code>pandas</code>, executes it against your actual rows, and keeps the code. LLMs draft; the interpreter decides.</p>
+        <div class="scm" aria-hidden="true">
+          <span class="scm-tag">Compute</span>
+          <span class="scm-vbadge">Verified</span>
+          <div class="scm-code"><b>df["gross_amount"].sum()</b> → 306612.44</div>
+          <div class="scm-meta"><span>Engine <b>Python · in-browser</b></span></div>
+        </div>
       </div>
       <div class="step rv d2">
         <h3>Decide</h3>
         <p>KPIs, forecasts, and anomalies — each one linked to the exact computation that produced it. Click any number, see its math.</p>
+        <div class="scm" aria-hidden="true">
+          <span class="scm-tag">Decide</span>
+          <div class="scm-acts scm-acts--anim">
+            <div class="ar"><span class="pri">P1</span><p>Cut supplier B freight</p><span class="imp">+$3,412/mo</span></div>
+            <div class="ar"><span class="pri">P2</span><p>Reprice SKU-2231</p><span class="imp">+$1,090/mo</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -748,6 +936,13 @@ document.querySelectorAll(".rec-actions button").forEach(function(btn){
     top.textContent = btn.textContent.trim().toUpperCase() === "APPROVE" ? "✓ APPROVED" : "DISMISSED";
   });
 });
+})();
+</script>
+<script>
+(function () {
+  var box = document.getElementById("onbVideo");
+  if (!box) return;
+  box.querySelector("video").addEventListener("loadedmetadata", function () { box.style.display = "block"; });
 })();
 </script>
 </body>
