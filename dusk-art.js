@@ -18,7 +18,7 @@ var root = document.documentElement;
 /* ---------- THEME ---------- */
 var stored = null;
 try { stored = localStorage.getItem("bf-theme"); } catch(e){}
-if (stored === "light" || (!stored && window.matchMedia("(prefers-color-scheme: light)").matches)) {
+if (stored !== "dark") {  // default light; toggle (stored) overrides
   root.setAttribute("data-theme","light");
 }
 var toggle = document.getElementById("themeToggle");
