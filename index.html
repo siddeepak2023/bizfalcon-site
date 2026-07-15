@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <style>
 /* ============ TOKENS ============ */
 :root{
@@ -128,7 +128,7 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
 .nav-in{max-width:1180px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:32px}
-.brand{display:flex;align-items:center;gap:11px;font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;letter-spacing:.16em}
+.brand{display:flex;align-items:center;gap:11px;font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;font-size:16px;font-weight:800;letter-spacing:-.01em}
 .brand img{height:30px;width:auto;display:block}
 [data-theme="light"] .brand img{filter:invert(1)}
 .nav-links{display:flex;gap:28px;margin-left:12px}
@@ -343,7 +343,7 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
   .prod{padding:24px}
   .nav-in{gap:14px;padding:0 16px}
   .nav .btn{white-space:nowrap;padding:9px 13px;font-size:10.5px;letter-spacing:.08em}
-  .brand{letter-spacing:.1em;font-size:12px}
+  .brand{letter-spacing:-.01em;font-size:14px}
 }
 
 /* ============ REDUCED MOTION ============ */
@@ -571,6 +571,14 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var(--bg)}
 [data-theme="light"] body{background:url(textures/halftone-ink.png) repeat fixed 0 0/720px 720px,var(--bg)}
 </style>
+  <script>
+    /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (rs) {
+        rs.forEach(function (r) { if (r.scope === location.origin + "/") r.unregister(); });
+      }).catch(function () {});
+    }
+  </script>
 </head>
 <body>
 
