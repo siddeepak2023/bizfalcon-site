@@ -221,7 +221,7 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 .prod-link{
   margin-top:26px;display:inline-flex;align-items:center;gap:8px;
   font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--fg);transition:color .2s ease;
+  color:var(--fg);transition:color .2s ease;text-decoration:none;
 }
 .prod:hover .prod-link{color:var(--signal)}
 .prod-link::after{content:"→";transition:transform .2s ease}
@@ -576,6 +576,83 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var(--bg)}
 [data-theme="light"] body{background:url(textures/halftone-ink.png) repeat fixed 0 0/720px 720px,var(--bg)}
 </style>
+<style>
+/* PORTED — talonomic/talonmark dusk.css blocks (ledger, gallery, bench, calcs, minute chips).
+   Token-only colors; DUSK tokens untouched. */
+/* product shot frame */
+.shot{border:1px solid var(--line);background:var(--bg);font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75}
+.shot-bar{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--line-soft);color:var(--mut);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.shot-foot{padding:12px 22px;border-top:1px solid var(--line-soft);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.shot-foot a{color:var(--signal)}
+/* gallery tabs */
+.demo-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.demo-tab{padding:11px 16px;border:1px solid var(--line);background:none;color:var(--mut);cursor:pointer;transition:color .2s ease,border-color .2s ease}
+.demo-tab:hover{border-color:var(--fg);color:var(--fg)}
+.demo-tab.on{border-color:var(--signal);color:var(--fg)}
+.demo-tab.on::before{content:"● ";color:var(--signal)}
+.gal-img{display:block;width:100%;height:auto;border-bottom:1px solid var(--line-soft);background:var(--card)}
+.gal-shot .shot-foot a{color:var(--signal)}
+.demo-prog{height:2px;background:var(--line-soft);position:relative;overflow:hidden;margin-top:0}
+.demo-prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--signal)}
+/* ledger anatomy */
+.ledger-sec .sec-head p{max-width:560px}
+.lg-frame{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
+.lg-rail{display:flex;border-bottom:1px solid var(--line-soft)}
+.lg-node{flex:1;min-width:0;padding:13px 8px 11px;text-align:center;cursor:pointer;background:none;border:0;border-right:1px solid var(--line-soft);position:relative;transition:background .3s}
+.lg-node:last-child{border-right:0}
+.lg-node .ln-dot{display:block;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--mut);margin:0 auto 7px;transition:background .3s,border-color .3s,box-shadow .3s}
+.lg-node .ln-t{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);display:block;transition:color .3s}
+.lg-node.on{background:var(--bg2)}
+.lg-node.on .ln-dot{background:var(--signal);border-color:var(--signal);box-shadow:0 0 0 3px color-mix(in srgb,var(--signal) 18%,transparent)}
+.lg-node.on .ln-t{color:var(--fg)}
+.lg-node.done .ln-dot{background:var(--fg);border-color:var(--fg)}
+.lg-stage{padding:22px 24px 20px;min-height:118px}
+.lg-line{display:flex;gap:10px;align-items:flex-start;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
+.lg-line.show{opacity:1;transform:none}
+.lg-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal);white-space:nowrap;padding-top:3px}
+.lg-v{font-size:14.5px;line-height:1.55;color:var(--fg)}
+.lg-v b{font-weight:700}
+.lg-v .lgm{font-family:"JetBrains Mono",monospace;font-size:12.5px;background:var(--bg2);border:1px solid var(--line-soft);padding:2px 7px;border-radius:6px;white-space:nowrap}
+.lg-foot{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line-soft);padding:10px 24px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.lg-foot .lg-tally{margin-left:auto;color:var(--fg)}
+.lg-prog{height:2px;background:var(--line-soft);position:relative;overflow:hidden}
+.lg-prog i{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--signal)}
+.lg-prog i.run{transition:transform linear;transform:scaleX(1)}
+@media(max-width:700px){.lg-node .ln-t{font-size:8px}.lg-stage{padding:18px 14px;min-height:150px}.lg-foot{padding:10px 14px;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.lg-line{opacity:1;transform:none;transition:none}.lg-prog{display:none}}
+/* minute-boxed step chips */
+.step h3 .stm{font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:500;letter-spacing:.08em;color:var(--mut);border:1px solid var(--line);padding:3px 8px;border-radius:999px;vertical-align:2px;margin-left:9px;white-space:nowrap}
+/* agent bench */
+.bench-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:960px){.bench-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.bench-grid{grid-template-columns:1fr}}
+.bn-card{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:18px 18px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.bn-name{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg)}
+.bn-name::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);flex:0 0 auto}
+.bn-name .bn-prod{margin-left:auto;color:var(--mut);font-size:8.5px;border:1px solid var(--line-soft);padding:2px 6px;border-radius:4px}
+.bn-watch{font-size:13.5px;color:var(--mut);line-height:1.5;margin:0}
+.bn-rec{border:1px solid var(--line-soft);background:var(--bg2);border-radius:8px;padding:10px 12px}
+.bn-rec .bn-tag{display:block;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
+.bn-rec .bn-move{font-size:12.5px;color:var(--fg);line-height:1.45}
+.bn-rec .bn-move b{color:var(--signal)}
+.bn-ledger{border-top:1px solid var(--line-soft);padding-top:9px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.bn-card .bn-cta{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);text-decoration:none}
+.bn-card .bn-cta:hover{text-decoration:underline}
+/* honest calculators */
+.calc{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+@media(max-width:760px){.calc{grid-template-columns:1fr}}
+.calc-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+.calc-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}
+.calc-row label{font-size:13px;color:var(--fg);flex:1}
+.calc-row input{width:110px;padding:7px 10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:7px;font-family:"JetBrains Mono",monospace;font-size:13px;text-align:right}
+.calc-row input:focus{outline:2px solid var(--signal);outline-offset:1px}
+.calc-out{text-align:center}
+.calc-out .co-n{font-size:clamp(1.7rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.02em;color:var(--signal)}
+.calc-out .co-l{font-size:12.5px;color:var(--mut);max-width:300px;margin:8px auto 0;line-height:1.5}
+.calc2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px}
+@media(max-width:1020px){.calc2{grid-template-columns:1fr}}
+.calc2 .calc{grid-template-columns:1fr;margin-top:0}
+</style>
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
     if ("serviceWorker" in navigator) {
@@ -604,9 +681,12 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       BizFalcon&nbsp;AI
     </a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="#ledger">Ledger</a>
       <a href="#products">Products</a>
+      <a href="#screens">Screens</a>
+      <a href="#bench">Agents</a>
       <a href="#method">Method</a>
-      <a href="#agentic">Agentic</a>
+      <a href="#approve">Approve</a>
       <a href="#studio">Studio</a>
     </nav>
     <div class="nav-right">
@@ -645,6 +725,70 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 
 </section>
 
+<!-- ============ LEDGER ANATOMY — decision→outcome lifecycle, the differentiator ============ -->
+<section id="ledger" class="ledger-sec">
+  <div class="wrap">
+    <div class="sec-row">
+      <div class="sec-head rv">
+        <div class="eyebrow">The ledger</div>
+        <h2>One ledger under all three products.</h2>
+        <p>Every recommendation is scored against what actually happened. Each move a falcon proposes carries a projected impact, waits for your approval, and gets measured against reality — the agents learn from the outcome.</p>
+      </div>
+    </div>
+    <div class="lg-frame rv d1" id="lgFrame">
+      <div class="lg-rail" role="tablist" aria-label="Recommendation lifecycle">
+        <button class="lg-node" role="tab" data-lg="0"><span class="ln-dot"></span><span class="ln-t">Detected</span></button>
+        <button class="lg-node" role="tab" data-lg="1"><span class="ln-dot"></span><span class="ln-t">Exact change</span></button>
+        <button class="lg-node" role="tab" data-lg="2"><span class="ln-dot"></span><span class="ln-t">Projected</span></button>
+        <button class="lg-node" role="tab" data-lg="3"><span class="ln-dot"></span><span class="ln-t">Approved</span></button>
+        <button class="lg-node" role="tab" data-lg="4"><span class="ln-dot"></span><span class="ln-t">Measured</span></button>
+        <button class="lg-node" role="tab" data-lg="5"><span class="ln-dot"></span><span class="ln-t">Realized</span></button>
+      </div>
+      <div class="lg-stage">
+        <div class="lg-line" id="lgLine"><span class="lg-k" id="lgK"></span><span class="lg-v" id="lgV"></span></div>
+      </div>
+      <div class="lg-prog" aria-hidden="true"><i id="lgProg"></i></div>
+      <div class="lg-foot"><span>SAMPLE RECOMMENDATION · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">LEDGER (SAMPLE): PROJECTED +$540 · REALIZED +$498 · 92%</span></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var stages=[
+    ["Detected","Margin Sentinel flagged Meta campaign <b>Prospecting — Broad</b>: CPA up 18% week-over-week, contribution margin negative on 9 of the last 14 days."],
+    ["Exact change","<span class=\"lgm\">Cut daily budget · Meta Ads Manager — Prospecting — Broad: $200 → $176/day (−12%)</span>"],
+    ["Projected","<b>+$540/mo</b> contribution margin · confidence 78% · the formula behind the number is attached to the card."],
+    ["Approved","You approved it. The change is yours to apply — one click copies the exact move. Nothing executes without you."],
+    ["Measured","The agent keeps watching after the change: CPA, spend, and margin tracked daily against the projection."],
+    ["Realized","<b>+$498/mo</b> measured over 30 days — 92% of projection. The outcome is stored; the next recommendation starts smarter."]
+  ];
+  var frame=document.getElementById("lgFrame"); if(!frame) return;
+  var nodes=frame.querySelectorAll(".lg-node"),k=document.getElementById("lgK"),v=document.getElementById("lgV"),
+      line=document.getElementById("lgLine"),prog=document.getElementById("lgProg"),
+      cur=-1,timer=null,DUR=3400,
+      still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  function show(i,auto){
+    cur=i;
+    nodes.forEach(function(n,j){n.classList.toggle("on",j===i);n.classList.toggle("done",j<i);n.setAttribute("aria-selected",j===i?"true":"false");});
+    line.classList.remove("show");k.textContent=stages[i][0];v.innerHTML=stages[i][1];
+    requestAnimationFrame(function(){requestAnimationFrame(function(){line.classList.add("show");});});
+    if(prog){prog.classList.remove("run");prog.style.transitionDuration="0ms";prog.style.transform="scaleX(0)";
+      if(auto&&!still){requestAnimationFrame(function(){requestAnimationFrame(function(){prog.style.transitionDuration=DUR+"ms";prog.classList.add("run");});});}}
+  }
+  function loop(){clearTimeout(timer);if(still)return;timer=setTimeout(function(){show((cur+1)%stages.length,true);loop();},DUR);}
+  nodes.forEach(function(n){n.addEventListener("click",function(){clearTimeout(timer);show(+n.dataset.lg,false);loop();});});
+  var inView=false;
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){inView=e.isIntersecting;if(inView){if(cur<0){show(0,true);}loop();}else{clearTimeout(timer);}});
+  },{threshold:.35});
+  io.observe(frame);
+  document.addEventListener("visibilitychange",function(){
+    if(document.hidden){clearTimeout(timer);}else if(inView&&cur>=0){show(cur,true);loop();}
+  });
+  if(still){show(0,false);}
+})();
+</script>
+
 <!-- ============ PRODUCTS ============ -->
 <section id="products" class="dotbg">
   <div class="wrap">
@@ -671,7 +815,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
           <div class="prod-idx"><span>01 / FLAGSHIP</span><span>TALON.BIZFALCONAI.COM</span></div>
           <h3>Talon</h3>
           <p>The AI data analyst that shows its math. Drop in a spreadsheet, ask in plain English, and watch it write and execute real pandas — KPIs, forecasts, anomaly flags, and decks, each with an audit trail.</p>
-          <span class="prod-link">Open Talon</span>
+          <a class="prod-link" href="https://talon.bizfalconai.com">Open Talon</a>
         </div>
         <div class="demo" aria-label="Talon demo: analyst answers a question by running Python">
           <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span><span>talon — sample session</span></div>
@@ -703,8 +847,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
           <div class="bar hot" style="height:15%"></div>
           <div class="bar" style="height:79%"></div>
         </div>
-        <div class="mini-note">Per-SKU contribution margin · <em>2 SKUs below water</em></div>
-        <span class="prod-link">Open ProfitFalcon</span>
+        <div class="mini-note">Per-SKU screener · Star / Bleeder / Sleeper / Leak · <em>SAMPLE</em></div>
+        <a class="prod-link" href="https://profit.bizfalconai.com/">Open ProfitFalcon</a>
       </article>
 
       <!-- CLIENTFALCON -->
@@ -721,11 +865,209 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
             LOGO&nbsp;<b>YOURS</b>
           </div>
         </div>
-        <span class="prod-link">Open ClientFalcon</span>
+        <div class="mini-note">Portfolio health · Healthy / Drifting / At-risk / Quiet · <em>SAMPLE</em></div>
+        <a class="prod-link" href="https://client.bizfalconai.com/">Open ClientFalcon</a>
       </article>
     </div>
   </div>
 </section>
+
+<!-- ============ SUITE GALLERY — real screenshots, SAMPLE data ============ -->
+<section id="screens">
+  <div class="wrap">
+    <div class="sec-row">
+      <div class="sec-head rv">
+        <div class="eyebrow">Real screens</div>
+        <h2>This is the product, not a mockup.</h2>
+        <p>Captured from the live apps running SAMPLE exports — every number on screen was computed, not designed. Talon has no screenshot here because it runs live in the card above.</p>
+      </div>
+    </div>
+    <div class="rv d1">
+      <div class="demo-tabs" id="galTabs" role="tablist" aria-label="Product surfaces"></div>
+      <figure class="shot gal-shot" style="margin:0">
+        <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span id="galCap">bizfalcon — sample data</span><span style="margin-left:auto">SAMPLE DATA · LIVE PRODUCT</span></div>
+        <img id="galImg" class="gal-img" src="./shots/dashboard.png" alt="" loading="lazy" decoding="async">
+        <div class="shot-foot"><span>CAPTURED FROM THE RUNNING APPS</span><a id="galLive" href="https://profit.bizfalconai.com/dashboard?demo=1">OPEN THIS SCREEN LIVE ▸</a></div>
+      </figure>
+      <div class="demo-prog" aria-hidden="true"><i id="galProg"></i></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var PF="https://profit.bizfalconai.com",CF="https://client.bizfalconai.com";
+  var scenes=[
+    {t:"PF · Profit dashboard",cap:"profitfalcon — morning brief + profit tiles",img:"./shots/dashboard.png",live:PF+"/dashboard?demo=1",alt:"ProfitFalcon profit dashboard: morning brief, contribution tiles, and trend computed from a sample export"},
+    {t:"PF · SKU screener",cap:"profitfalcon — per-SKU screener with archetypes",img:"./shots/screener.png",live:PF+"/dashboard?demo=1",alt:"Per-SKU profit screener ranking products by revenue with Star, Sleeper, and Leak archetype labels and margin status"},
+    {t:"PF · Agent feed",cap:"profitfalcon — autopilot recommendations, you approve",img:"./shots/agent-feed.png",live:PF+"/dashboard?demo=1",alt:"Autopilot agent feed recommending exact price reviews with projected monthly impact, risk tier, reasoning, and approve/dismiss controls"},
+    {t:"PF · Free teardown",cap:"profitfalcon — export teardown",img:"./shots/teardown.png",live:PF+"/",alt:"Free teardown report computed from an uploaded order export"},
+    {t:"CF · Prospect audit",cap:"clientfalcon — prospect audit (the pitch that becomes the baseline)",img:"./shots/audit.png",live:CF+"/dashboard/new?demo=1",alt:"ClientFalcon prospect audit: evidence-backed findings with projected monthly gains computed from a sample ad export"},
+    {t:"CF · Portfolio health",cap:"clientfalcon — portfolio brief on sample client exports",img:"./shots/portfolio-brief.png",live:CF+"/",alt:"ClientFalcon portfolio brief: five sample clients ranked by explainable health score with revenue at risk"},
+    {t:"CF · Report builder",cap:"clientfalcon — client report builder",img:"./shots/report-builder.png",live:CF+"/",alt:"ClientFalcon report builder generating a branded client report from a sample ad export"}
+  ];
+  var tabs=document.getElementById("galTabs"),img=document.getElementById("galImg"),
+      cap=document.getElementById("galCap"),prog=document.getElementById("galProg"),liveA=document.getElementById("galLive");
+  if(!tabs||!img) return;
+  var still=matchMedia("(prefers-reduced-motion:reduce)").matches,cur=0,timer=null,DUR=5200,hover=false;
+  scenes.forEach(function(s,i){
+    var b=document.createElement("button");
+    b.className="demo-tab";b.type="button";b.setAttribute("role","tab");b.textContent=s.t;
+    b.addEventListener("click",function(){clearTimeout(timer);show(i,false);loop();});
+    tabs.appendChild(b);
+  });
+  var btns=tabs.querySelectorAll(".demo-tab");
+  function show(i,auto){
+    cur=i;
+    btns.forEach(function(b,j){b.classList.toggle("on",j===i);b.setAttribute("aria-selected",j===i?"true":"false");});
+    img.src=scenes[i].img;img.alt=scenes[i].alt;cap.textContent=scenes[i].cap;
+    if(liveA)liveA.href=scenes[i].live;
+    if(prog){prog.style.transitionDuration="0ms";prog.style.transitionProperty="width";prog.style.width="0";
+      if(auto&&!still){requestAnimationFrame(function(){requestAnimationFrame(function(){prog.style.transitionDuration=DUR+"ms";prog.style.transitionTimingFunction="linear";prog.style.width="100%";});});}}
+  }
+  function loop(){clearTimeout(timer);if(still)return;timer=setTimeout(function(){if(!hover){show((cur+1)%scenes.length,true);}loop();},DUR);}
+  var fig=document.querySelector(".gal-shot");
+  if(fig){fig.addEventListener("mouseenter",function(){hover=true;});fig.addEventListener("mouseleave",function(){hover=false;});}
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){if(!timer){show(0,true);loop();}}else{clearTimeout(timer);timer=null;}});
+  },{threshold:.3});
+  io.observe(document.getElementById("screens"));
+  show(0,false);
+})();
+</script>
+
+<!-- ============ AGENT BENCH — the work, not the count ============ -->
+<section id="bench" class="dotbg">
+  <div class="wrap">
+    <div class="sec-row">
+      <div class="sec-head rv">
+        <div class="eyebrow">The bench</div>
+        <h2>Every agent shows its work.<br>Every move lands in the ledger.</h2>
+        <p>Each one watches a different way money leaks out — and proposes the exact change. You approve every move; nothing executes on its own. Sample recommendations below; your ledger fills from your first approval.</p>
+      </div>
+    </div>
+    <div class="bench-grid rv d1">
+      <div class="bn-card">
+        <div class="bn-name">Margin Sentinel<span class="bn-prod">PF</span></div>
+        <p class="bn-watch">Watches paid campaigns for spend that returns less than it costs — MER, CPA drift, contribution margin by campaign.</p>
+        <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
+          <span class="bn-move">Cut daily budget · Meta Ads Manager — Prospecting — Broad: <b>$200 → $176/day</b> · projected +$540/mo</span></div>
+        <div class="bn-ledger">Ledger · fills from your approvals</div>
+      </div>
+      <div class="bn-card">
+        <div class="bn-name">Discount Leak<span class="bn-prod">PF</span></div>
+        <p class="bn-watch">Watches every discount code for redemptions by customers who were already converting — returning buyers, organic traffic.</p>
+        <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
+          <span class="bn-move">Restrict <b>WELCOME10</b> to first-time customers — 57% of its redemptions went to returning buyers · est. +$340/mo</span></div>
+        <div class="bn-ledger">Ledger · fills from your approvals</div>
+      </div>
+      <div class="bn-card">
+        <div class="bn-name">Inventory &amp; Reorder<span class="bn-prod">PF</span></div>
+        <p class="bn-watch">Watches per-SKU sales velocity against what's on hand and works back from the resupply lead time to a reorder-by date.</p>
+        <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
+          <span class="bn-move">Reorder <b>Blue Hoodie</b> by Aug 2 — 6 days of stock left at current velocity · $2,800 of 30-day revenue at stake</span></div>
+        <div class="bn-ledger">Ledger · fills from your approvals</div>
+      </div>
+      <div class="bn-card">
+        <div class="bn-name">Prospect Audit<span class="bn-prod">CF</span></div>
+        <p class="bn-watch">Turns a prospect's ad export into a ranked issue list — evidence, first move, projected impact — and a 30-day plan for the pitch.</p>
+        <div class="bn-rec"><span class="bn-tag">Sample finding</span>
+          <span class="bn-move">Pause the bottom ad set on <b>Search — Generic</b> — $1,900/mo of spend at 0.7x ROAS · projected +$1,340/mo</span></div>
+        <div class="bn-ledger">Ledger · the audit becomes the client's baseline</div>
+      </div>
+      <div class="bn-card">
+        <div class="bn-name">Client Health<span class="bn-prod">CF</span></div>
+        <p class="bn-watch">Ranks your whole book by blended ROAS against breakeven and flags the clients drifting toward a churn conversation.</p>
+        <div class="bn-rec"><span class="bn-tag">Sample flag</span>
+          <span class="bn-move"><b>Meridian Retail</b> at 1.4x blended ROAS, below the 2.0x band — book the review before the renewal call happens without you</span></div>
+        <div class="bn-ledger">Ledger · fills from your approvals</div>
+      </div>
+      <div class="bn-card">
+        <div class="bn-name">Portfolio Brief<span class="bn-prod">CF</span></div>
+        <p class="bn-watch">Opens your day agency-wide: which clients need you, which recommendations are waiting, what revenue is at risk this week.</p>
+        <div class="bn-rec"><span class="bn-tag">Sample brief line</span>
+          <span class="bn-move">"2 clients under breakeven · <b>4 recommendations waiting</b> · $3,100/mo of client spend flagged for review."</span></div>
+        <div class="bn-ledger">Ledger · fills from your approvals</div>
+      </div>
+    </div>
+
+    <!-- Honest calculators: pure arithmetic on the visitor's own inputs. -->
+    <div class="calc2 rv d2">
+      <div class="calc" id="leakCalc">
+        <div>
+          <div class="calc-k">Discount-leak estimator — ProfitFalcon</div>
+          <div class="calc-row"><label for="lcOrders">Orders per month</label><input id="lcOrders" type="number" min="0" step="50" value="800" inputmode="numeric"></div>
+          <div class="calc-row"><label for="lcAov">Average order value ($)</label><input id="lcAov" type="number" min="0" step="5" value="60" inputmode="decimal"></div>
+          <div class="calc-row"><label for="lcShare">Orders with a discount (%)</label><input id="lcShare" type="number" min="0" max="100" step="5" value="30" inputmode="numeric"></div>
+          <div class="calc-row"><label for="lcPct">Average discount (%)</label><input id="lcPct" type="number" min="0" max="100" step="5" value="15" inputmode="numeric"></div>
+        </div>
+        <div class="calc-out">
+          <div class="co-n" id="lcOut">$648–$1,296/mo</div>
+          <div class="co-l">ESTIMATE — your numbers × the share of discounted orders that typically go to already-converting customers (30–60%). Upload your export and ProfitFalcon computes the real figure per code.</div>
+        </div>
+      </div>
+      <div class="calc" id="hoursCalc">
+        <div>
+          <div class="calc-k">Reporting-hours calculator — ClientFalcon</div>
+          <div class="calc-row"><label for="hcClients">Clients</label><input id="hcClients" type="number" min="0" step="1" value="12" inputmode="numeric"></div>
+          <div class="calc-row"><label for="hcHours">Hours per report</label><input id="hcHours" type="number" min="0" step="0.5" value="3" inputmode="decimal"></div>
+          <div class="calc-row"><label for="hcRate">Your billable rate ($/hr)</label><input id="hcRate" type="number" min="0" step="10" value="120" inputmode="numeric"></div>
+        </div>
+        <div class="calc-out">
+          <div class="co-n" id="hcOut">$4,320/mo</div>
+          <div class="co-l">Your numbers, multiplied: clients × hours per report × your rate — the billable time monthly reporting consumes today. ClientFalcon builds the computed draft; you edit and ship it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Self-qualification: concrete thresholds only. -->
+    <div class="bench-grid rv d2" style="margin-top:44px">
+      <div class="bn-card">
+        <div class="bn-name">DTC / ecommerce brand</div>
+        <p class="bn-watch">You run 100+ orders a month on Shopify, WooCommerce, or Amazon and nobody on the team is a data analyst.</p>
+        <a class="bn-cta" href="https://profit.bizfalconai.com/">ProfitFalcon is yours ▸</a>
+      </div>
+      <div class="bn-card">
+        <div class="bn-name">Agency / freelancer</div>
+        <p class="bn-watch">You report to 3+ clients every month and the audit that wins a pitch should become that client's baseline.</p>
+        <a class="bn-cta" href="https://client.bizfalconai.com/">ClientFalcon is yours ▸</a>
+      </div>
+      <div class="bn-card">
+        <div class="bn-name">Anyone with a CSV</div>
+        <p class="bn-watch">You have a spreadsheet and a question, and you want the answer with the math attached — not a guess.</p>
+        <a class="bn-cta" href="https://talon.bizfalconai.com">Talon is yours ▸</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var ids=["lcOrders","lcAov","lcShare","lcPct"],out=document.getElementById("lcOut");
+  if(!out) return;
+  function money(n){return "$"+Math.round(n).toLocaleString();}
+  function calc(){
+    var o=+document.getElementById("lcOrders").value||0,
+        a=+document.getElementById("lcAov").value||0,
+        s=Math.min(100,+document.getElementById("lcShare").value||0)/100,
+        p=Math.min(100,+document.getElementById("lcPct").value||0)/100;
+    var monthly=o*s*a*p;
+    out.textContent=money(monthly*0.3)+"–"+money(monthly*0.6)+"/mo";
+  }
+  ids.forEach(function(id){var el=document.getElementById(id);el&&el.addEventListener("input",calc);});
+  calc();
+})();
+(function(){
+  var ids=["hcClients","hcHours","hcRate"],out=document.getElementById("hcOut");
+  if(!out) return;
+  function calc(){
+    var c=+document.getElementById("hcClients").value||0,
+        h=+document.getElementById("hcHours").value||0,
+        r=+document.getElementById("hcRate").value||0;
+    out.textContent="$"+Math.round(c*h*r).toLocaleString()+"/mo";
+  }
+  ids.forEach(function(id){var el=document.getElementById(id);el&&el.addEventListener("input",calc);});
+  calc();
+})();
+</script>
 
 <!-- ============ METHOD ============ -->
 <section id="method">
@@ -740,7 +1082,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
     </div>
     <div class="steps">
       <div class="step rv">
-        <h3>Upload</h3>
+        <h3>Upload<span class="stm">~2 MIN</span></h3>
         <p>Drop a CSV or a platform export. Your spreadsheet loads into a Python runtime that lives <code>in your browser</code> — not on a GPU somewhere.</p>
         <div class="scm" aria-hidden="true">
           <span class="scm-tag">Upload</span>
@@ -754,7 +1096,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         </div>
       </div>
       <div class="step rv d1">
-        <h3>Compute</h3>
+        <h3>Compute<span class="stm">10 SEC</span></h3>
         <p>The analyst writes real <code>pandas</code>, executes it against your actual rows, and keeps the code. LLMs draft; the interpreter decides.</p>
         <div class="scm" aria-hidden="true">
           <span class="scm-tag">Compute</span>
@@ -764,7 +1106,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         </div>
       </div>
       <div class="step rv d2">
-        <h3>Decide</h3>
+        <h3>Decide<span class="stm">~60 SEC</span></h3>
         <p>KPIs, forecasts, and anomalies — each one linked to the exact computation that produced it. Click any number, see its math.</p>
         <div class="scm" aria-hidden="true">
           <span class="scm-tag">Decide</span>
@@ -778,8 +1120,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   </div>
 </section>
 
-<!-- ============ AGENTIC ============ -->
-<section id="agentic" class="dotbg">
+<!-- ============ APPROVE (agentic) ============ -->
+<section id="approve" class="dotbg">
   <div class="wrap">
     <div class="agent-grid">
       <div class="agent-copy rv">
@@ -792,11 +1134,12 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
           <span>STATUS <b>APPROVED / DISMISSED</b></span>
           <span>OUTCOMES <b>TRACKED 7/30D</b></span>
         </div>
+        <p style="margin-top:14px"><a href="#ledger" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal)">See the full lifecycle ↑</a></p>
         <canvas class="art art--dome art--eclipse" data-art="eclipse" aria-hidden="true"></canvas>
       </div>
       <div class="rv d1">
         <div class="queue-head">
-          <span>APPROVAL QUEUE — 3 PENDING</span>
+          <span>APPROVAL QUEUE — 3 PENDING · SAMPLE</span>
           <span class="chip"><i class="pulse"></i>SHADOW MODE · EXECUTES NOTHING</span>
         </div>
         <div class="queue">
