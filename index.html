@@ -167,7 +167,7 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 
 /* telemetry side rails */
 .rail{
-  position:absolute;top:170px;z-index:2;
+  position:absolute;top:104px;z-index:2;
   font-family:"JetBrains Mono",monospace;font-size:9.5px;line-height:2.1;
   letter-spacing:.08em;color:var(--mut);text-transform:uppercase;
 }
@@ -256,6 +256,7 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 .mini{margin-top:28px;height:120px;display:flex;align-items:flex-end;gap:6px}
 .mini .bar{flex:1;background:var(--line);position:relative;transition:background .2s ease}
 .mini .bar.hot{background:var(--signal)}
+.prod-shot{display:block;width:100%;border:1px solid var(--line);border-radius:8px;margin:14px 0 8px}
 .mini-note{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase;margin-top:10px}
 .mini-note em{color:var(--signal);font-style:normal}
 
@@ -681,8 +682,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       BizFalcon&nbsp;AI
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#ledger">Ledger</a>
       <a href="#products">Products</a>
+      <a href="#ledger">Ledger</a>
       <a href="#screens">Screens</a>
       <a href="#bench">Agents</a>
       <a href="#method">Method</a>
@@ -703,25 +704,21 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 <section class="hero">
   <canvas class="hero-canvas" id="terrain" aria-hidden="true"></canvas>
 
-  <div class="rail rail--l" aria-hidden="true">
-    MODE&nbsp;<b class="sig">COMPUTED</b><br>
-    ESTIMATES&nbsp;<b>0</b>
-  </div>
-  <div class="rail rail--r" aria-hidden="true">
+  <div class="rail rail--r">
     <b>TALON</b>&nbsp;— DATA&nbsp;ANALYST<br>
     <b>PROFITFALCON</b>&nbsp;— UNIT&nbsp;ECON<br>
     <b>CLIENTFALCON</b>&nbsp;— AGENCY&nbsp;REPORTS
   </div>
 
   <div class="wrap hero-in">
-    <span class="chip hero-chip"><i class="pulse"></i>LIVE — THREE PRODUCTS, ONE ENGINE</span>
+    <span class="chip hero-chip">Three products, one engine</span>
     <h1>Computed,<br>not <span class="est">estimated</span>.</h1>
     <p class="hero-sub">BizFalcon is an AI product studio. Our products <strong>write and run real Python on your data</strong> — every KPI traceable to the code that produced it — and every recommendation they make is scored in a ledger against what actually happened. No SQL. No black box. No numbers you can't check.</p>
     <div class="hero-ctas">
       <a class="btn btn--primary" href="https://talon.bizfalconai.com">Launch Talon — free</a>
       <a class="btn btn--ghost" href="https://profit.bizfalconai.com/dashboard?demo=1">Try a live sandbox — no signup</a>
     </div>
-    <div class="eyebrow">No card. No demo call.</div>
+    <div class="eyebrow" style="margin-top:22px;margin-bottom:0">No card. No demo call.</div>
   </div>
 
 </section>
@@ -839,16 +836,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="prod-idx"><span>02 / ECOMMERCE</span><span>/PROFITFALCON</span></div>
         <h3>ProfitFalcon <span class="chip chip--ghost">AI Product Manager — it recommends, you approve every move</span></h3>
         <p>Unit economics for ecommerce brands. LTV, contribution margin, and per-SKU profit computed straight from your Shopify, WooCommerce, or Amazon exports.</p>
-        <div class="mini" aria-hidden="true">
-          <div class="bar" style="height:46%"></div>
-          <div class="bar" style="height:72%"></div>
-          <div class="bar" style="height:58%"></div>
-          <div class="bar hot" style="height:24%"></div>
-          <div class="bar" style="height:88%"></div>
-          <div class="bar" style="height:64%"></div>
-          <div class="bar hot" style="height:15%"></div>
-          <div class="bar" style="height:79%"></div>
-        </div>
+        <img class="prod-shot" src="./shots/screener.png" loading="lazy" alt="ProfitFalcon per-SKU screener: every SKU ranked by contribution margin with Star / Bleeder / Sleeper / Leak status, computed from a sample export">
         <div class="mini-note">Per-SKU screener · Star / Bleeder / Sleeper / Leak · <em>SAMPLE</em></div>
         <a class="prod-link" href="https://profit.bizfalconai.com/">Open ProfitFalcon</a>
         <a class="prod-link" href="https://profit.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
@@ -859,16 +847,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="prod-idx"><span>03 / AGENCIES</span><span>/CLIENTFALCON</span></div>
         <h3>ClientFalcon <span class="chip chip--ghost">Campaign Autopilot — it recommends, you approve every move</span></h3>
         <p>Agency operations for account managers. A prospect's ad export becomes the audit that wins the pitch — and the day they sign, that audit becomes their live baseline. Reports, portfolio health, and a ledger you can show the client.</p>
-        <div class="pdfmock" aria-hidden="true">
-          <div class="pdfpage"><i class="hd"></i><i class="w70"></i><i class="w55"></i><i></i><i class="w40"></i><i class="w70"></i><i class="w55"></i></div>
-          <div class="pdfmeta">
-            FORMAT&nbsp;<b>WHITE-LABEL&nbsp;PDF</b><br>
-            NARRATIVE&nbsp;<b>AI-WRITTEN</b><br>
-            NUMBERS&nbsp;<b>COMPUTED</b><br>
-            LOGO&nbsp;<b>YOURS</b>
-          </div>
-        </div>
-        <div class="mini-note">Portfolio health · Healthy / Drifting / At-risk / Quiet · <em>SAMPLE</em></div>
+        <img class="prod-shot" src="./shots/audit.png" loading="lazy" alt="ClientFalcon prospect audit: evidence-backed findings with projected monthly gains, computed from a sample ad export">
+        <div class="mini-note">Prospect audit · evidence-backed findings, projected gains · <em>SAMPLE</em></div>
         <a class="prod-link" href="https://client.bizfalconai.com/">Open ClientFalcon</a>
         <a class="prod-link" href="https://client.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
       </article>
