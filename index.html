@@ -276,6 +276,26 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 .price-tiers li.addon span:last-child{color:var(--signal)}
 @media(max-width:900px){.price-grid{grid-template-columns:1fr}}
 
+/* sample recommendation card — the product's approve UI, rendered honestly */
+.rec-mock{max-width:640px;margin:0 0 34px;border:1px solid var(--line);background:var(--card)}
+.rec-mock .rm-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line-soft);color:var(--mut);font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
+.rec-mock .rm-bar span:last-child{margin-left:auto}
+.rm-body{padding:18px 20px 16px}
+.rm-head{display:flex;justify-content:space-between;gap:12px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
+.rm-head span:last-child{color:var(--mut)}
+.rm-title{font-family:"Instrument Sans",sans-serif;font-weight:600;font-size:16.5px;letter-spacing:-.01em;margin:0 0 6px;color:var(--fg)}
+.rm-move{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--mut);margin:0 0 12px}
+.rm-move b{color:var(--fg)}
+.rm-proj{font-size:13.5px;color:var(--fg);border:1px solid var(--line-soft);background:var(--bg2);padding:9px 12px;margin-bottom:14px}
+.rm-proj b{color:var(--signal)}
+.rm-proj span{color:var(--mut);font-size:12px}
+.rm-actions{display:flex;align-items:center;gap:10px}
+.rm-btn{font-family:"Instrument Sans",sans-serif;font-size:12.5px;font-weight:600;padding:8px 16px;border:1px solid var(--line);color:var(--fg)}
+.rm-btn--approve{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.rm-note{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+@media(max-width:640px){.rm-actions{flex-wrap:wrap}.rm-note{margin-left:0}}
+
+
 .pdfmock{margin-top:28px;height:120px;display:flex;gap:10px;align-items:flex-start}
 .pdfpage{width:86px;height:114px;background:var(--fg);padding:10px 9px;display:flex;flex-direction:column;gap:5px;flex:none}
 .pdfpage i{display:block;height:4px;background:color-mix(in srgb,var(--bg) 22%,transparent)}
@@ -997,6 +1017,17 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="eyebrow">The bench</div>
         <h2>Every agent shows its work.<br>Every move lands in the ledger.</h2>
         <p>Each one watches a different way money leaks out — and proposes the exact change. You approve every move; nothing executes on its own. Sample recommendations below; your ledger fills from your first approval.</p>
+      </div>
+    </div>
+    
+    <div class="rec-mock rv d1" aria-label="Sample recommendation card as it appears in the product">
+      <div class="rm-bar"><span>agent feed — one card</span><span>SAMPLE DATA · LIVE PRODUCT UI</span></div>
+      <div class="rm-body">
+        <div class="rm-head"><span>MARGIN SENTINEL · PROFITFALCON</span><span>CONFIDENCE 78%</span></div>
+        <p class="rm-title">Cut daily budget — Prospecting — Broad</p>
+        <p class="rm-move">Meta Ads Manager → campaign budget: <b>$200 → $176/day (−12%)</b></p>
+        <div class="rm-proj">Projected <b>+$540/mo</b> contribution margin <span>· the formula is attached to the card</span></div>
+        <div class="rm-actions"><span class="rm-btn rm-btn--approve">Approve</span><span class="rm-btn">Dismiss</span><span class="rm-note">Nothing executes without you</span></div>
       </div>
     </div>
     <div class="bench-grid rv d1">
