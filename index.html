@@ -260,6 +260,22 @@ section{padding:130px 0;border-top:1px solid var(--line-soft);position:relative}
 .mini-note{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase;margin-top:10px}
 .mini-note em{color:var(--signal);font-style:normal}
 
+/* pricing overview cards */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.price-card{border:1px solid var(--line);background:var(--card);padding:30px 30px 28px;transition:border-color .25s ease;display:flex;flex-direction:column}
+.price-card .prod-link{margin-top:auto;padding-top:20px}
+.price-card:hover{border-color:var(--fg)}
+.price-card h3{font-size:22px;margin-bottom:14px}
+.price-entry{display:flex;align-items:baseline;gap:10px;margin-bottom:20px}
+.price-entry b{font-size:34px;font-weight:700;letter-spacing:-.02em}
+.price-entry span{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.price-tiers{list-style:none;margin:0 0 6px;padding:0;font-family:"JetBrains Mono",monospace;font-size:12px}
+.price-tiers li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line-soft);color:var(--mut)}
+.price-tiers li span:last-child{color:var(--fg);font-variant-numeric:tabular-nums}
+.price-tiers li.addon{color:var(--signal)}
+.price-tiers li.addon span:last-child{color:var(--signal)}
+@media(max-width:900px){.price-grid{grid-template-columns:1fr}}
+
 .pdfmock{margin-top:28px;height:120px;display:flex;gap:10px;align-items:flex-start}
 .pdfpage{width:86px;height:114px;background:var(--fg);padding:10px 9px;display:flex;flex-direction:column;gap:5px;flex:none}
 .pdfpage i{display:block;height:4px;background:color-mix(in srgb,var(--bg) 22%,transparent)}
@@ -683,6 +699,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#products">Products</a>
+      <a href="#pricing">Pricing</a>
       <a href="#ledger">Ledger</a>
       <a href="#screens">Screens</a>
       <a href="#bench">Agents</a>
@@ -722,70 +739,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   </div>
 
 </section>
-
-<!-- ============ LEDGER ANATOMY — decision→outcome lifecycle, the differentiator ============ -->
-<section id="ledger" class="ledger-sec">
-  <div class="wrap">
-    <div class="sec-row">
-      <div class="sec-head rv">
-        <div class="eyebrow">The ledger</div>
-        <h2>Every recommendation is scored against what actually happened.</h2>
-        <p>One ledger under all three products. Each move a falcon proposes carries a projected impact, waits for your approval, and gets measured against reality — the agents learn from the outcome.</p>
-      </div>
-    </div>
-    <div class="lg-frame rv d1" id="lgFrame">
-      <div class="lg-rail" role="tablist" aria-label="Recommendation lifecycle">
-        <button class="lg-node" role="tab" data-lg="0"><span class="ln-dot"></span><span class="ln-t">Detected</span></button>
-        <button class="lg-node" role="tab" data-lg="1"><span class="ln-dot"></span><span class="ln-t">Exact change</span></button>
-        <button class="lg-node" role="tab" data-lg="2"><span class="ln-dot"></span><span class="ln-t">Projected</span></button>
-        <button class="lg-node" role="tab" data-lg="3"><span class="ln-dot"></span><span class="ln-t">Approved</span></button>
-        <button class="lg-node" role="tab" data-lg="4"><span class="ln-dot"></span><span class="ln-t">Measured</span></button>
-        <button class="lg-node" role="tab" data-lg="5"><span class="ln-dot"></span><span class="ln-t">Realized</span></button>
-      </div>
-      <div class="lg-stage">
-        <div class="lg-line" id="lgLine"><span class="lg-k" id="lgK"></span><span class="lg-v" id="lgV"></span></div>
-      </div>
-      <div class="lg-prog" aria-hidden="true"><i id="lgProg"></i></div>
-      <div class="lg-foot"><span>SAMPLE RECOMMENDATION · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">LEDGER (SAMPLE): PROJECTED +$540 · REALIZED +$498 · 92%</span></div>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  var stages=[
-    ["Detected","Margin Sentinel flagged Meta campaign <b>Prospecting — Broad</b>: CPA up 18% week-over-week, contribution margin negative on 9 of the last 14 days."],
-    ["Exact change","<span class=\"lgm\">Cut daily budget · Meta Ads Manager — Prospecting — Broad: $200 → $176/day (−12%)</span>"],
-    ["Projected","<b>+$540/mo</b> contribution margin · confidence 78% · the formula behind the number is attached to the card."],
-    ["Approved","You approved it. The change is yours to apply — one click copies the exact move. Nothing executes without you."],
-    ["Measured","The agent keeps watching after the change: CPA, spend, and margin tracked daily against the projection."],
-    ["Realized","<b>+$498/mo</b> measured over 30 days — 92% of projection. The outcome is stored; the next recommendation starts smarter."]
-  ];
-  var frame=document.getElementById("lgFrame"); if(!frame) return;
-  var nodes=frame.querySelectorAll(".lg-node"),k=document.getElementById("lgK"),v=document.getElementById("lgV"),
-      line=document.getElementById("lgLine"),prog=document.getElementById("lgProg"),
-      cur=-1,timer=null,DUR=3400,
-      still=matchMedia("(prefers-reduced-motion:reduce)").matches;
-  function show(i,auto){
-    cur=i;
-    nodes.forEach(function(n,j){n.classList.toggle("on",j===i);n.classList.toggle("done",j<i);n.setAttribute("aria-selected",j===i?"true":"false");});
-    line.classList.remove("show");k.textContent=stages[i][0];v.innerHTML=stages[i][1];
-    requestAnimationFrame(function(){requestAnimationFrame(function(){line.classList.add("show");});});
-    if(prog){prog.classList.remove("run");prog.style.transitionDuration="0ms";prog.style.transform="scaleX(0)";
-      if(auto&&!still){requestAnimationFrame(function(){requestAnimationFrame(function(){prog.style.transitionDuration=DUR+"ms";prog.classList.add("run");});});}}
-  }
-  function loop(){clearTimeout(timer);if(still)return;timer=setTimeout(function(){show((cur+1)%stages.length,true);loop();},DUR);}
-  nodes.forEach(function(n){n.addEventListener("click",function(){clearTimeout(timer);show(+n.dataset.lg,false);loop();});});
-  var inView=false;
-  var io=new IntersectionObserver(function(en){
-    en.forEach(function(e){inView=e.isIntersecting;if(inView){if(cur<0){show(0,true);}loop();}else{clearTimeout(timer);}});
-  },{threshold:.35});
-  io.observe(frame);
-  document.addEventListener("visibilitychange",function(){
-    if(document.hidden){clearTimeout(timer);}else if(inView&&cur>=0){show(cur,true);loop();}
-  });
-  if(still){show(0,false);}
-})();
-</script>
 
 <!-- ============ PRODUCTS ============ -->
 <section id="products" class="dotbg">
@@ -855,6 +808,123 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
     </div>
   </div>
 </section>
+
+<!-- ============ PRICING — entry price per product, links to each product's own pricing ============ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-row">
+      <div class="sec-head rv">
+        <div class="eyebrow">Pricing</div>
+        <h2>Start free. Pay when the math earns it.</h2>
+        <p>Founding pricing, locked for early accounts. Annual plans get 2 months free. Cancel anytime. Full tier details live on each product's own page.</p>
+      </div>
+    </div>
+    <div class="price-grid">
+      <article class="price-card rv">
+        <div class="prod-idx"><span>TALON · FLAGSHIP</span><span>ANALYST</span></div>
+        <h3>Talon</h3>
+        <div class="price-entry"><b>Free</b><span>paid from $15/mo</span></div>
+        <ul class="price-tiers">
+          <li><span>Free</span><span>$0</span></li>
+          <li><span>Plus</span><span>$15/mo</span></li>
+          <li><span>Pro</span><span>$35/mo</span></li>
+          <li><span>Max</span><span>$149/mo</span></li>
+        </ul>
+        <a class="prod-link" href="https://talon.bizfalconai.com/#pricing">Talon pricing</a>
+      </article>
+      <article class="price-card rv d1">
+        <div class="prod-idx"><span>PROFITFALCON · ECOMMERCE</span><span>UNIT ECONOMICS</span></div>
+        <h3>ProfitFalcon</h3>
+        <div class="price-entry"><b>Free</b><span>paid from $19/mo</span></div>
+        <ul class="price-tiers">
+          <li><span>Free</span><span>$0</span></li>
+          <li><span>Growth</span><span>$19/mo</span></li>
+          <li><span>Scale</span><span>$45/mo</span></li>
+          <li><span>Agency</span><span>$99/mo</span></li>
+          <li class="addon"><span>Autopilot add-on</span><span>$29/mo</span></li>
+        </ul>
+        <a class="prod-link" href="https://profit.bizfalconai.com/#pricing">ProfitFalcon pricing</a>
+      </article>
+      <article class="price-card rv d2">
+        <div class="prod-idx"><span>CLIENTFALCON · AGENCIES</span><span>CLIENT OPS</span></div>
+        <h3>ClientFalcon</h3>
+        <div class="price-entry"><b>$19</b><span>/mo entry · Solo</span></div>
+        <ul class="price-tiers">
+          <li><span>Solo</span><span>$19/mo</span></li>
+          <li><span>Agency</span><span>$69/mo</span></li>
+          <li><span>Studio</span><span>$129/mo</span></li>
+          <li class="addon"><span>Autopilot add-on</span><span>$49/mo</span></li>
+        </ul>
+        <a class="prod-link" href="https://client.bizfalconai.com/#pricing">ClientFalcon pricing</a>
+      </article>
+    </div>
+    <div class="mini-note rv" style="margin-top:18px">Prices shown are current founding prices — each product page is the source of truth.</div>
+  </div>
+</section>
+
+<!-- ============ LEDGER ANATOMY — decision→outcome lifecycle, the differentiator ============ -->
+<section id="ledger" class="ledger-sec">
+  <div class="wrap">
+    <div class="sec-row">
+      <div class="sec-head rv">
+        <div class="eyebrow">The ledger</div>
+        <h2>Every recommendation is scored against what actually happened.</h2>
+        <p>One ledger under all three products. Each move a falcon proposes carries a projected impact, waits for your approval, and gets measured against reality — the agents learn from the outcome.</p>
+      </div>
+    </div>
+    <div class="lg-frame rv d1" id="lgFrame">
+      <div class="lg-rail" role="tablist" aria-label="Recommendation lifecycle">
+        <button class="lg-node" role="tab" data-lg="0"><span class="ln-dot"></span><span class="ln-t">Detected</span></button>
+        <button class="lg-node" role="tab" data-lg="1"><span class="ln-dot"></span><span class="ln-t">Exact change</span></button>
+        <button class="lg-node" role="tab" data-lg="2"><span class="ln-dot"></span><span class="ln-t">Projected</span></button>
+        <button class="lg-node" role="tab" data-lg="3"><span class="ln-dot"></span><span class="ln-t">Approved</span></button>
+        <button class="lg-node" role="tab" data-lg="4"><span class="ln-dot"></span><span class="ln-t">Measured</span></button>
+        <button class="lg-node" role="tab" data-lg="5"><span class="ln-dot"></span><span class="ln-t">Realized</span></button>
+      </div>
+      <div class="lg-stage">
+        <div class="lg-line" id="lgLine"><span class="lg-k" id="lgK"></span><span class="lg-v" id="lgV"></span></div>
+      </div>
+      <div class="lg-prog" aria-hidden="true"><i id="lgProg"></i></div>
+      <div class="lg-foot"><span>SAMPLE RECOMMENDATION · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">LEDGER (SAMPLE): PROJECTED +$540 · REALIZED +$498 · 92%</span></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var stages=[
+    ["Detected","Margin Sentinel flagged Meta campaign <b>Prospecting — Broad</b>: CPA up 18% week-over-week, contribution margin negative on 9 of the last 14 days."],
+    ["Exact change","<span class=\"lgm\">Cut daily budget · Meta Ads Manager — Prospecting — Broad: $200 → $176/day (−12%)</span>"],
+    ["Projected","<b>+$540/mo</b> contribution margin · confidence 78% · the formula behind the number is attached to the card."],
+    ["Approved","You approved it. The change is yours to apply — one click copies the exact move. Nothing executes without you."],
+    ["Measured","The agent keeps watching after the change: CPA, spend, and margin tracked daily against the projection."],
+    ["Realized","<b>+$498/mo</b> measured over 30 days — 92% of projection. The outcome is stored; the next recommendation starts smarter."]
+  ];
+  var frame=document.getElementById("lgFrame"); if(!frame) return;
+  var nodes=frame.querySelectorAll(".lg-node"),k=document.getElementById("lgK"),v=document.getElementById("lgV"),
+      line=document.getElementById("lgLine"),prog=document.getElementById("lgProg"),
+      cur=-1,timer=null,DUR=3400,
+      still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  function show(i,auto){
+    cur=i;
+    nodes.forEach(function(n,j){n.classList.toggle("on",j===i);n.classList.toggle("done",j<i);n.setAttribute("aria-selected",j===i?"true":"false");});
+    line.classList.remove("show");k.textContent=stages[i][0];v.innerHTML=stages[i][1];
+    requestAnimationFrame(function(){requestAnimationFrame(function(){line.classList.add("show");});});
+    if(prog){prog.classList.remove("run");prog.style.transitionDuration="0ms";prog.style.transform="scaleX(0)";
+      if(auto&&!still){requestAnimationFrame(function(){requestAnimationFrame(function(){prog.style.transitionDuration=DUR+"ms";prog.classList.add("run");});});}}
+  }
+  function loop(){clearTimeout(timer);if(still)return;timer=setTimeout(function(){show((cur+1)%stages.length,true);loop();},DUR);}
+  nodes.forEach(function(n){n.addEventListener("click",function(){clearTimeout(timer);show(+n.dataset.lg,false);loop();});});
+  var inView=false;
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){inView=e.isIntersecting;if(inView){if(cur<0){show(0,true);}loop();}else{clearTimeout(timer);}});
+  },{threshold:.35});
+  io.observe(frame);
+  document.addEventListener("visibilitychange",function(){
+    if(document.hidden){clearTimeout(timer);}else if(inView&&cur>=0){show(cur,true);loop();}
+  });
+  if(still){show(0,false);}
+})();
+</script>
 
 <!-- ============ SUITE GALLERY — real screenshots, SAMPLE data ============ -->
 <section id="screens">
