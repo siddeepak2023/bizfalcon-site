@@ -772,12 +772,13 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       </div>
     </div>
 
-    <!-- onboarding walkthrough video — appears when ./media/onboarding.mp4 ships -->
+    <!-- onboarding walkthrough video — real capture of the live ProfitFalcon sample-store dashboard.
+         (Talon in-app capture needs an authed session — swap in when recorded.) -->
     <style>.onb-video{border:1px solid var(--line);background:var(--bg);margin-bottom:26px}.onb-video video{display:block;width:100%;height:auto}</style>
-    <div class="onb-video rv" id="onbVideo" style="display:none">
-      <div class="demo-bar"><span>bizfalcon — onboarding walkthrough</span><span style="margin-left:auto">REAL SESSION · 90 SEC</span></div>
-      <video src="./media/onboarding.mp4" controls playsinline preload="metadata"
-             aria-label="BizFalcon walkthrough: uploading a spreadsheet and reading the computed answer"></video>
+    <div class="onb-video rv" id="onbVideo">
+      <div class="demo-bar"><span>profitfalcon — real product session</span><span style="margin-left:auto">SAMPLE DATA · REAL SESSION · 43 SEC</span></div>
+      <video src="./media/onboarding.mp4" poster="./media/onboarding-poster.jpg" controls muted playsinline preload="metadata"
+             aria-label="ProfitFalcon walkthrough on sample data: morning brief, product screener with Star, Sleeper and Leak tags, and computed store metrics"></video>
     </div>
 
     <div class="prod-grid">
