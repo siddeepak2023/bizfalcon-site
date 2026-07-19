@@ -616,6 +616,32 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 <style>
 /* PORTED — talonomic/talonmark dusk.css blocks (ledger, gallery, bench, calcs, minute chips).
    Token-only colors; DUSK tokens untouched. */
+/* interlude band + sentinel bust + ledger sphere (parity with PF/CF) */
+.interlude{
+  background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,#0A0A0B;padding:76px 0;
+  --bg:#0A0A0B;--bg2:#111110;--card:#141413;--fg:#EDECE8;
+  --mut:rgba(237,236,232,.55);--line:rgba(237,236,232,.16);--line-soft:rgba(237,236,232,.09);--dot:rgba(237,236,232,.10);
+  color:var(--fg);
+}
+:root:not([data-theme="light"]) .interlude{
+  background:url(textures/halftone-ink.png) repeat fixed 0 0/720px 720px,#F8F7F3;
+  --bg:#F8F7F3;--bg2:#FFFFFF;--card:#FFFFFF;--fg:#111110;
+  --mut:rgba(17,17,16,.55);--line:rgba(17,17,16,.16);--line-soft:rgba(17,17,16,.09);--dot:rgba(17,17,16,.10);
+}
+.interlude .sec-head h2,.interlude h3{color:var(--fg)}
+.interlude .sec-head p{color:var(--mut)}
+.feed-duo{position:relative;margin-bottom:24px}
+@media(min-width:861px){#bench .sec-head{max-width:min(640px,50%);margin-bottom:36px}}
+.feed-duo .rec-mock{margin:0}
+.art--bust{position:absolute;right:-64px;bottom:35px;width:430px;height:340px;
+  transform:scale(1.12) !important;transform-origin:100% 100%;image-rendering:auto;pointer-events:none}
+@media(max-width:1120px){.art--bust{transform:scale(1.05) !important;right:-24px}}
+.art--oort{width:320px;height:320px;display:block;justify-self:end;align-self:center;transform:translateY(-35px)}
+@media(max-width:860px){
+  .feed-duo{position:static}
+  .art--bust{position:static;transform:scale(1) !important;width:min(360px,84%);height:auto;aspect-ratio:430/340;margin:8px auto 0}
+  .art--oort{width:240px;height:240px;justify-self:center;margin-top:8px}
+}
 /* product shot frame */
 .shot{border:1px solid var(--line);background:var(--bg);font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75}
 .shot-bar{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--line-soft);color:var(--mut);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
@@ -898,6 +924,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <h2>Every recommendation is scored against what actually happened.</h2>
         <p>One ledger under all three products. Each move a falcon proposes carries a projected impact, waits for your approval, and gets measured against reality on the ledger.</p>
       </div>
+      <canvas class="art art--oort rv d1" data-art="oort" aria-hidden="true"></canvas>
     </div>
     <div class="lg-frame rv d1" id="lgFrame">
       <div class="lg-rail" role="tablist" aria-label="Recommendation lifecycle">
@@ -1017,7 +1044,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 </script>
 
 <!-- ============ AGENT BENCH — the work, not the count ============ -->
-<section id="bench" class="dotbg">
+<section id="bench" class="interlude">
   <div class="wrap">
     <div class="sec-row">
       <div class="sec-head rv">
@@ -1026,8 +1053,9 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <p>Each one watches a different way money leaks out — and proposes the exact change. You approve every move; nothing executes on its own. Sample recommendations below; your ledger fills from your first approval.</p>
       </div>
     </div>
-    
-    <div class="rec-mock rv d1" aria-label="Sample recommendation card as it appears in the product">
+
+    <div class="feed-duo rv d1">
+    <div class="rec-mock" aria-label="Sample recommendation card as it appears in the product">
       <div class="rm-bar"><span>agent feed — one card</span><span>SAMPLE DATA · LIVE PRODUCT UI</span></div>
       <div class="rm-body">
         <div class="rm-head"><span>MARGIN SENTINEL · PROFITFALCON</span><span>CONFIDENCE 78%</span></div>
@@ -1036,6 +1064,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="rm-proj">Projected <b>+$540/mo</b> contribution margin <span>· the formula is attached to the card</span></div>
         <div class="rm-actions"><span class="rm-btn rm-btn--approve">Approve</span><span class="rm-btn">Dismiss</span><span class="rm-note">Nothing executes without you</span></div>
       </div>
+    </div>
+      <canvas class="art art--bust rv d1" data-art="bust" aria-hidden="true"></canvas>
     </div>
     <div class="bench-grid rv d1">
       <div class="bn-card">
@@ -1312,7 +1342,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   </div>
 </footer>
 
-<script src="./dusk-art.js"></script>
+<script src="./dusk-art.js?v=20260731"></script>
 <script>
 (function(){
 "use strict";
