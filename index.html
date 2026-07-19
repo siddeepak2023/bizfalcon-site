@@ -772,13 +772,18 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       </div>
     </div>
 
-    <!-- onboarding walkthrough video — real capture of the live ProfitFalcon sample-store dashboard.
-         (Talon in-app capture needs an authed session — swap in when recorded.) -->
+    <!-- product walkthrough videos — real captures of the live PF/CF sample sessions.
+         (Talon in-app capture needs an authed session — add when recorded.) -->
     <style>.onb-video{border:1px solid var(--line);background:var(--bg);margin-bottom:26px}.onb-video video{display:block;width:100%;height:auto}</style>
-    <div class="onb-video rv" id="onbVideo">
-      <div class="demo-bar"><span>profitfalcon — real product session</span><span style="margin-left:auto">SAMPLE DATA · REAL SESSION · 43 SEC</span></div>
-      <video src="./media/onboarding.mp4" poster="./media/onboarding-poster.jpg" controls muted playsinline preload="metadata"
-             aria-label="ProfitFalcon walkthrough on sample data: morning brief, product screener with Star, Sleeper and Leak tags, and computed store metrics"></video>
+    <div class="onb-video rv" id="onbVideoPf">
+      <div class="demo-bar"><span>profitfalcon — live product session</span><span style="margin-left:auto">SAMPLE DATA · REAL SESSION · 53 SEC</span></div>
+      <video src="./media/walkthrough-pf.mp4" poster="./media/walkthrough-pf-poster.jpg" autoplay muted loop playsinline preload="metadata"
+             aria-label="ProfitFalcon walkthrough on sample data: morning brief, product screener with Star, Sleeper and Leak tags, store metrics, costs, autopilot, alerts, and the free profit teardown computing live"></video>
+    </div>
+    <div class="onb-video rv" id="onbVideoCf">
+      <div class="demo-bar"><span>clientfalcon — live product session</span><span style="margin-left:auto">SAMPLE DATA · REAL SESSION · 50 SEC</span></div>
+      <video src="./media/walkthrough-cf.mp4" poster="./media/walkthrough-cf-poster.jpg" muted loop playsinline preload="metadata"
+             aria-label="ClientFalcon walkthrough on sample data: prospect audit, ranked findings, recommendations, test plan, verified metric formulas, channel screener, white-label PDF and batch reports"></video>
     </div>
 
     <div class="prod-grid">
@@ -1392,10 +1397,20 @@ document.querySelectorAll(".rec-actions button").forEach(function(btn){
 })();
 </script>
 <script>
+// Walkthrough frames run like live screens: reveal when the file exists, play
+// only while on screen, pause off-screen, poster-only under reduced motion.
 (function () {
-  var box = document.getElementById("onbVideo");
-  if (!box) return;
-  box.querySelector("video").addEventListener("loadedmetadata", function () { box.style.display = "block"; });
+  var rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  ["onbVideoPf", "onbVideoCf"].forEach(function (id) {
+    var box = document.getElementById(id);
+    if (!box) return;
+    var v = box.querySelector("video");
+    v.addEventListener("loadedmetadata", function () { box.style.display = "block"; });
+    if (rm) { v.removeAttribute("autoplay"); v.pause(); return; }
+    new IntersectionObserver(function (en) {
+      en[0].isIntersecting ? v.play().catch(function () {}) : v.pause();
+    }, { threshold: 0.25 }).observe(box);
+  });
 })();
 </script>
 </body>
