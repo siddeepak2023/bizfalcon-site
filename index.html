@@ -1138,6 +1138,9 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   .clip-lg .lgc-rail .lgc-node:nth-child(n+5){display:none}
 }
 @media(prefers-reduced-motion:reduce){.clip-stage{transition:none}}
+.live-shot{overflow:hidden}
+.live-frame{display:block;width:100%;height:min(72vh,640px);border:0;background:var(--bg)}
+@media(max-width:700px){.live-frame{height:78vh}}
 
 /* PORTED — talonomic/talonmark dusk.css blocks (ledger, gallery, bench, calcs, minute chips).
    Token-only colors; DUSK tokens untouched. */
@@ -1322,17 +1325,13 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       </div>
     </div>
 
-    <!-- coded clip player — PF/CF scenes from the sc-* kit + two real proof clips -->
+    <!-- live product embed — the real ProfitFalcon teardown running in the browser -->
     <div class="rv d1" style="margin-bottom:26px">
-      <div class="demo-tabs" id="demoTabs" role="tablist" aria-label="Product demo scenes"></div>
-      <div class="shot" id="demoRoot">
-        <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span id="clipBarTitle">bizfalcon — sample session</span><span style="margin-left:auto">SAMPLE DATA</span></div>
-        <div class="clip-stage" id="clipStage"></div>
-        <div class="shot-foot"><span id="clipFootLeft">COMPUTED FROM SAMPLE EXPORTS</span><a id="clipFootCta" href="https://profit.bizfalconai.com">OPEN PROFITFALCON ▸</a></div>
+      <div class="shot live-shot" id="demoRoot">
+        <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span>profitfalcon — live teardown</span><span style="margin-left:auto">LIVE · RUNNING IN YOUR BROWSER</span></div>
+        <iframe class="live-frame" src="https://profit.bizfalconai.com/teardown" title="ProfitFalcon live teardown — running on sample data" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <div class="shot-foot"><span>COMPUTED IN YOUR BROWSER · NOTHING UPLOADED</span><a href="https://profit.bizfalconai.com/teardown">OPEN FULL-SCREEN ▸</a></div>
       </div>
-      <div class="demo-prog" id="demoProg" aria-hidden="true"><i></i></div>
-      <div class="demo-cap" id="demoCap" aria-live="polite"></div>
-      <div class="demo-ins" id="demoIns" aria-live="polite"></div>
     </div>
     </div>
 
@@ -1806,108 +1805,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 </footer>
 
 <script src="./dusk-art.js?v=20260736"></script>
-<script>
-(function(){
-"use strict";
-if (!document.getElementById("demoRoot") || !window.DUSK || !window.DUSK.clipPlayer) return;
-var barTitle = document.getElementById("clipBarTitle");
-var player = window.DUSK.clipPlayer({
-  root: document.getElementById("demoRoot"),
-  stageEl: document.getElementById("clipStage"),
-  tabsEl: document.getElementById("demoTabs"),
-  capEl: document.getElementById("demoCap"),
-  progEl: document.getElementById("demoProg"),
-  insEl: document.getElementById("demoIns"),
-  footLeftEl: document.getElementById("clipFootLeft"),
-  footCtaEl: document.getElementById("clipFootCta"),
-  clips: [
-    {
-      label: "PF SCREENER", cap: "PROFITFALCON — PER-SKU PROFIT SCREENER, LEAKS SURFACE FIRST",
-      foot: { left: "SAMPLE DATA · REAL STRUCTURE", cta: { label: "OPEN PROFITFALCON ▸", href: "https://profit.bizfalconai.com" } },
-      body: '<div class="sc-panel" aria-label="ProfitFalcon per-SKU screener (sample data)">' +
-        '<span class="sc-tag">PROFITFALCON · SAMPLE STORE</span>' +
-        '<div class="sc-kpis">' +
-          '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">SKUs below a healthy margin</div><div class="k-val"><b data-count="2">0</b> of <b data-count="14">0</b></div><div class="k-formula"><b>=</b> contribution margin &lt; 20% target</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">Worst margin <span class="sc-delta loss">below 20%</span></div><div class="k-val"><b data-count="16" data-suffix=".1%">0</b></div><div class="k-formula"><b>=</b> Overstock Graphic Tee · 163 orders</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">Top SKU margin <span class="sc-delta gain">healthy</span></div><div class="k-val"><b data-count="40" data-suffix=".1%">0</b></div><div class="k-formula"><b>=</b> USB-C Hub Pro · 107 orders</div></div>' +
-        '</div>' +
-        '<table class="sc-table"><thead><tr><th>SKU</th><th>Tag</th><th class="num">Rev</th><th class="num">Orders</th><th class="num">Margin</th></tr></thead><tbody>' +
-        '<tr><td>Overstock Graphic Tee</td><td class="sig">LEAK</td><td class="num">$6.6K</td><td class="num">163</td><td class="num sig">16.1%</td></tr>' +
-        '<tr><td>Last-Season Travel Mug</td><td class="sig">LEAK</td><td class="num">$5.1K</td><td class="num">132</td><td class="num sig">16.2%</td></tr>' +
-        '<tr><td>USB-C Hub Pro</td><td>STAR</td><td class="num">$47.9K</td><td class="num">107</td><td class="num">40.1%</td></tr>' +
-        '</tbody></table></div>',
-      ins: "<b>ProfitFalcon finds the weak-margin SKUs</b> — Overstock Graphic Tee 16.1%, Last-Season Travel Mug 16.2% (both below 20%), formula attached to every figure."
-    },
-    {
-      label: "CF AUDIT", cap: "CLIENTFALCON — WIN THE PITCH WITH THE PROSPECT\u2019S OWN DATA",
-      foot: { left: "SAMPLE DATA · REAL STRUCTURE", cta: { label: "OPEN CLIENTFALCON ▸", href: "https://client.bizfalconai.com" } },
-      body: '<div class="sc-panel" aria-label="ClientFalcon prospect audit (sample data)">' +
-        '<span class="sc-tag">CLIENTFALCON · SAMPLE EXPORT</span>' +
-        '<div class="sc-kpis">' +
-          '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">Projected recovery, all findings</div><div class="k-val">~$<b data-count="18447">0</b>/mo</div><div class="k-formula"><b>=</b> Σ projected impact · 4 ranked issues</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">CPA, period over period <span class="sc-delta loss up">37%</span></div><div class="k-val">$23.24 → $31.94</div><div class="k-formula"><b>=</b> spend / conversions · both periods</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">Budget on the weak channel</div><div class="k-val">2.6×</div><div class="k-formula"><b>=</b> Google ROAS 6.72 / Meta ROAS 2.62</div></div>' +
-        '</div>' +
-        '<div class="sc-act"><span class="a-pri">P1</span><p><b>Pause the bleeding channel</b> — redeploy budget to the efficient one</p><span class="a-imp">+$<b data-count="8985">0</b>/mo</span></div>' +
-        '<div class="sc-act"><span class="a-pri">P2</span><p><b>Reallocate Meta → Google</b> — 6.72x vs 2.62x on the same dollars</p><span class="a-imp">+$<b data-count="6765">0</b>/mo</span></div>' +
-        '</div>',
-      ins: "<b>ClientFalcon writes the pitch</b> — ranked issues from the prospect\u2019s export, dollars attached."
-    },
-    {
-      label: "APPROVE", cap: "EVERY MOVE WAITS FOR YOUR APPROVAL — NOTHING EXECUTES ALONE",
-      foot: { left: "SAMPLE DATA · L1: RECOMMENDS, YOU APPROVE", cta: { label: "HOW APPROVAL WORKS ▸", href: "#approve" } },
-      body: '<div class="sc-panel" aria-label="Approval queue (sample data)">' +
-        '<span class="sc-tag">OPERATOR QUEUE · SAMPLE</span>' +
-        '<div class="sc-act"><span class="a-pri">P1</span><p><b>Fence or kill the deep codes</b> — FLASH35 ran 27% off on 173 orders; $14,339 given away (5.3% of gross)</p><span class="a-imp">~$<b data-count="4904">0</b>/mo</span></div>' +
-        '<div class="sc-act"><span class="a-pri">P2</span><p><b>Reprice the two sub-20% SKUs</b> — Overstock Graphic Tee &amp; Last-Season Travel Mug; target ≥40% margin</p><span class="a-imp">below 20%</span></div>' +
-        '<div class="sc-formula" style="margin-top:14px">QUEUED → YOUR APPROVAL · ~$3,206/mo recoverable · nothing executes without you</div></div>',
-      ins: "<b>Recommends; you approve</b> — the deepest leak is discount depth (FLASH35), ~$3,206/mo recoverable. The queue holds every move; the ledger keeps score after."
-    },
-    {
-      label: "LEDGER", cap: "THE LEDGER — EVERY APPROVED MOVE, MEASURED AGAINST ITS PROJECTION",
-      hold: 5200,
-      foot: { left: "ILLUSTRATIVE — THE LEDGER FILLS FROM YOUR FIRST APPROVAL", cta: { label: "SEE THE LEDGER ▸", href: "#ledger" } },
-      body: '<div class="clip-lg" aria-label="Recommendation lifecycle ledger (sample data)">' +
-        '<div class="lgc-rail">' +
-          '<span class="lgc-node done"><i></i><s>Detected</s></span>' +
-          '<span class="lgc-node done"><i></i><s>Exact change</s></span>' +
-          '<span class="lgc-node done"><i></i><s>Projected</s></span>' +
-          '<span class="lgc-node done"><i></i><s>Approved</s></span>' +
-          '<span class="lgc-node done"><i></i><s>Measured</s></span>' +
-          '<span class="lgc-node on"><i></i><s>Realized</s></span>' +
-        '</div>' +
-        '<div class="lgc-body">Every product runs the same lifecycle: detected → exact change → projected → approved → measured — <span class="lgm">projected +$540/mo</span> vs <span class="lgm">realized +$498/mo</span>.</div>' +
-        '<div class="lgc-tally"><span>EXAMPLE ENTRY: PROJECTED +$<b data-count="540">0</b></span><span>REALIZED +$<b data-count="498">0</b></span><span>ACCURACY <b data-count="92" data-suffix="%">0</b></span></div>' +
-        '</div>',
-      ins: "<b>No one else grades their own advice</b> — every projection is scored against reality, on every product."
-    },
-    {
-      label: "PF LIVE", cap: "REAL SESSION — PROFITFALCON\u2019S TEARDOWN ON A SAMPLE EXPORT",
-      hold: 9000,
-      foot: { left: "SAMPLE DATA · REAL SESSION", cta: { label: "RUN THE FREE TEARDOWN ▸", href: "https://profit.bizfalconai.com/teardown" } },
-      video: { src: "./media/teardown-pf.webm", poster: "./media/teardown-pf-poster.jpg",
-               alt: "Real ProfitFalcon session: the free teardown computing per-SKU profit and monthly leak from a sample order export" },
-      ins: "<b>This actually ran</b> — unedited capture of the live teardown on the labeled sample export."
-    },
-    {
-      label: "CF LIVE", cap: "REAL SESSION — CLIENTFALCON\u2019S SAMPLE AUDIT BUILDING ITSELF",
-      hold: 8000,
-      foot: { left: "SAMPLE DATA · REAL SESSION", cta: { label: "RUN A SAMPLE AUDIT ▸", href: "https://client.bizfalconai.com/clientfalcon/audit" } },
-      video: { src: "./media/audit-cf.webm", poster: "./media/audit-cf-poster.jpg",
-               alt: "Real ClientFalcon session: audit mode ranking issues and building the 30-day plan from labeled sample CSVs" },
-      ins: "<b>Same engine, agency-shaped</b> — the audit ran live on labeled sample CSVs, captured unedited."
-    }
-  ]
-});
-/* keep the window-bar title in sync with the scene's product */
-(function(){
-  var titles = ["profitfalcon — sample session","clientfalcon — sample session","bizfalcon — sample session","bizfalcon — sample session","profitfalcon — real session","clientfalcon — real session"];
-  var tabs = document.querySelectorAll("#demoTabs .demo-tab");
-  tabs.forEach(function(t, i){ t.addEventListener("click", function(){ if (barTitle) barTitle.textContent = titles[i]; }); });
-  if (barTitle) barTitle.textContent = titles[0];
-})();
-})();
-</script>
 <script>
 (function(){
 "use strict";
