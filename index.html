@@ -1533,9 +1533,9 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
             <div class="demo-q" id="demoQ"></div>
             <div class="demo-code" id="demoCode"></div>
             <div class="demo-tiles" id="demoTiles">
-              <div class="tile"><b data-count="7">0</b><s>Loss-making SKUs</s></div>
-              <div class="tile neg"><b data-count="3412" data-prefix="−$">−$0</b><s>June impact</s></div>
-              <div class="tile"><b data-count="11204">0</b><s>Rows computed</s></div>
+              <div class="tile"><b data-count="2">0</b><s>SKUs below 20% margin</s></div>
+              <div class="tile neg"><b data-count="3206" data-prefix="~$">~$0</b><s>Recoverable / mo</s></div>
+              <div class="tile"><b data-count="1588">0</b><s>Orders computed</s></div>
             </div>
           </div>
           <div class="demo-foot"><span>PYTHON · EXECUTED IN-BROWSER</span><a href="#method">SHOW THE MATH ▸</a></div>
@@ -1644,7 +1644,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="lg-line" id="lgLine"><span class="lg-k" id="lgK"></span><span class="lg-v" id="lgV"></span></div>
       </div>
       <div class="lg-prog" aria-hidden="true"><i id="lgProg"></i></div>
-      <div class="lg-foot"><span>SAMPLE RECOMMENDATION · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">LEDGER (SAMPLE): PROJECTED +$540 · REALIZED +$498 · 92%</span></div>
+      <div class="lg-foot"><span>ILLUSTRATIVE EXAMPLE · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">ILLUSTRATIVE: PROJECTED +$540 · REALIZED +$498 · 92%</span></div>
     </div>
   </div>
 </section>
@@ -1856,7 +1856,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
             <div class="track"><div class="fill"></div></div>
             <div class="lbl">
               <span class="busy">parsing…</span>
-              <span class="done">✓ 1,616 rows · runtime ready</span>
+              <span class="done">✓ 1,588 rows · runtime ready</span>
             </div>
           </div>
         </div>
@@ -1867,7 +1867,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="scm" aria-hidden="true">
           <span class="scm-tag">Compute</span>
           <span class="scm-vbadge">Verified</span>
-          <div class="scm-code"><b>df["gross_amount"].sum()</b> → 306612.44</div>
+          <div class="scm-code"><b>df["gross_amount"].sum()</b> → 254845.81</div>
           <div class="scm-meta"><span>Engine <b>Python · in-browser</b></span></div>
         </div>
       </div>
@@ -1877,8 +1877,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="scm" aria-hidden="true">
           <span class="scm-tag">Decide</span>
           <div class="scm-acts scm-acts--anim">
-            <div class="ar"><span class="pri">P1</span><p>Cut supplier B freight</p><span class="imp">+$3,412/mo</span></div>
-            <div class="ar"><span class="pri">P2</span><p>Reprice SKU-2231</p><span class="imp">+$1,090/mo</span></div>
+            <div class="ar"><span class="pri">P1</span><p>Fence FLASH35 deep codes</p><span class="imp">~$3,206/mo</span></div>
+            <div class="ar"><span class="pri">P2</span><p>Reprice Overstock Graphic Tee</p><span class="imp">→ ≥40%</span></div>
           </div>
         </div>
       </div>
@@ -1921,7 +1921,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
           </div>
           <div class="rec">
             <div class="rec-top"><span>PLAYBOOK MARGIN-02 · PROFITFALCON</span><span class="conf">CONF 0.74</span></div>
-            <p>SKU <b>“Trail Mini”</b> loses <span class="sv">$1.82 per unit</span> after ad cost. Recommend an +8% price test before scaling spend.</p>
+            <p>SKU <b>“Overstock Graphic Tee”</b> sells at <span class="sv">16.1% margin</span> — below the 20% target. Recommend a reprice toward ≥40% before scaling spend.</p>
             <div class="rec-actions"><button type="button">Approve</button><button type="button">Dismiss</button></div>
           </div>
         </div>
@@ -1986,7 +1986,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   </div>
 </footer>
 
-<script src="./dusk-art.js?v=20260735"></script>
+<script src="./dusk-art.js?v=20260736"></script>
 <script>
 (function(){
 "use strict";
@@ -2008,15 +2008,16 @@ var player = window.DUSK.clipPlayer({
       body: '<div class="sc-panel" aria-label="ProfitFalcon per-SKU screener (sample data)">' +
         '<span class="sc-tag">PROFITFALCON · SAMPLE STORE</span>' +
         '<div class="sc-kpis">' +
-          '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">SKUs below water</div><div class="k-val"><b data-count="2">0</b> of <b data-count="214">0</b></div><div class="k-formula"><b>=</b> margin(rev − cogs − fees − ads) &lt; 0</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">Worst margin / unit <span class="sc-delta loss">LEAK</span></div><div class="k-val">−$1.82</div><div class="k-formula"><b>=</b> TRAIL-MINI · every ad dollar loses</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">Monthly leak, both SKUs</div><div class="k-val">−$<b data-count="496">0</b></div><div class="k-formula"><b>=</b> Σ negative-margin units × velocity</div></div>' +
+          '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">SKUs below a healthy margin</div><div class="k-val"><b data-count="2">0</b> of <b data-count="14">0</b></div><div class="k-formula"><b>=</b> contribution margin &lt; 20% target</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">Worst margin <span class="sc-delta loss">below 20%</span></div><div class="k-val"><b data-count="16" data-suffix=".1%">0</b></div><div class="k-formula"><b>=</b> Overstock Graphic Tee · 163 orders</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">Top SKU margin <span class="sc-delta gain">healthy</span></div><div class="k-val"><b data-count="40" data-suffix=".1%">0</b></div><div class="k-formula"><b>=</b> USB-C Hub Pro · 107 orders</div></div>' +
         '</div>' +
-        '<table class="sc-table"><thead><tr><th>SKU</th><th>Tag</th><th class="num">Rev</th><th class="num">Margin</th><th class="num">P&amp;L / mo</th></tr></thead><tbody>' +
-        '<tr><td>TRAIL-MINI</td><td class="sig">LEAK</td><td class="num">$12.4K</td><td class="num sig">−4%</td><td class="num sig">−$496</td></tr>' +
-        '<tr><td>HDL-201</td><td>STAR</td><td class="num">$48.2K</td><td class="num">41%</td><td class="num">$19.8K</td></tr>' +
+        '<table class="sc-table"><thead><tr><th>SKU</th><th>Tag</th><th class="num">Rev</th><th class="num">Orders</th><th class="num">Margin</th></tr></thead><tbody>' +
+        '<tr><td>Overstock Graphic Tee</td><td class="sig">LEAK</td><td class="num">$6.6K</td><td class="num">163</td><td class="num sig">16.1%</td></tr>' +
+        '<tr><td>Last-Season Travel Mug</td><td class="sig">LEAK</td><td class="num">$5.1K</td><td class="num">132</td><td class="num sig">16.2%</td></tr>' +
+        '<tr><td>USB-C Hub Pro</td><td>STAR</td><td class="num">$47.9K</td><td class="num">107</td><td class="num">40.1%</td></tr>' +
         '</tbody></table></div>',
-      ins: "<b>ProfitFalcon finds the SKUs losing money</b> — with the formula attached to every figure."
+      ins: "<b>ProfitFalcon finds the weak-margin SKUs</b> — Overstock Graphic Tee 16.1%, Last-Season Travel Mug 16.2% (both below 20%), formula attached to every figure."
     },
     {
       label: "CF AUDIT", cap: "CLIENTFALCON — WIN THE PITCH WITH THE PROSPECT\u2019S OWN DATA",
@@ -2038,16 +2039,15 @@ var player = window.DUSK.clipPlayer({
       foot: { left: "SAMPLE DATA · L1: RECOMMENDS, YOU APPROVE", cta: { label: "HOW APPROVAL WORKS ▸", href: "#approve" } },
       body: '<div class="sc-panel" aria-label="Approval queue (sample data)">' +
         '<span class="sc-tag">OPERATOR QUEUE · SAMPLE</span>' +
-        '<div class="sc-act"><span class="a-pri">P1</span><p><b>Cut supplier B freight</b> — 7 SKUs ship at a loss</p><span class="a-imp">+$<b data-count="3412">0</b>/mo</span></div>' +
-        '<div class="sc-act"><span class="a-pri">P2</span><p><b>Raise AOV floor</b> — free shipping at $45, not $35</p><span class="a-imp">+$<b data-count="1890">0</b>/mo</span></div>' +
-        '<div class="sc-act"><span class="a-pri">P3</span><p><b>+8% price test on Trail Mini</b> — flips the margin in simulation</p><span class="a-imp">+$<b data-count="612">0</b>/mo</span></div>' +
-        '<div class="sc-formula" style="margin-top:14px">QUEUED → YOUR APPROVAL · projected impact attached to every move</div></div>',
-      ins: "<b>Recommends; you approve</b> — the queue holds every move until you say go, and the ledger keeps score after."
+        '<div class="sc-act"><span class="a-pri">P1</span><p><b>Fence or kill the deep codes</b> — FLASH35 ran 27% off on 173 orders; $14,339 given away (5.3% of gross)</p><span class="a-imp">~$<b data-count="4904">0</b>/mo</span></div>' +
+        '<div class="sc-act"><span class="a-pri">P2</span><p><b>Reprice the two sub-20% SKUs</b> — Overstock Graphic Tee &amp; Last-Season Travel Mug; target ≥40% margin</p><span class="a-imp">below 20%</span></div>' +
+        '<div class="sc-formula" style="margin-top:14px">QUEUED → YOUR APPROVAL · ~$3,206/mo recoverable · nothing executes without you</div></div>',
+      ins: "<b>Recommends; you approve</b> — the deepest leak is discount depth (FLASH35), ~$3,206/mo recoverable. The queue holds every move; the ledger keeps score after."
     },
     {
       label: "LEDGER", cap: "THE LEDGER — EVERY APPROVED MOVE, MEASURED AGAINST ITS PROJECTION",
       hold: 5200,
-      foot: { left: "SAMPLE RECOMMENDATION · SHARED ACROSS ALL PRODUCTS", cta: { label: "SEE THE LEDGER ▸", href: "#ledger" } },
+      foot: { left: "ILLUSTRATIVE — THE LEDGER FILLS FROM YOUR FIRST APPROVAL", cta: { label: "SEE THE LEDGER ▸", href: "#ledger" } },
       body: '<div class="clip-lg" aria-label="Recommendation lifecycle ledger (sample data)">' +
         '<div class="lgc-rail">' +
           '<span class="lgc-node done"><i></i><s>Detected</s></span>' +
@@ -2058,7 +2058,7 @@ var player = window.DUSK.clipPlayer({
           '<span class="lgc-node on"><i></i><s>Realized</s></span>' +
         '</div>' +
         '<div class="lgc-body">Every product runs the same lifecycle: detected → exact change → projected → approved → measured — <span class="lgm">projected +$540/mo</span> vs <span class="lgm">realized +$498/mo</span>.</div>' +
-        '<div class="lgc-tally"><span>LEDGER: PROJECTED +$<b data-count="540">0</b></span><span>REALIZED +$<b data-count="498">0</b></span><span>ACCURACY <b data-count="92" data-suffix="%">0</b></span></div>' +
+        '<div class="lgc-tally"><span>EXAMPLE ENTRY: PROJECTED +$<b data-count="540">0</b></span><span>REALIZED +$<b data-count="498">0</b></span><span>ACCURACY <b data-count="92" data-suffix="%">0</b></span></div>' +
         '</div>',
       ins: "<b>No one else grades their own advice</b> — every projection is scored against reality, on every product."
     },
