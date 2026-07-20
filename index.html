@@ -614,6 +614,493 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 [data-theme="light"] body{background:url(textures/halftone-ink.png) repeat fixed 0 0/720px 720px,var(--bg)}
 </style>
 <style>
+/* PORTED sc-* built-mockup fragment kit (from talonomic dusk.css) */
+.sc-panel{
+  position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  padding:clamp(22px,3.4vw,40px);
+  background:
+    radial-gradient(120% 150% at 88% 118%, rgba(176,69,59,.17), transparent 62%),
+    radial-gradient(90% 90% at -8% -12%, rgba(237,236,232,.045), transparent 55%),
+    linear-gradient(158deg, var(--bg2), var(--bg) 68%);
+}
+[data-theme="light"] .sc-panel{
+  background:
+    radial-gradient(120% 150% at 88% 118%, rgba(142,42,34,.075), transparent 62%),
+    linear-gradient(158deg, #FFFFFF, var(--bg) 72%);
+}
+/* faint dotted grid, same register as .dotbg but subtler */
+.sc-panel::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(var(--dot) 1px,transparent 1px);
+  background-size:26px 26px;opacity:.35;
+}
+.sc-panel > *{position:relative}
+
+/* mono caption pinned to a panel corner (instrument label voice) */
+.sc-tag{
+  position:absolute;top:14px;right:16px;font-family:"JetBrains Mono",monospace;
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);
+}
+
+/* ── Floating sub-card ──────────────────────────────────────── */
+.sc-card{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.55);
+  padding:16px 18px;min-width:0;
+}
+[data-theme="light"] .sc-card{box-shadow:0 16px 36px -20px rgba(17,17,16,.28)}
+
+/* ── KPI cluster ────────────────────────────────────────────── */
+.sc-kpis{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;align-items:stretch}
+@media(max-width:700px){.sc-kpis{grid-template-columns:1fr 1fr}.sc-kpis .sc-kpi--hero{grid-column:span 2}}
+.sc-kpi{position:relative}
+.sc-kpi--hero{padding:20px 20px 18px}
+/* oxblood registration tick, top-left — the DUSK corner mark */
+.sc-kpi--hero::before{
+  content:"";position:absolute;top:-1px;left:-1px;width:14px;height:14px;
+  border-top:2px solid var(--signal);border-left:2px solid var(--signal);
+  border-top-left-radius:10px;
+}
+.sc-kpi .k-label{
+  font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:8px;
+}
+.sc-kpi .k-val{
+  font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-weight:600;
+  letter-spacing:-.02em;color:var(--fg);font-size:30px;line-height:1.1;margin-top:8px;
+}
+.sc-kpi--hero .k-val{font-size:40px}
+.sc-kpi .k-formula{
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--mut);
+  margin-top:10px;padding-top:10px;border-top:1px solid var(--line-soft);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.sc-kpi .k-formula b{color:var(--signal);font-weight:500}
+.sc-delta{
+  display:inline-flex;align-items:center;gap:5px;margin-left:auto;
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:500;
+  padding:3px 8px;border-radius:6px;border:1px solid var(--line-soft);
+  color:var(--fg);background:color-mix(in srgb,var(--fg) 5%,transparent);
+}
+.sc-delta.up::before{content:"▲";font-size:7px;color:var(--signal)}
+.sc-delta.down::before{content:"▼";font-size:7px;color:var(--signal)}
+.sc-delta.neg{color:var(--signal);border-color:color-mix(in srgb,var(--signal) 35%,transparent)}
+
+/* ── Verified-formula tile ──────────────────────────────────── */
+.sc-formula{padding:18px 20px}
+.sc-verified{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--signal);
+  border:1px solid color-mix(in srgb,var(--signal) 40%,transparent);
+  border-radius:6px;padding:4px 9px;
+}
+.sc-verified::before{content:"✓";font-size:11px}
+.sc-formula .f-read{
+  font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-weight:600;
+  letter-spacing:-.015em;color:var(--fg);font-size:19px;margin-top:14px;line-height:1.35;
+}
+.sc-formula .f-read .f-num{color:var(--signal)}
+.sc-formula .f-code{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--mut);
+  margin-top:12px;padding:10px 12px;border:1px solid var(--line-soft);border-radius:8px;
+  background:color-mix(in srgb,var(--fg) 3.5%,transparent);
+  white-space:pre;overflow-x:auto;
+}
+.sc-formula .f-code .tok{color:var(--fg)}
+.sc-formula .f-foot{
+  display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;
+  font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--mut);
+}
+.sc-formula .f-foot b{color:var(--fg);font-weight:500}
+
+/* ── Metric-pack tab bar + peek ─────────────────────────────── */
+.sc-pack{padding:0;overflow:hidden}
+.sc-pack .p-tabs{
+  display:flex;gap:2px;padding:8px 10px 0;border-bottom:1px solid var(--line-soft);
+  overflow-x:auto;scrollbar-width:none;
+}
+.sc-pack .p-tabs::-webkit-scrollbar{display:none}
+.sc-pack .p-tabs button{
+  font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-size:12.5px;font-weight:600;
+  color:var(--mut);padding:8px 12px 10px;border-bottom:2px solid transparent;
+  white-space:nowrap;transition:color .2s ease,border-color .2s ease;
+}
+.sc-pack .p-tabs button.on{color:var(--fg);border-bottom-color:var(--signal)}
+.sc-pack .p-tabs .p-live{
+  margin-left:auto;align-self:center;font-family:"JetBrains Mono",monospace;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
+  padding-right:6px;white-space:nowrap;
+}
+.sc-pack .p-body{padding:18px;min-height:190px}
+.sc-pack .p-pane{display:none}
+.sc-pack .p-pane.on{display:block;animation:scFade .45s ease both}
+@keyframes scFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.sc-pack .p-pane.on{animation:none}}
+
+/* pane primitives */
+.sc-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line-soft);font-size:13px;color:var(--mut)}
+.sc-row:first-child{border-top:none}
+.sc-row b{color:var(--fg);font-weight:600}
+.sc-row .mono{font-size:11px}
+.sc-row .r-val{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--fg)}
+.sc-row .r-val.sig{color:var(--signal)}
+
+/* peers: benchmark bars (you vs peer median) */
+.sc-bench .b-label{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
+.sc-bench .b-label b{color:var(--fg);font-weight:500;letter-spacing:0}
+.sc-bench .b-track{position:relative;height:8px;border-radius:4px;background:color-mix(in srgb,var(--fg) 7%,transparent);margin-bottom:14px}
+.sc-bench .b-you{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--signal)}
+.sc-bench .b-med{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg);opacity:.75}
+
+/* operator: prioritized action list */
+.sc-act{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line-soft)}
+.sc-act:first-child{border-top:none}
+.sc-act .a-pri{
+  flex:none;font-family:"JetBrains Mono",monospace;font-size:9px;font-weight:600;
+  letter-spacing:.1em;color:var(--signal);border:1px solid color-mix(in srgb,var(--signal) 40%,transparent);
+  border-radius:5px;padding:2px 6px;margin-top:2px;
+}
+.sc-act p{font-size:13px;color:var(--mut);line-height:1.45}
+.sc-act p b{color:var(--fg);font-weight:600}
+.sc-act .a-imp{margin-left:auto;flex:none;font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--fg);white-space:nowrap}
+
+/* deep dive: mini data table */
+.sc-table{width:100%;border-collapse:collapse;font-family:"JetBrains Mono",monospace;font-size:11px}
+.sc-table th{font-weight:500;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);text-align:left;padding:0 10px 7px 0;border-bottom:1px solid var(--line)}
+.sc-table td{color:var(--mut);padding:7px 10px 7px 0;border-bottom:1px solid var(--line-soft);white-space:nowrap}
+.sc-table td:first-child{color:var(--fg)}
+.sc-table .num{text-align:right;padding-right:0}
+.sc-table .sig{color:var(--signal)}
+
+/* mini donut (overview peek) */
+.sc-donut{display:flex;align-items:center;gap:16px}
+.sc-donut svg{flex:none}
+.sc-donut .d-leg{display:flex;flex-direction:column;gap:5px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.sc-donut .d-leg i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:7px;vertical-align:-1px}
+
+/* ── float-in on reveal (rides the existing .rv observer) ───── */
+.rv.on .sc-float{animation:scFloat .8s cubic-bezier(.22,1,.36,1) both}
+.rv.on .sc-float.f2{animation-delay:.12s}
+.rv.on .sc-float.f3{animation-delay:.24s}
+@keyframes scFloat{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.rv.on .sc-float{animation:none}}
+
+/* ── What-if slider row ─────────────────────────────────────── */
+.sc-whatif{padding:18px 20px}
+.sc-wlever{padding:11px 0;border-top:1px solid var(--line-soft)}
+.sc-wlever:first-of-type{border-top:none;padding-top:2px}
+.sc-wlever .w-head{display:flex;align-items:baseline;gap:10px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
+.sc-wlever .w-head b{color:var(--fg);font-weight:500}
+.sc-wlever .w-head .w-imp{margin-left:auto;font-size:11.5px;color:var(--signal);letter-spacing:.02em;font-weight:600}
+.sc-wlever .w-track{position:relative;height:4px;border-radius:2px;background:color-mix(in srgb,var(--fg) 8%,transparent);margin-top:10px}
+.sc-wlever .w-fill{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:linear-gradient(90deg,color-mix(in srgb,var(--signal) 55%,transparent),var(--signal))}
+.sc-wlever .w-knob{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--signal);transform:translate(-50%,-50%);box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.sc-whatif .w-total{display:flex;align-items:baseline;gap:10px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+.sc-whatif .w-total span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--mut)}
+.sc-whatif .w-total b{margin-left:auto;font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-size:22px;font-weight:600;letter-spacing:-.02em;color:var(--signal)}
+
+/* ── Ember chart fragment ───────────────────────────────────── */
+.sc-chart{padding:16px 18px 12px}
+.sc-chart .c-head{display:flex;align-items:center;gap:10px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.sc-chart .c-head b{color:var(--fg);font-weight:500}
+.sc-chart svg{display:block;width:100%;height:auto}
+.sc-chart .c-axis{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.08em;fill:var(--mut)}
+.sc-chart .c-bar{fill:url(#scEmber)}
+.sc-chart .c-line{fill:none;stroke:var(--signal);stroke-width:1.6}
+.sc-chart .c-dotgrid{stroke:var(--line-soft);stroke-dasharray:1 5}
+.rv.on .sc-chart .c-bar{animation:scBarUp .9s cubic-bezier(.22,1,.36,1) both;transform-origin:bottom;animation-delay:calc(var(--i)*.07s + .25s)}
+@keyframes scBarUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.rv.on .sc-chart .c-bar{animation:none}}
+
+/* ── Cost donut fragment ────────────────────────────────────── */
+.sc-costd{padding:18px 20px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.sc-costd .cd-ring{position:relative;flex:none}
+.sc-costd .cd-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.sc-costd .cd-center b{font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em;color:var(--fg)}
+.sc-costd .cd-center span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-top:2px}
+.sc-costd .cd-rows{flex:1;min-width:170px}
+.sc-costd .cd-row{display:flex;align-items:center;gap:9px;padding:7px 0;border-top:1px solid var(--line-soft);font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--mut)}
+.sc-costd .cd-row:first-child{border-top:none}
+.sc-costd .cd-row i{width:8px;height:8px;border-radius:2px;flex:none}
+.sc-costd .cd-row .cd-val{margin-left:auto;color:var(--fg);letter-spacing:.02em;font-size:11px}
+
+/* ── Signal / notification chip stack ───────────────────────── */
+.sc-signals{display:flex;flex-direction:column;gap:10px;max-width:440px}
+.sc-signal{display:flex;gap:12px;align-items:flex-start;padding:13px 15px}
+.sc-signal .s-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--signal);margin-top:6px}
+.sc-signal .s-dot.ok{background:color-mix(in srgb,var(--fg) 45%,transparent)}
+.sc-signal p{font-size:13px;line-height:1.45;color:var(--mut)}
+.sc-signal p b{color:var(--fg);font-weight:600}
+.sc-signal .s-time{margin-left:auto;flex:none;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:3px}
+.sc-signals .sc-signal:nth-child(2){margin-left:18px}
+.sc-signals .sc-signal:nth-child(3){margin-left:36px}
+@media(max-width:700px){.sc-signals .sc-signal{margin-left:0!important}}
+
+/* ── Animated first-scroll product demo ("see Talon think") ──
+   One 9s master clock; every element keys its window off the same
+   duration so the sequence loops in lockstep. Pure CSS. */
+.sc-demo{padding:0;overflow:hidden}
+.sc-demo .d-bar{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--line-soft);font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.sc-demo .d-bar .d-live{margin-left:auto;color:var(--signal)}
+.sc-demo .d-body{padding:18px;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.7}
+.sc-demo .d-q{color:var(--fg);white-space:nowrap;overflow:hidden;max-width:34ch}
+.sc-demo .d-q::before{content:"you ▸ ";color:var(--signal)}
+.sc-demo .d-code{color:var(--mut);white-space:pre-wrap;font-size:11.5px;margin-top:10px;padding:10px 12px;border:1px solid var(--line-soft);border-radius:8px;background:color-mix(in srgb,var(--fg) 3.5%,transparent)}
+.sc-demo .d-out{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+@media(max-width:700px){.sc-demo .d-out{grid-template-columns:1fr 1fr}}
+.sc-demo .d-tile{border:1px solid var(--line-soft);border-radius:8px;padding:10px 12px}
+.sc-demo .d-tile b{display:block;font-size:17px;font-weight:700;color:var(--fg)}
+.sc-demo .d-tile.neg b{color:var(--signal)}
+.sc-demo .d-tile s{display:block;text-decoration:none;font-size:8.5px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase;margin-top:4px}
+.sc-demo .d-verify{display:inline-flex;margin-top:12px}
+/* master timeline: 9s loop */
+@keyframes scdType{0%{max-width:0}6%,100%{max-width:34ch}}
+.sc-demo.play .d-q{animation:scdType 9s steps(34) infinite}
+.sc-demo.play .d-step{opacity:0;animation:scdStep 9s ease infinite}
+.sc-demo.play .d-step.s1{animation-delay:0s}
+@keyframes scdStep{12%{opacity:0;transform:translateY(8px)}18%,92%{opacity:1;transform:none}97%,100%{opacity:0}}
+.sc-demo.play .d-step.s2{animation-name:scdStep2}
+@keyframes scdStep2{0%,30%{opacity:0;transform:translateY(8px)}38%,92%{opacity:1;transform:none}97%,100%{opacity:0}}
+.sc-demo.play .d-step.s3{animation-name:scdStep3}
+@keyframes scdStep3{0%,48%{opacity:0;transform:translateY(8px)}56%,92%{opacity:1;transform:none}97%,100%{opacity:0}}
+.sc-demo:not(.play) .d-step{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  .sc-demo.play .d-q,.sc-demo.play .d-step{animation:none;opacity:1;max-width:34ch}
+}
+
+/* ── Showcase layout: Goliath rows ──────────────────────────── */
+/* 3-column feature row: mono index + heading + copy, mockup below */
+.sc-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+@media(max-width:920px){.sc-grid3{grid-template-columns:1fr}}
+.sc-feature{display:flex;flex-direction:column;gap:0}
+.sc-feature .ft-idx{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--signal);display:block;margin-bottom:14px}
+.sc-feature h3{font-size:19px;margin-bottom:8px}
+.sc-feature > p{color:var(--mut);font-size:14.5px;margin-bottom:18px;max-width:44ch}
+.sc-feature .sc-panel{flex:1;display:flex;flex-direction:column;justify-content:center}
+
+/* alternating full-width row: mockup one side, copy + button the other */
+.sc-split{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,4.5vw,64px);align-items:center}
+.sc-split.flip{grid-template-columns:1fr 1.15fr}
+.sc-split.flip .sc-split-media{order:2}
+@media(max-width:920px){.sc-split,.sc-split.flip{grid-template-columns:1fr}.sc-split.flip .sc-split-media{order:0}}
+.sc-split-copy h3{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:14px}
+.sc-split-copy p{color:var(--mut);font-size:15.5px;max-width:52ch;margin-bottom:22px}
+.sc-split-copy .eyebrow{margin-bottom:16px}
+
+/* narrow contexts (3-col feature columns): KPI cluster stacks */
+.sc-feature .sc-kpis{grid-template-columns:1fr}
+.sc-feature .sc-kpi--hero{grid-column:auto}
+.sc-feature .sc-kpi--hero .k-val{font-size:32px}
+
+/* static-site duo grid: pack tabs beside cost donut */
+.sc-duo{display:grid;grid-template-columns:1.25fr 1fr;gap:12px;margin-top:12px;align-items:start}
+@media(max-width:700px){.sc-duo{grid-template-columns:1fr}}
+
+/* onboarding walkthrough video frame (shown only when the mp4 exists) */
+/* narrower than full bleed: keeps the docked falcon's claw clear of the frame */
+.onb-video{border:1px solid var(--line);background:var(--bg);margin:0 auto 26px;max-width:820px}
+.onb-video video{display:block;width:100%;height:auto}
+
+/* ── scm v2 minis (ported from talon showcase.css) ── */
+/* ── Panel-grade card minis (v2) — each bento/step card gets its own
+      mini gradient stage with an accurate in-app fragment. ───────── */
+.scm{
+  position:relative;margin-top:18px;border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;padding:30px 15px 13px;
+  background:
+    radial-gradient(130% 170% at 90% 125%, rgba(176,69,59,.15), transparent 60%),
+    linear-gradient(155deg, var(--bg2), var(--bg) 70%);
+}
+[data-theme="light"] .scm{
+  background:
+    radial-gradient(130% 170% at 90% 125%, rgba(142,42,34,.07), transparent 60%),
+    linear-gradient(155deg, #FFFFFF, var(--bg) 72%);
+}
+.scm::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(var(--dot) 1px,transparent 1px);
+  background-size:22px 22px;opacity:.3;
+}
+.scm > *{position:relative}
+.scm-tag{
+  position:absolute;top:9px;right:11px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);
+}
+.scm .mono, .scm-row, .scm-meta{font-family:"JetBrains Mono",monospace}
+
+/* verified formula mini (A1) */
+.scm-vbadge{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--signal) 45%,transparent);
+  color:var(--signal);border-radius:6px;padding:3px 8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.16em;text-transform:uppercase}
+.scm-vbadge::before{content:"✓"}
+.scm-formula{margin:10px 0 2px;font-size:14.5px;color:var(--fg);font-weight:600;letter-spacing:-.01em}
+.scm-formula em{font-style:normal;color:var(--signal)}
+.scm-code{margin-top:9px;border:1px solid var(--line-soft);background:color-mix(in srgb,var(--fg) 3.5%,transparent);
+  border-radius:7px;padding:7px 10px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--mut)}
+.scm-code b{color:var(--fg);font-weight:500}
+.scm-meta{display:flex;gap:14px;margin-top:10px;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);flex-wrap:wrap}
+.scm-meta b{color:var(--fg);font-weight:500}
+
+/* model picker mini (A2) — rows cycle highlight */
+.scm-modl{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-modl .mr{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;
+  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--mut)}
+.scm-modl .mr::before{content:"";width:7px;height:7px;border-radius:50%;border:1px solid var(--line);flex:none}
+.scm-modl .mr .tag2{margin-left:auto;font-size:8px;letter-spacing:.14em;text-transform:uppercase;opacity:0;color:var(--signal)}
+.rv.on .scm-modl .mr{animation:scmModl 12s infinite}
+.rv.on .scm-modl .mr:nth-child(2){animation-delay:3s}
+.rv.on .scm-modl .mr:nth-child(3){animation-delay:6s}
+.rv.on .scm-modl .mr:nth-child(4){animation-delay:9s}
+@keyframes scmModl{
+  0%,22%{border-color:color-mix(in srgb,var(--signal) 45%,transparent);color:var(--fg)}
+  25%,100%{border-color:var(--line-soft);color:var(--mut)}
+}
+.rv.on .scm-modl .mr::before{animation:scmModlDot 12s infinite}
+.rv.on .scm-modl .mr:nth-child(2)::before{animation-delay:3s}
+.rv.on .scm-modl .mr:nth-child(3)::before{animation-delay:6s}
+.rv.on .scm-modl .mr:nth-child(4)::before{animation-delay:9s}
+@keyframes scmModlDot{
+  0%,22%{background:var(--signal);border-color:var(--signal)}
+  25%,100%{background:transparent;border-color:var(--line)}
+}
+.rv.on .scm-modl .mr .tag2{animation:scmModlTag 12s infinite}
+.rv.on .scm-modl .mr:nth-child(2) .tag2{animation-delay:3s}
+.rv.on .scm-modl .mr:nth-child(3) .tag2{animation-delay:6s}
+.rv.on .scm-modl .mr:nth-child(4) .tag2{animation-delay:9s}
+@keyframes scmModlTag{0%,22%{opacity:1}25%,100%{opacity:0}}
+
+/* privacy / masking mini (A3) */
+.scm-mask{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-mask .mk{display:flex;align-items:center;gap:8px;border:1px solid var(--line-soft);border-radius:7px;
+  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--mut)}
+.scm-mask .mk b{color:var(--fg);font-weight:500}
+.scm-mask .mk .mtag{margin-left:auto;font-size:8px;letter-spacing:.14em;color:var(--signal)}
+.scm-mask .sum{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);padding:2px 2px 0}
+.scm-mask .sum::before{content:"✓";color:var(--signal)}
+
+/* chart + forecast mini (A4) — bars grow, forecast dashes draw */
+.scm-chart{display:block;width:100%;height:86px;margin-top:6px}
+.scm-chart .bar{fill:color-mix(in srgb,var(--fg) 16%,transparent);transform-origin:bottom;transform-box:fill-box}
+.scm-chart .bar.hot{fill:color-mix(in srgb,var(--signal) 75%,transparent)}
+.rv.on .scm-chart .bar{animation:scmBar .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i)*90ms)}
+@keyframes scmBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.scm-chart .fc{fill:none;stroke:var(--signal);stroke-width:1.5;stroke-dasharray:4 4}
+.rv.on .scm-chart .fc{stroke-dashoffset:160;animation:scmFc 2.2s ease-out .8s forwards}
+@keyframes scmFc{to{stroke-dashoffset:0}}
+.scm-exp{display:flex;align-items:center;gap:10px;margin-top:8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
+.scm-exp b{color:var(--fg);font-weight:500}
+.scm-exp .x{margin-left:auto;color:var(--signal)}
+
+/* agents / schedule mini (A5) — one row live */
+.scm-sched{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-sched .sr2{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;
+  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.scm-sched .sr2 b{color:var(--fg);font-weight:500;letter-spacing:.1em}
+.scm-sched .sr2 .st{margin-left:auto;color:var(--signal);display:flex;align-items:center;gap:5px}
+.scm-sched .sr2 .st.live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal)}
+.rv.on .scm-sched .sr2 .st.live::before{animation:scmPulse 1.6s ease-in-out infinite}
+@keyframes scmPulse{0%,100%{opacity:1}50%{opacity:.25}}
+.scm-sched .add{border-style:dashed;justify-content:center;color:var(--mut);letter-spacing:.14em}
+
+/* upload / parse mini (step 1) — progress loop */
+.scm-up{margin-top:4px}
+.scm-up .fchip2{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:6px;
+  padding:4px 9px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--fg);
+  background:color-mix(in srgb,var(--fg) 4%,transparent)}
+.scm-up .track{height:3px;border-radius:2px;background:var(--line-soft);margin-top:10px;overflow:hidden}
+.scm-up .fill{height:100%;width:100%;background:var(--signal);transform-origin:left;transform:scaleX(1)}
+.rv.on .scm-up .fill{animation:scmFill 5s cubic-bezier(.3,.6,.3,1) infinite}
+@keyframes scmFill{0%{transform:scaleX(0)}55%,100%{transform:scaleX(1)}}
+.scm-up .lbl{position:relative;height:14px;margin-top:8px;font-family:"JetBrains Mono",monospace;
+  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
+.scm-up .lbl span{position:absolute;left:0;top:0}
+.scm-up .lbl .done{color:var(--fg);opacity:1}
+.scm-up .lbl .busy{opacity:0}
+.rv.on .scm-up .lbl .busy{animation:scmLblA 5s infinite}
+.rv.on .scm-up .lbl .done{animation:scmLblB 5s infinite}
+@keyframes scmLblA{0%,50%{opacity:1}56%,100%{opacity:0}}
+@keyframes scmLblB{0%,50%{opacity:0}56%,100%{opacity:1}}
+
+/* ask / typing mini (step 2) */
+.scm-askr{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:8px;
+  padding:8px 11px;margin-top:4px;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--fg)}
+.scm-askr .q{overflow:hidden;white-space:nowrap;max-width:100%}
+.rv.on .scm-askr .q{width:31ch;animation:scmType 7s steps(31) infinite}
+@keyframes scmType{0%{width:0}45%,100%{width:31ch}}
+.scm-askr .cur{width:1px;height:13px;background:var(--signal);flex:none}
+.rv.on .scm-askr .cur{animation:scmCur 1s steps(1) infinite}
+@keyframes scmCur{50%{opacity:0}}
+.scm-askr .send2{margin-left:auto;color:var(--signal)}
+.scm-ans{display:flex;align-items:center;gap:8px;margin-top:8px;font-family:"JetBrains Mono",monospace;
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.scm-ans b{color:var(--fg);font-weight:500}
+.rv.on .scm-ans{opacity:0;animation:scmAns 7s infinite}
+@keyframes scmAns{0%,48%{opacity:0}58%,100%{opacity:1}}
+
+/* act mini (step 3) — priced action rows */
+.scm-acts{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.scm-acts .ar{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;padding:7px 10px}
+.scm-acts .ar .pri{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.12em;color:var(--signal);
+  border:1px solid color-mix(in srgb,var(--signal) 40%,transparent);border-radius:5px;padding:2px 6px;flex:none}
+.scm-acts .ar p{margin:0;font-size:11.5px;color:var(--fg);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scm-acts .ar .imp{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--signal);flex:none}
+
+@media(prefers-reduced-motion:reduce){
+  .rv.on .scm-modl .mr,.rv.on .scm-modl .mr::before,.rv.on .scm-modl .mr .tag2,
+  .rv.on .scm-chart .bar,.rv.on .scm-chart .fc,.rv.on .scm-sched .sr2 .st.live::before,
+  .rv.on .scm-up .fill,.rv.on .scm-up .lbl .busy,.rv.on .scm-up .lbl .done,
+  .rv.on .scm-askr .q,.rv.on .scm-askr .cur,.rv.on .scm-ans{animation:none}
+  .rv.on .scm-askr .q{width:auto}
+  .rv.on .scm-ans{opacity:1}
+}
+
+
+/* drift float for scm minis */
+.rv.on .sc-drift{animation:scDrift 7s ease-in-out infinite alternate}
+.rv.on .sc-drift.dr2{animation-duration:9s;animation-delay:.8s}
+@keyframes scDrift{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){.rv.on .sc-drift{animation:none}}
+
+/* scm act anim */
+/* act rows slide in on loop (step 03) */
+.rv.on .scm-acts--anim .ar{opacity:0;animation:scmAct 7s infinite}
+.rv.on .scm-acts--anim .ar:nth-child(2){animation-delay:.9s}
+@keyframes scmAct{0%{opacity:0;transform:translateY(7px)}9%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.rv.on .scm-acts--anim .ar{animation:none;opacity:1}}
+
+
+/* clip player — coded dashboard scenes in the .shot frame (ported) */
+.clip-stage{opacity:0;transform:translateY(6px);transition:opacity .5s ease,transform .5s ease;
+  padding:clamp(14px,2vw,22px);min-height:430px;display:flex;flex-direction:column;justify-content:center}
+.clip-stage.show{opacity:1;transform:none}
+.clip-stage .sc-panel{padding:clamp(16px,2.2vw,26px)}
+.clip-stage .sc-kpis{margin-bottom:12px}
+.clip-video{width:100%;display:block;border-radius:10px;border:1px solid var(--line-soft);background:#000}
+.clip-lg{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
+.clip-lg .lgc-rail{display:flex;border-bottom:1px solid var(--line-soft)}
+.clip-lg .lgc-node{flex:1;min-width:0;padding:11px 6px 9px;text-align:center;position:relative}
+.clip-lg .lgc-node+.lgc-node{border-left:1px solid var(--line-soft)}
+.clip-lg .lgc-node i{display:block;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--mut);margin:0 auto 6px}
+.clip-lg .lgc-node.done i{background:var(--fg);border-color:var(--fg)}
+.clip-lg .lgc-node.on i{background:var(--signal);border-color:var(--signal);box-shadow:0 0 0 3px color-mix(in srgb,var(--signal) 18%,transparent)}
+.clip-lg .lgc-node s{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);display:block;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clip-lg .lgc-node.on s{color:var(--fg)}
+.clip-lg .lgc-body{padding:16px 20px;font-size:13.5px;line-height:1.6;color:var(--fg)}
+.clip-lg .lgc-body .lgm{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--bg2);border:1px solid var(--line-soft);padding:2px 7px;border-radius:6px;white-space:nowrap}
+.clip-lg .lgc-tally{display:flex;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line-soft);padding:11px 20px;
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.clip-lg .lgc-tally b{color:var(--fg);font-weight:600}
+@media(max-width:700px){
+  .clip-stage{min-height:360px;padding:10px}
+  .clip-lg .lgc-node s{font-size:8px}
+  .clip-lg .lgc-rail .lgc-node:nth-child(n+5){display:none}
+}
+@media(prefers-reduced-motion:reduce){.clip-stage{transition:none}}
+
 /* PORTED — talonomic/talonmark dusk.css blocks (ledger, gallery, bench, calcs, minute chips).
    Token-only colors; DUSK tokens untouched. */
 /* interlude band + sentinel bust + ledger sphere (parity with PF/CF) */
@@ -748,7 +1235,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       <a href="#products">Products</a>
       <a href="#pricing">Pricing</a>
       <a href="#ledger">Ledger</a>
-      <a href="#screens">Screens</a>
       <a href="#bench">Agents</a>
       <a href="#method">Method</a>
       <a href="#approve">Approve</a>
@@ -798,18 +1284,18 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
       </div>
     </div>
 
-    <!-- product walkthrough videos — real captures of the live PF/CF sample sessions.
-         (Talon in-app capture needs an authed session — add when recorded.) -->
-    <style>.onb-video{border:1px solid var(--line);background:var(--bg);margin-bottom:26px}.onb-video video{display:block;width:100%;height:auto}</style>
-    <div class="onb-video rv" id="onbVideoPf">
-      <div class="demo-bar"><span>profitfalcon — live product session</span><span style="margin-left:auto">SAMPLE DATA · REAL SESSION · 53 SEC</span></div>
-      <video src="./media/walkthrough-pf.mp4" poster="./media/walkthrough-pf-poster.jpg" autoplay muted loop playsinline preload="metadata"
-             aria-label="ProfitFalcon walkthrough on sample data: morning brief, product screener with Star, Sleeper and Leak tags, store metrics, costs, autopilot, alerts, and the free profit teardown computing live"></video>
+    <!-- coded clip player — PF/CF scenes from the sc-* kit + two real proof clips -->
+    <div class="rv d1" style="margin-bottom:26px">
+      <div class="demo-tabs" id="demoTabs" role="tablist" aria-label="Product demo scenes"></div>
+      <div class="shot" id="demoRoot">
+        <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span id="clipBarTitle">bizfalcon — sample session</span><span style="margin-left:auto">SAMPLE DATA</span></div>
+        <div class="clip-stage" id="clipStage"></div>
+        <div class="shot-foot"><span id="clipFootLeft">COMPUTED FROM SAMPLE EXPORTS</span><a id="clipFootCta" href="https://profit.bizfalconai.com">OPEN PROFITFALCON ▸</a></div>
+      </div>
+      <div class="demo-prog" id="demoProg" aria-hidden="true"><i></i></div>
+      <div class="demo-cap" id="demoCap" aria-live="polite"></div>
+      <div class="demo-ins" id="demoIns" aria-live="polite"></div>
     </div>
-    <div class="onb-video rv" id="onbVideoCf">
-      <div class="demo-bar"><span>clientfalcon — live product session</span><span style="margin-left:auto">SAMPLE DATA · REAL SESSION · 50 SEC</span></div>
-      <video src="./media/walkthrough-cf.mp4" poster="./media/walkthrough-cf-poster.jpg" muted loop playsinline preload="metadata"
-             aria-label="ClientFalcon walkthrough on sample data: prospect audit, ranked findings, recommendations, test plan, verified metric formulas, channel screener, white-label PDF and batch reports"></video>
     </div>
 
     <div class="prod-grid">
@@ -980,68 +1466,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 })();
 </script>
 
-<!-- ============ SUITE GALLERY — real screenshots, SAMPLE data ============ -->
-<section id="screens">
-  <div class="wrap">
-    <div class="sec-row">
-      <div class="sec-head rv">
-        <div class="eyebrow">Real screens</div>
-        <h2>Every screen below is live software.</h2>
-        <p>Captured from the live apps running SAMPLE exports — every number on screen was computed, not designed. Talon has no screenshot here because it runs live in the card above.</p>
-      </div>
-    </div>
-    <div class="rv d1">
-      <div class="demo-tabs" id="galTabs" role="tablist" aria-label="Product surfaces"></div>
-      <figure class="shot gal-shot" style="margin:0">
-        <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span id="galCap">bizfalcon — sample data</span><span style="margin-left:auto">SAMPLE DATA · LIVE PRODUCT</span></div>
-        <img id="galImg" class="gal-img" src="./shots/dashboard.png" alt="" loading="lazy" decoding="async">
-        <div class="shot-foot"><span>CAPTURED FROM THE RUNNING APPS</span><a id="galLive" href="https://profit.bizfalconai.com/dashboard?demo=1">OPEN THIS SCREEN LIVE ▸</a></div>
-      </figure>
-      <div class="demo-prog" aria-hidden="true"><i id="galProg"></i></div>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  var PF="https://profit.bizfalconai.com",CF="https://client.bizfalconai.com";
-  var scenes=[
-    {t:"PF · Profit dashboard",cap:"profitfalcon — morning brief + profit tiles",img:"./shots/dashboard.png",live:PF+"/dashboard?demo=1",alt:"ProfitFalcon profit dashboard: morning brief, contribution tiles, and trend computed from a sample export"},
-    {t:"PF · SKU screener",cap:"profitfalcon — per-SKU screener with archetypes",img:"./shots/screener.png",live:PF+"/dashboard?demo=1",alt:"Per-SKU profit screener ranking products by revenue with Star, Sleeper, and Leak archetype labels and margin status"},
-    {t:"PF · Agent feed",cap:"profitfalcon — autopilot recommendations, you approve",img:"./shots/agent-feed.png",live:PF+"/dashboard?demo=1",alt:"Autopilot agent feed recommending exact price reviews with projected monthly impact, risk tier, reasoning, and approve/dismiss controls"},
-    {t:"PF · Free teardown",cap:"profitfalcon — export teardown",img:"./shots/teardown.png",live:PF+"/",alt:"Free teardown report computed from an uploaded order export"},
-    {t:"CF · Prospect audit",cap:"clientfalcon — prospect audit (the pitch that becomes the baseline)",img:"./shots/audit.png",live:CF+"/dashboard/new?demo=1",alt:"ClientFalcon prospect audit: evidence-backed findings with projected monthly gains computed from a sample ad export"},
-    {t:"CF · Portfolio health",cap:"clientfalcon — portfolio brief on sample client exports",img:"./shots/portfolio-brief.png",live:CF+"/",alt:"ClientFalcon portfolio brief: five sample clients ranked by explainable health score with revenue at risk"},
-    {t:"CF · Report builder",cap:"clientfalcon — client report builder",img:"./shots/report-builder.png",live:CF+"/",alt:"ClientFalcon report builder generating a branded client report from a sample ad export"}
-  ];
-  var tabs=document.getElementById("galTabs"),img=document.getElementById("galImg"),
-      cap=document.getElementById("galCap"),prog=document.getElementById("galProg"),liveA=document.getElementById("galLive");
-  if(!tabs||!img) return;
-  var still=matchMedia("(prefers-reduced-motion:reduce)").matches,cur=0,timer=null,DUR=5200,hover=false;
-  scenes.forEach(function(s,i){
-    var b=document.createElement("button");
-    b.className="demo-tab";b.type="button";b.setAttribute("role","tab");b.textContent=s.t;
-    b.addEventListener("click",function(){clearTimeout(timer);show(i,false);loop();});
-    tabs.appendChild(b);
-  });
-  var btns=tabs.querySelectorAll(".demo-tab");
-  function show(i,auto){
-    cur=i;
-    btns.forEach(function(b,j){b.classList.toggle("on",j===i);b.setAttribute("aria-selected",j===i?"true":"false");});
-    img.src=scenes[i].img;img.alt=scenes[i].alt;cap.textContent=scenes[i].cap;
-    if(liveA)liveA.href=scenes[i].live;
-    if(prog){prog.style.transitionDuration="0ms";prog.style.transitionProperty="width";prog.style.width="0";
-      if(auto&&!still){requestAnimationFrame(function(){requestAnimationFrame(function(){prog.style.transitionDuration=DUR+"ms";prog.style.transitionTimingFunction="linear";prog.style.width="100%";});});}}
-  }
-  function loop(){clearTimeout(timer);if(still)return;timer=setTimeout(function(){if(!hover){show((cur+1)%scenes.length,true);}loop();},DUR);}
-  var fig=document.querySelector(".gal-shot");
-  if(fig){fig.addEventListener("mouseenter",function(){hover=true;});fig.addEventListener("mouseleave",function(){hover=false;});}
-  var io=new IntersectionObserver(function(en){
-    en.forEach(function(e){if(e.isIntersecting){if(!timer){show(0,true);loop();}}else{clearTimeout(timer);timer=null;}});
-  },{threshold:.3});
-  io.observe(document.getElementById("screens"));
-  show(0,false);
-})();
-</script>
+
 
 <!-- ============ AGENT BENCH — the work, not the count ============ -->
 <section id="bench" class="interlude">
@@ -1049,7 +1474,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
     <div class="sec-row">
       <div class="sec-head rv">
         <div class="eyebrow">The bench</div>
-        <h2>Every agent shows its work.<br>Every move lands in the ledger.</h2>
+        <h2>Every agent shows its work. Every move lands in the ledger.</h2>
         <p>Each one watches a different way money leaks out — and proposes the exact change. You approve every move; nothing executes on its own. Sample recommendations below; your ledger fills from your first approval.</p>
       </div>
     </div>
@@ -1342,7 +1767,109 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   </div>
 </footer>
 
-<script src="./dusk-art.js?v=20260731"></script>
+<script src="./dusk-art.js?v=20260733"></script>
+<script>
+(function(){
+"use strict";
+if (!document.getElementById("demoRoot") || !window.DUSK || !window.DUSK.clipPlayer) return;
+var barTitle = document.getElementById("clipBarTitle");
+var player = window.DUSK.clipPlayer({
+  root: document.getElementById("demoRoot"),
+  stageEl: document.getElementById("clipStage"),
+  tabsEl: document.getElementById("demoTabs"),
+  capEl: document.getElementById("demoCap"),
+  progEl: document.getElementById("demoProg"),
+  insEl: document.getElementById("demoIns"),
+  footLeftEl: document.getElementById("clipFootLeft"),
+  footCtaEl: document.getElementById("clipFootCta"),
+  clips: [
+    {
+      label: "PF SCREENER", cap: "PROFITFALCON — PER-SKU PROFIT SCREENER, LEAKS SURFACE FIRST",
+      foot: { left: "SAMPLE DATA · REAL STRUCTURE", cta: { label: "OPEN PROFITFALCON ▸", href: "https://profit.bizfalconai.com" } },
+      body: '<div class="sc-panel" aria-label="ProfitFalcon per-SKU screener (sample data)">' +
+        '<span class="sc-tag">PROFITFALCON · SAMPLE STORE</span>' +
+        '<div class="sc-kpis">' +
+          '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">SKUs below water</div><div class="k-val"><b data-count="2">0</b> of <b data-count="214">0</b></div><div class="k-formula"><b>=</b> margin(rev − cogs − fees − ads) &lt; 0</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">Worst margin / unit <span class="sc-delta down neg">LEAK</span></div><div class="k-val">−$1.82</div><div class="k-formula"><b>=</b> TRAIL-MINI · every ad dollar loses</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">Monthly leak, both SKUs</div><div class="k-val">−$<b data-count="496">0</b></div><div class="k-formula"><b>=</b> Σ negative-margin units × velocity</div></div>' +
+        '</div>' +
+        '<table class="sc-table"><thead><tr><th>SKU</th><th>Tag</th><th class="num">Rev</th><th class="num">Margin</th><th class="num">P&amp;L / mo</th></tr></thead><tbody>' +
+        '<tr><td>TRAIL-MINI</td><td class="sig">LEAK</td><td class="num">$12.4K</td><td class="num sig">−4%</td><td class="num sig">−$496</td></tr>' +
+        '<tr><td>HDL-201</td><td>STAR</td><td class="num">$48.2K</td><td class="num">41%</td><td class="num">$19.8K</td></tr>' +
+        '</tbody></table></div>',
+      ins: "<b>ProfitFalcon finds the SKUs losing money</b> — with the formula attached to every figure."
+    },
+    {
+      label: "CF AUDIT", cap: "CLIENTFALCON — WIN THE PITCH WITH THE PROSPECT\u2019S OWN DATA",
+      foot: { left: "SAMPLE DATA · REAL STRUCTURE", cta: { label: "OPEN CLIENTFALCON ▸", href: "https://client.bizfalconai.com" } },
+      body: '<div class="sc-panel" aria-label="ClientFalcon prospect audit (sample data)">' +
+        '<span class="sc-tag">CLIENTFALCON · SAMPLE EXPORT</span>' +
+        '<div class="sc-kpis">' +
+          '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">Projected recovery, all findings</div><div class="k-val">~$<b data-count="18447">0</b>/mo</div><div class="k-formula"><b>=</b> Σ projected impact · 4 ranked issues</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">CPA, period over period <span class="sc-delta down neg">37%</span></div><div class="k-val">$23.24 → $31.94</div><div class="k-formula"><b>=</b> spend / conversions · both periods</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">Budget on the weak channel</div><div class="k-val">2.6×</div><div class="k-formula"><b>=</b> Google ROAS 6.72 / Meta ROAS 2.62</div></div>' +
+        '</div>' +
+        '<div class="sc-act"><span class="a-pri">P1</span><p><b>Pause the bleeding channel</b> — redeploy budget to the efficient one</p><span class="a-imp">+$<b data-count="8985">0</b>/mo</span></div>' +
+        '<div class="sc-act"><span class="a-pri">P2</span><p><b>Reallocate Meta → Google</b> — 6.72x vs 2.62x on the same dollars</p><span class="a-imp">+$<b data-count="6765">0</b>/mo</span></div>' +
+        '</div>',
+      ins: "<b>ClientFalcon writes the pitch</b> — ranked issues from the prospect\u2019s export, dollars attached."
+    },
+    {
+      label: "APPROVE", cap: "EVERY MOVE WAITS FOR YOUR APPROVAL — NOTHING EXECUTES ALONE",
+      foot: { left: "SAMPLE DATA · L1: RECOMMENDS, YOU APPROVE", cta: { label: "HOW APPROVAL WORKS ▸", href: "#approve" } },
+      body: '<div class="sc-panel" aria-label="Approval queue (sample data)">' +
+        '<span class="sc-tag">OPERATOR QUEUE · SAMPLE</span>' +
+        '<div class="sc-act"><span class="a-pri">P1</span><p><b>Cut supplier B freight</b> — 7 SKUs ship at a loss</p><span class="a-imp">+$<b data-count="3412">0</b>/mo</span></div>' +
+        '<div class="sc-act"><span class="a-pri">P2</span><p><b>Raise AOV floor</b> — free shipping at $45, not $35</p><span class="a-imp">+$<b data-count="1890">0</b>/mo</span></div>' +
+        '<div class="sc-act"><span class="a-pri">P3</span><p><b>+8% price test on Trail Mini</b> — flips the margin in simulation</p><span class="a-imp">+$<b data-count="612">0</b>/mo</span></div>' +
+        '<div class="sc-formula" style="margin-top:14px">QUEUED → YOUR APPROVAL · projected impact attached to every move</div></div>',
+      ins: "<b>Recommends; you approve</b> — the queue holds every move until you say go, and the ledger keeps score after."
+    },
+    {
+      label: "LEDGER", cap: "THE LEDGER — EVERY APPROVED MOVE, MEASURED AGAINST ITS PROJECTION",
+      hold: 5200,
+      foot: { left: "SAMPLE RECOMMENDATION · SHARED ACROSS ALL PRODUCTS", cta: { label: "SEE THE LEDGER ▸", href: "#ledger" } },
+      body: '<div class="clip-lg" aria-label="Recommendation lifecycle ledger (sample data)">' +
+        '<div class="lgc-rail">' +
+          '<span class="lgc-node done"><i></i><s>Detected</s></span>' +
+          '<span class="lgc-node done"><i></i><s>Exact change</s></span>' +
+          '<span class="lgc-node done"><i></i><s>Projected</s></span>' +
+          '<span class="lgc-node done"><i></i><s>Approved</s></span>' +
+          '<span class="lgc-node done"><i></i><s>Measured</s></span>' +
+          '<span class="lgc-node on"><i></i><s>Realized</s></span>' +
+        '</div>' +
+        '<div class="lgc-body">Every product runs the same lifecycle: detected → exact change → projected → approved → measured — <span class="lgm">projected +$540/mo</span> vs <span class="lgm">realized +$498/mo</span>.</div>' +
+        '<div class="lgc-tally"><span>LEDGER: PROJECTED +$<b data-count="540">0</b></span><span>REALIZED +$<b data-count="498">0</b></span><span>ACCURACY <b data-count="92" data-suffix="%">0</b></span></div>' +
+        '</div>',
+      ins: "<b>No one else grades their own advice</b> — every projection is scored against reality, on every product."
+    },
+    {
+      label: "PF LIVE", cap: "REAL SESSION — PROFITFALCON\u2019S TEARDOWN ON A SAMPLE EXPORT",
+      hold: 9000,
+      foot: { left: "SAMPLE DATA · REAL SESSION", cta: { label: "RUN THE FREE TEARDOWN ▸", href: "https://profit.bizfalconai.com/teardown" } },
+      video: { src: "./media/teardown-pf.webm", poster: "./media/teardown-pf-poster.jpg",
+               alt: "Real ProfitFalcon session: the free teardown computing per-SKU profit and monthly leak from a sample order export" },
+      ins: "<b>This actually ran</b> — unedited capture of the live teardown on the labeled sample export."
+    },
+    {
+      label: "CF LIVE", cap: "REAL SESSION — CLIENTFALCON\u2019S SAMPLE AUDIT BUILDING ITSELF",
+      hold: 8000,
+      foot: { left: "SAMPLE DATA · REAL SESSION", cta: { label: "RUN A SAMPLE AUDIT ▸", href: "https://client.bizfalconai.com/clientfalcon/audit" } },
+      video: { src: "./media/audit-cf.webm", poster: "./media/audit-cf-poster.jpg",
+               alt: "Real ClientFalcon session: audit mode ranking issues and building the 30-day plan from labeled sample CSVs" },
+      ins: "<b>Same engine, agency-shaped</b> — the audit ran live on labeled sample CSVs, captured unedited."
+    }
+  ]
+});
+/* keep the window-bar title in sync with the scene's product */
+(function(){
+  var titles = ["profitfalcon — sample session","clientfalcon — sample session","bizfalcon — sample session","bizfalcon — sample session","profitfalcon — real session","clientfalcon — real session"];
+  var tabs = document.querySelectorAll("#demoTabs .demo-tab");
+  tabs.forEach(function(t, i){ t.addEventListener("click", function(){ if (barTitle) barTitle.textContent = titles[i]; }); });
+  if (barTitle) barTitle.textContent = titles[0];
+})();
+})();
+</script>
 <script>
 (function(){
 "use strict";
@@ -1426,22 +1953,6 @@ document.querySelectorAll(".rec-actions button").forEach(function(btn){
 });
 })();
 </script>
-<script>
-// Walkthrough frames run like live screens: reveal when the file exists, play
-// only while on screen, pause off-screen, poster-only under reduced motion.
-(function () {
-  var rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  ["onbVideoPf", "onbVideoCf"].forEach(function (id) {
-    var box = document.getElementById(id);
-    if (!box) return;
-    var v = box.querySelector("video");
-    v.addEventListener("loadedmetadata", function () { box.style.display = "block"; });
-    if (rm) { v.removeAttribute("autoplay"); v.pause(); return; }
-    new IntersectionObserver(function (en) {
-      en[0].isIntersecting ? v.play().catch(function () {}) : v.pause();
-    }, { threshold: 0.25 }).observe(box);
-  });
-})();
-</script>
+
 </body>
 </html>
