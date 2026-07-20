@@ -685,6 +685,35 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 .sc-delta.up::before{content:"▲";font-size:7px;color:var(--signal)}
 .sc-delta.down::before{content:"▼";font-size:7px;color:var(--signal)}
 .sc-delta.neg{color:var(--signal);border-color:color-mix(in srgb,var(--signal) 35%,transparent)}
+/* favorable/unfavorable deltas — mirror the real dashboard's green/red status
+   (money-roles: gain ≠ loss ≠ brand). Direction (up/down) is orthogonal to
+   good/bad, so color keys off gain/loss, arrow off up/down. */
+.sc-delta.gain{color:var(--gain);border-color:color-mix(in srgb,var(--gain) 32%,transparent);background:color-mix(in srgb,var(--gain) 8%,transparent)}
+.sc-delta.loss{color:var(--loss);border-color:color-mix(in srgb,var(--loss) 32%,transparent);background:color-mix(in srgb,var(--loss) 8%,transparent)}
+/* Arrow shows DIRECTION, color shows GOOD/BAD — they're independent (a falling
+   refund rate is a down arrow AND green). Combine e.g. `sc-delta gain down`. */
+.sc-delta.up::before{content:"\25B2";font-size:7px;color:currentColor}
+.sc-delta.down::before{content:"\25BC";font-size:7px;color:currentColor}
+/* trend sparkline — SVG polyline, animated line-draw via [data-draw] (mirrors
+   the real dashboard SparkCard). Endpoint dot marks the latest value. */
+.sc-spark{display:block;width:100%;height:44px;overflow:visible}
+.sc-spark .sp-line{fill:none;stroke:var(--gain);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sc-spark .sp-line.loss{stroke:var(--loss)}
+.sc-spark .sp-fill{opacity:.10}
+.sc-spark .sp-dot{fill:var(--gain)}
+.sc-spark .sp-dot.loss{fill:var(--loss)}
+/* anatomy still — one dissected KPI + labeled notes (distinct from #demo player) */
+.sc-panel.anat .anat-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(16px,2.4vw,32px);align-items:center}
+.anat-hero{align-self:center}
+.anat-hero .k-val{font-size:clamp(30px,4vw,44px)}
+.anat-notes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;counter-reset:an}
+.anat-notes li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:baseline;position:relative;padding-left:30px}
+.anat-notes li::before{counter-increment:an;content:counter(an);position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--signal) 45%,transparent);color:var(--signal);
+  font-family:"JetBrains Mono",monospace;font-size:10px;display:flex;align-items:center;justify-content:center}
+.anat-notes .an-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg);white-space:nowrap}
+.anat-notes .an-v{grid-column:2;font-size:13px;line-height:1.5;color:var(--mut)}
+@media(max-width:760px){.sc-panel.anat .anat-grid{grid-template-columns:1fr;gap:20px}}
 
 /* ── Verified-formula tile ──────────────────────────────────── */
 .sc-formula{padding:18px 20px}
@@ -1071,6 +1100,196 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 .rv.on .scm-acts--anim .ar:nth-child(2){animation-delay:.9s}
 @keyframes scmAct{0%{opacity:0;transform:translateY(7px)}9%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.rv.on .scm-acts--anim .ar{animation:none;opacity:1}}
+
+/* Wordmark second segment — lighter weight so the compound name reads as two
+   words without adding a space (the brand stays one word). */
+.wm2{font-weight:400;opacity:.85}
+
+/* ── Ledger anatomy — the decision→outcome lifecycle (talonomic-first; port to talonmark after) ── */
+.ledger-sec .sec-head p{max-width:560px}
+.lg-frame{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
+.lg-rail{display:flex;border-bottom:1px solid var(--line-soft)}
+.lg-node{flex:1;min-width:0;padding:13px 8px 11px;text-align:center;cursor:pointer;background:none;border:0;border-right:1px solid var(--line-soft);position:relative;transition:background .3s}
+.lg-node:last-child{border-right:0}
+.lg-node .ln-dot{display:block;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--mut);margin:0 auto 7px;transition:background .3s,border-color .3s,box-shadow .3s}
+.lg-node .ln-t{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);display:block;transition:color .3s}
+.lg-node.on{background:var(--bg2)}
+.lg-node.on .ln-dot{background:var(--signal);border-color:var(--signal);box-shadow:0 0 0 3px color-mix(in srgb,var(--signal) 18%,transparent)}
+.lg-node.on .ln-t{color:var(--fg)}
+.lg-node.done .ln-dot{background:var(--fg);border-color:var(--fg)}
+.lg-stage{padding:22px 24px 20px;min-height:118px}
+.lg-line{display:flex;gap:10px;align-items:flex-start;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
+.lg-line.show{opacity:1;transform:none}
+.lg-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal);white-space:nowrap;padding-top:3px}
+.lg-v{font-size:14.5px;line-height:1.55;color:var(--fg)}
+.lg-v b{font-weight:700}
+.lg-v .lgm{font-family:"JetBrains Mono",monospace;font-size:12.5px;background:var(--bg2);border:1px solid var(--line-soft);padding:2px 7px;border-radius:6px;white-space:nowrap}
+.lg-foot{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line-soft);padding:10px 24px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.lg-foot .lg-tally{margin-left:auto;color:var(--fg)}
+.lg-prog{height:2px;background:var(--line-soft);position:relative;overflow:hidden}
+.lg-prog i{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--signal)}
+.lg-prog i.run{transition:transform linear;transform:scaleX(1)}
+@media(max-width:700px){.lg-node .ln-t{font-size:8px}.lg-stage{padding:18px 14px;min-height:150px}.lg-foot{padding:10px 14px;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.lg-line{opacity:1;transform:none;transition:none}.lg-prog{display:none}}
+
+/* step time chips — minute-boxed onboarding (Reaktion pattern) */
+.step h3 .stm{font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:500;letter-spacing:.08em;color:var(--mut);border:1px solid var(--line-2,var(--line));padding:3px 8px;border-radius:999px;vertical-align:2px;margin-left:9px;white-space:nowrap}
+.hero-icp{margin-bottom:16px}
+/* cross-product strip */
+.xprod{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--card)}
+.xprod .xp-in{max-width:1100px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.xprod .xp-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);white-space:nowrap}
+.xprod p{margin:0;font-size:14.5px;color:var(--fg);flex:1;min-width:260px}
+.xprod a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);text-decoration:none;white-space:nowrap}
+.xprod a:hover{text-decoration:underline}
+
+/* ── agent bench — one card per shipped agent; the work, not the count ── */
+.bench-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.bench-grid .calc{grid-column:span 2;margin-top:0}
+@media(max-width:960px){.bench-grid .calc{grid-column:1/-1}}
+@media(max-width:960px){.bench-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.bench-grid{grid-template-columns:1fr}}
+.bn-card{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:18px 18px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.bn-name{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg)}
+.bn-name::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);flex:0 0 auto}
+.bn-watch{font-size:13.5px;color:var(--mut);line-height:1.5;margin:0}
+.bn-rec{border:1px solid var(--line-soft);background:var(--bg2);border-radius:8px;padding:10px 12px}
+.bn-rec .bn-tag{display:block;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
+.bn-rec .bn-move{font-size:12.5px;color:var(--fg);line-height:1.45}
+.bn-rec .bn-move b{color:var(--signal)}
+.bn-ledger{border-top:1px solid var(--line-soft);padding-top:9px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+/* ── honest calculator (arithmetic only, ESTIMATE-labeled) ── */
+.calc{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:26px;margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+@media(max-width:760px){.calc{grid-template-columns:1fr}}
+.calc-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+.calc-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}
+.calc-row label{font-size:13px;color:var(--fg);flex:1}
+.calc-row input{width:110px;padding:7px 10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:7px;font-family:"JetBrains Mono",monospace;font-size:13px;text-align:right}
+.calc-row input:focus{outline:2px solid var(--signal);outline-offset:1px}
+.calc-out{text-align:center}
+.calc-out .co-n{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em;color:var(--signal)}
+.calc-out .co-l{font-size:12.5px;color:var(--mut);max-width:300px;margin:8px auto 0;line-height:1.5}
+
+/* ── integrations hub — exports in, product core, artifacts out ── */
+.hub{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:52px;align-items:center;margin-top:14px}
+@media(max-width:860px){.hub{grid-template-columns:1fr}}
+.hub-col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.hub-k{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.hub-chip{display:flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--fg);font:500 12.5px/1.2 "Instrument Sans",sans-serif;position:relative}
+.hub-chip svg{flex:0 0 auto;opacity:.85}
+.hub-src .hub-chip::after,.hub-out .hub-chip::before{content:"";position:absolute;top:50%;width:14px;height:1px;background:var(--line)}
+.hub-src .hub-chip::after{right:-15px}
+.hub-out .hub-chip::before{left:-15px}
+@media(max-width:860px){.hub-src .hub-chip::after,.hub-out .hub-chip::before{display:none}}
+.hub-core{border:1px solid color-mix(in srgb,var(--signal) 45%,var(--line));background:var(--card);border-radius:14px;padding:22px 20px;box-shadow:0 0 0 4px color-mix(in srgb,var(--signal) 6%,transparent)}
+.hub-core .hc-name{display:flex;align-items:center;gap:9px;justify-content:center;font-family:"Inter Tight",sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--fg);margin-bottom:4px}
+.hub-core .hc-sub{text-align:center;font-size:12px;color:var(--mut);margin-bottom:14px}
+.hub-core ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.hub-core li{display:flex;align-items:center;gap:10px;border:1px solid var(--line-soft);background:var(--bg2);border-radius:7px;padding:8px 11px;font-size:12.5px;color:var(--fg)}
+.hub-core li .hn{font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--signal);flex:0 0 auto}
+
+/* ── product gallery (real screenshots, SAMPLE data) ── */
+.gal-img{display:block;width:100%;height:auto;border-bottom:1px solid var(--line-soft);background:var(--card)}
+.gal-shot .shot-foot a{color:var(--signal)}
+
+/* animated hub flow — exports → engine → outputs (JS draws paths at layout time) */
+.hub{position:relative}
+.hub-flow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.hub-flow .fl-base{fill:none;stroke:var(--line);stroke-width:1}
+.hub-flow .fl-pulse{fill:none;stroke:var(--signal);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:10 140;stroke-dashoffset:150;animation:hubflow 3.6s linear infinite;opacity:.85}
+@keyframes hubflow{to{stroke-dashoffset:0}}
+.hub--flow .hub-src .hub-chip::after,.hub--flow .hub-out .hub-chip::before{display:none}
+@media(prefers-reduced-motion:reduce){.hub-flow .fl-pulse{display:none}}
+
+/* sample recommendation card — the product's approve UI, rendered honestly */
+.rec-mock{max-width:640px;margin:0 0 34px;border:1px solid var(--line);background:var(--card)}
+.rec-mock .rm-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line-soft);color:var(--mut);font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
+.rec-mock .rm-bar span:last-child{margin-left:auto}
+.rm-body{padding:18px 20px 16px}
+.rm-head{display:flex;justify-content:space-between;gap:12px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
+.rm-head span:last-child{color:var(--mut)}
+.rm-title{font-family:"Instrument Sans",sans-serif;font-weight:600;font-size:16.5px;letter-spacing:-.01em;margin:0 0 6px;color:var(--fg)}
+.rm-move{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--mut);margin:0 0 12px}
+.rm-move b{color:var(--fg)}
+.rm-proj{font-size:13.5px;color:var(--fg);border:1px solid var(--line-soft);background:var(--bg2);padding:9px 12px;margin-bottom:14px}
+.rm-proj b{color:var(--signal)}
+.rm-proj span{color:var(--mut);font-size:12px}
+.rm-actions{display:flex;align-items:center;gap:10px}
+.rm-btn{font-family:"Instrument Sans",sans-serif;font-size:12.5px;font-weight:600;padding:8px 16px;border:1px solid var(--line);color:var(--fg)}
+.rm-btn--approve{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.rm-note{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+@media(max-width:640px){.rm-actions{flex-wrap:wrap}.rm-note{margin-left:0}}
+
+/* nav product dropdown — Reaktion-pattern depth, honest anchors */
+.nav-dd{position:relative;display:flex;align-items:center}
+.nav-dd-btn{display:flex;align-items:center;gap:6px;font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-size:13.5px;font-weight:500;letter-spacing:.01em;color:var(--mut);transition:color .2s ease;padding:0}
+.nav-dd-btn:hover,.nav-dd.open .nav-dd-btn{color:var(--signal)}
+.nav-dd-btn svg{width:10px;height:10px;transition:transform .2s ease}
+.nav-dd.open .nav-dd-btn svg{transform:rotate(180deg)}
+.nav-dd-menu{position:absolute;top:calc(100% + 18px);left:-16px;min-width:200px;border:1px solid var(--line);background:var(--card);padding:8px;display:none;flex-direction:column;box-shadow:0 14px 34px rgba(0,0,0,.10);z-index:120}
+.nav-dd-menu::before{content:"";position:absolute;top:-19px;left:0;right:0;height:19px}
+.nav-dd.open .nav-dd-menu,.nav-dd:focus-within .nav-dd-menu{display:flex}
+@media(hover:hover){.nav-dd:hover .nav-dd-menu{display:flex}}
+.nav-dd-menu a{display:block;padding:9px 12px;font-family:"Instrument Sans","Hanken Grotesk",sans-serif;font-size:13px;font-weight:500;letter-spacing:.01em;text-transform:none;color:var(--mut);transition:color .15s ease,background .15s ease}
+.nav-dd-menu a:hover{color:var(--signal);background:var(--bg2)}
+
+/* ---------- INTERLUDE BANDS — theme-flipped full-bleed surfaces.
+   Same halftone atmosphere as the page body, opposite tile: bone dots on the
+   ink band (light mode), ink dots on the paper band (dark mode). `fixed`
+   keeps the tile aligned with the page atmosphere through the flip. ---------- */
+.interlude{
+  background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,#0A0A0B;padding:76px 0;
+  --bg:#0A0A0B;--bg2:#111110;--card:#141413;--fg:#EDECE8;
+  --mut:rgba(237,236,232,.55);--line:rgba(237,236,232,.16);--line-soft:rgba(237,236,232,.09);--dot:rgba(237,236,232,.10);
+  color:var(--fg);
+}
+:root:not([data-theme="light"]) .interlude{
+  background:url(textures/halftone-ink.png) repeat fixed 0 0/720px 720px,#F8F7F3;
+  --bg:#F8F7F3;--bg2:#FFFFFF;--card:#FFFFFF;--fg:#111110;
+  --mut:rgba(17,17,16,.55);--line:rgba(17,17,16,.16);--line-soft:rgba(17,17,16,.09);--dot:rgba(17,17,16,.10);
+}
+.interlude .sec-head h2,.interlude h3{color:var(--fg)}
+.interlude .sec-head p{color:var(--mut)}
+.feed-duo{position:relative;margin-bottom:24px}
+/* keep the bench copy out of the head's column at mid widths */
+@media(min-width:861px){#bench .sec-head{max-width:min(640px,50%);margin-bottom:36px}}
+.feed-duo .rec-mock{margin:0}
+/* head = live canvas render (crisp). Rendered at the SAME 430:340 aspect, so the
+   silhouette is unchanged — drawBust just draws denser at this size, crisp, never
+   upscaled-soft (no PNG, no transform:scale). Right column, bottom-aligned so it
+   rises as the card shrinks; pushed right so the back of the head reaches past the
+   content edge. */
+/* head = verbatim drawBust at 430x340 native (IDENTICAL dots to committed) then
+   CSS-scaled 1.4 as one bitmap — same picture, not re-rendered. Absolutely placed
+   so the card sizes on its own; anchored bottom-right, scales up-left, right edge
+   pushed past the content edge, bottom at the card line. Neck cut kept (no mask). */
+.art--bust{position:absolute;right:-64px;bottom:35px;width:430px;height:340px;
+  transform:scale(1.17) !important;transform-origin:100% 100%;image-rendering:auto;pointer-events:none}
+@media(max-width:1120px){.art--bust{transform:scale(1.10) !important;right:-24px}}
+.art--oort{width:320px;height:320px;display:block;justify-self:end;align-self:center;transform:translateY(-35px)}
+@media(max-width:860px){
+  .feed-duo{position:static}
+  .art--bust{position:static;transform:scale(1) !important;width:min(360px,84%);height:auto;aspect-ratio:430/340;margin:8px auto 0}
+  .art--oort{width:240px;height:240px;justify-self:center;margin-top:8px}
+}
+.interlude--engine{padding:64px 0 72px}
+.interlude--engine .wrap{position:relative}
+.eng-stream{position:absolute;left:4%;right:4%;height:1px;pointer-events:none;opacity:.45;
+  background:repeating-linear-gradient(90deg,var(--line) 0 12px,transparent 12px 30px);
+  animation:engstream 16s linear infinite}
+@keyframes engstream{to{background-position:300px 0}}
+@media (prefers-reduced-motion: reduce){.eng-stream{animation:none}}
+/* eyebrow hairline draws in on reveal */
+.sec-head .eyebrow::before{transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.22,.8,.24,1) .15s}
+.sec-head.rv.on .eyebrow::before{transform:scaleX(1)}
+@media (prefers-reduced-motion: reduce){.sec-head .eyebrow::before{transform:none;transition:none}}
+
+/* Perf: let the browser skip layout/paint for offscreen lower sections.
+   Only sections BELOW the falcon dock (#bench) — keeps dock scroll math intact.
+   contain-intrinsic-size remembers real height after first render (no jump). */
+#gallery,#integrations,#engine,#pricing,#faq{
+  content-visibility:auto;contain-intrinsic-size:auto 720px;
+}
 
 
 /* clip player — coded dashboard scenes in the .shot frame (ported) */
@@ -1767,7 +1986,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   </div>
 </footer>
 
-<script src="./dusk-art.js?v=20260733"></script>
+<script src="./dusk-art.js?v=20260735"></script>
 <script>
 (function(){
 "use strict";
@@ -1790,7 +2009,7 @@ var player = window.DUSK.clipPlayer({
         '<span class="sc-tag">PROFITFALCON · SAMPLE STORE</span>' +
         '<div class="sc-kpis">' +
           '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">SKUs below water</div><div class="k-val"><b data-count="2">0</b> of <b data-count="214">0</b></div><div class="k-formula"><b>=</b> margin(rev − cogs − fees − ads) &lt; 0</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">Worst margin / unit <span class="sc-delta down neg">LEAK</span></div><div class="k-val">−$1.82</div><div class="k-formula"><b>=</b> TRAIL-MINI · every ad dollar loses</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">Worst margin / unit <span class="sc-delta loss">LEAK</span></div><div class="k-val">−$1.82</div><div class="k-formula"><b>=</b> TRAIL-MINI · every ad dollar loses</div></div>' +
           '<div class="sc-card sc-kpi"><div class="k-label">Monthly leak, both SKUs</div><div class="k-val">−$<b data-count="496">0</b></div><div class="k-formula"><b>=</b> Σ negative-margin units × velocity</div></div>' +
         '</div>' +
         '<table class="sc-table"><thead><tr><th>SKU</th><th>Tag</th><th class="num">Rev</th><th class="num">Margin</th><th class="num">P&amp;L / mo</th></tr></thead><tbody>' +
@@ -1806,7 +2025,7 @@ var player = window.DUSK.clipPlayer({
         '<span class="sc-tag">CLIENTFALCON · SAMPLE EXPORT</span>' +
         '<div class="sc-kpis">' +
           '<div class="sc-card sc-kpi sc-kpi--hero"><div class="k-label">Projected recovery, all findings</div><div class="k-val">~$<b data-count="18447">0</b>/mo</div><div class="k-formula"><b>=</b> Σ projected impact · 4 ranked issues</div></div>' +
-          '<div class="sc-card sc-kpi"><div class="k-label">CPA, period over period <span class="sc-delta down neg">37%</span></div><div class="k-val">$23.24 → $31.94</div><div class="k-formula"><b>=</b> spend / conversions · both periods</div></div>' +
+          '<div class="sc-card sc-kpi"><div class="k-label">CPA, period over period <span class="sc-delta loss up">37%</span></div><div class="k-val">$23.24 → $31.94</div><div class="k-formula"><b>=</b> spend / conversions · both periods</div></div>' +
           '<div class="sc-card sc-kpi"><div class="k-label">Budget on the weak channel</div><div class="k-val">2.6×</div><div class="k-formula"><b>=</b> Google ROAS 6.72 / Meta ROAS 2.62</div></div>' +
         '</div>' +
         '<div class="sc-act"><span class="a-pri">P1</span><p><b>Pause the bleeding channel</b> — redeploy budget to the efficient one</p><span class="a-imp">+$<b data-count="8985">0</b>/mo</span></div>' +
