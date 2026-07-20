@@ -811,10 +811,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 
 /* ── float-in on reveal (rides the existing .rv observer) ───── */
 .rv.on .sc-float{animation:scFloat .8s cubic-bezier(.22,1,.36,1) both}
-.rv.on .sc-float.f2{animation-delay:.12s}
-.rv.on .sc-float.f3{animation-delay:.24s}
 @keyframes scFloat{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.rv.on .sc-float{animation:none}}
 
 /* ── What-if slider row ─────────────────────────────────────── */
 .sc-whatif{padding:18px 20px}
@@ -839,9 +836,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 .sc-chart .c-bar{fill:url(#scEmber)}
 .sc-chart .c-line{fill:none;stroke:var(--signal);stroke-width:1.6}
 .sc-chart .c-dotgrid{stroke:var(--line-soft);stroke-dasharray:1 5}
-.rv.on .sc-chart .c-bar{animation:scBarUp .9s cubic-bezier(.22,1,.36,1) both;transform-origin:bottom;animation-delay:calc(var(--i)*.07s + .25s)}
 @keyframes scBarUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@media(prefers-reduced-motion:reduce){.rv.on .sc-chart .c-bar{animation:none}}
 
 /* ── Cost donut fragment ────────────────────────────────────── */
 .sc-costd{padding:18px 20px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
@@ -947,159 +942,61 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
     radial-gradient(130% 170% at 90% 125%, rgba(142,42,34,.07), transparent 60%),
     linear-gradient(155deg, #FFFFFF, var(--bg) 72%);
 }
-.scm::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(var(--dot) 1px,transparent 1px);
-  background-size:22px 22px;opacity:.3;
-}
-.scm > *{position:relative}
-.scm-tag{
-  position:absolute;top:9px;right:11px;font-family:"JetBrains Mono",monospace;
-  font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);
-}
-.scm .mono, .scm-row, .scm-meta{font-family:"JetBrains Mono",monospace}
 
 /* verified formula mini (A1) */
 .scm-vbadge{display:inline-flex;align-items:center;gap:6px;border:1px solid color-mix(in srgb,var(--signal) 45%,transparent);
   color:var(--signal);border-radius:6px;padding:3px 8px;font-family:"JetBrains Mono",monospace;
   font-size:8.5px;letter-spacing:.16em;text-transform:uppercase}
-.scm-vbadge::before{content:"✓"}
-.scm-formula{margin:10px 0 2px;font-size:14.5px;color:var(--fg);font-weight:600;letter-spacing:-.01em}
-.scm-formula em{font-style:normal;color:var(--signal)}
-.scm-code{margin-top:9px;border:1px solid var(--line-soft);background:color-mix(in srgb,var(--fg) 3.5%,transparent);
-  border-radius:7px;padding:7px 10px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--mut)}
-.scm-code b{color:var(--fg);font-weight:500}
-.scm-meta{display:flex;gap:14px;margin-top:10px;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);flex-wrap:wrap}
-.scm-meta b{color:var(--fg);font-weight:500}
 
 /* model picker mini (A2) — rows cycle highlight */
 .scm-modl{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.scm-modl .mr{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;
-  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--mut)}
-.scm-modl .mr::before{content:"";width:7px;height:7px;border-radius:50%;border:1px solid var(--line);flex:none}
-.scm-modl .mr .tag2{margin-left:auto;font-size:8px;letter-spacing:.14em;text-transform:uppercase;opacity:0;color:var(--signal)}
-.rv.on .scm-modl .mr{animation:scmModl 12s infinite}
-.rv.on .scm-modl .mr:nth-child(2){animation-delay:3s}
-.rv.on .scm-modl .mr:nth-child(3){animation-delay:6s}
-.rv.on .scm-modl .mr:nth-child(4){animation-delay:9s}
 @keyframes scmModl{
   0%,22%{border-color:color-mix(in srgb,var(--signal) 45%,transparent);color:var(--fg)}
   25%,100%{border-color:var(--line-soft);color:var(--mut)}
 }
-.rv.on .scm-modl .mr::before{animation:scmModlDot 12s infinite}
-.rv.on .scm-modl .mr:nth-child(2)::before{animation-delay:3s}
-.rv.on .scm-modl .mr:nth-child(3)::before{animation-delay:6s}
-.rv.on .scm-modl .mr:nth-child(4)::before{animation-delay:9s}
 @keyframes scmModlDot{
   0%,22%{background:var(--signal);border-color:var(--signal)}
   25%,100%{background:transparent;border-color:var(--line)}
 }
-.rv.on .scm-modl .mr .tag2{animation:scmModlTag 12s infinite}
-.rv.on .scm-modl .mr:nth-child(2) .tag2{animation-delay:3s}
-.rv.on .scm-modl .mr:nth-child(3) .tag2{animation-delay:6s}
-.rv.on .scm-modl .mr:nth-child(4) .tag2{animation-delay:9s}
 @keyframes scmModlTag{0%,22%{opacity:1}25%,100%{opacity:0}}
 
 /* privacy / masking mini (A3) */
 .scm-mask{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.scm-mask .mk{display:flex;align-items:center;gap:8px;border:1px solid var(--line-soft);border-radius:7px;
-  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--mut)}
-.scm-mask .mk b{color:var(--fg);font-weight:500}
-.scm-mask .mk .mtag{margin-left:auto;font-size:8px;letter-spacing:.14em;color:var(--signal)}
-.scm-mask .sum{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;
-  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);padding:2px 2px 0}
-.scm-mask .sum::before{content:"✓";color:var(--signal)}
 
 /* chart + forecast mini (A4) — bars grow, forecast dashes draw */
 .scm-chart{display:block;width:100%;height:86px;margin-top:6px}
-.scm-chart .bar{fill:color-mix(in srgb,var(--fg) 16%,transparent);transform-origin:bottom;transform-box:fill-box}
-.scm-chart .bar.hot{fill:color-mix(in srgb,var(--signal) 75%,transparent)}
-.rv.on .scm-chart .bar{animation:scmBar .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i)*90ms)}
 @keyframes scmBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-.scm-chart .fc{fill:none;stroke:var(--signal);stroke-width:1.5;stroke-dasharray:4 4}
-.rv.on .scm-chart .fc{stroke-dashoffset:160;animation:scmFc 2.2s ease-out .8s forwards}
 @keyframes scmFc{to{stroke-dashoffset:0}}
-.scm-exp{display:flex;align-items:center;gap:10px;margin-top:8px;font-family:"JetBrains Mono",monospace;
-  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
-.scm-exp b{color:var(--fg);font-weight:500}
-.scm-exp .x{margin-left:auto;color:var(--signal)}
 
 /* agents / schedule mini (A5) — one row live */
 .scm-sched{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.scm-sched .sr2{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;
-  padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
-.scm-sched .sr2 b{color:var(--fg);font-weight:500;letter-spacing:.1em}
-.scm-sched .sr2 .st{margin-left:auto;color:var(--signal);display:flex;align-items:center;gap:5px}
-.scm-sched .sr2 .st.live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal)}
-.rv.on .scm-sched .sr2 .st.live::before{animation:scmPulse 1.6s ease-in-out infinite}
 @keyframes scmPulse{0%,100%{opacity:1}50%{opacity:.25}}
-.scm-sched .add{border-style:dashed;justify-content:center;color:var(--mut);letter-spacing:.14em}
 
 /* upload / parse mini (step 1) — progress loop */
 .scm-up{margin-top:4px}
-.scm-up .fchip2{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:6px;
-  padding:4px 9px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--fg);
-  background:color-mix(in srgb,var(--fg) 4%,transparent)}
-.scm-up .track{height:3px;border-radius:2px;background:var(--line-soft);margin-top:10px;overflow:hidden}
-.scm-up .fill{height:100%;width:100%;background:var(--signal);transform-origin:left;transform:scaleX(1)}
-.rv.on .scm-up .fill{animation:scmFill 5s cubic-bezier(.3,.6,.3,1) infinite}
 @keyframes scmFill{0%{transform:scaleX(0)}55%,100%{transform:scaleX(1)}}
-.scm-up .lbl{position:relative;height:14px;margin-top:8px;font-family:"JetBrains Mono",monospace;
-  font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut)}
-.scm-up .lbl span{position:absolute;left:0;top:0}
-.scm-up .lbl .done{color:var(--fg);opacity:1}
-.scm-up .lbl .busy{opacity:0}
-.rv.on .scm-up .lbl .busy{animation:scmLblA 5s infinite}
-.rv.on .scm-up .lbl .done{animation:scmLblB 5s infinite}
 @keyframes scmLblA{0%,50%{opacity:1}56%,100%{opacity:0}}
 @keyframes scmLblB{0%,50%{opacity:0}56%,100%{opacity:1}}
 
 /* ask / typing mini (step 2) */
 .scm-askr{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:8px;
   padding:8px 11px;margin-top:4px;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--fg)}
-.scm-askr .q{overflow:hidden;white-space:nowrap;max-width:100%}
-.rv.on .scm-askr .q{width:31ch;animation:scmType 7s steps(31) infinite}
 @keyframes scmType{0%{width:0}45%,100%{width:31ch}}
-.scm-askr .cur{width:1px;height:13px;background:var(--signal);flex:none}
-.rv.on .scm-askr .cur{animation:scmCur 1s steps(1) infinite}
 @keyframes scmCur{50%{opacity:0}}
-.scm-askr .send2{margin-left:auto;color:var(--signal)}
-.scm-ans{display:flex;align-items:center;gap:8px;margin-top:8px;font-family:"JetBrains Mono",monospace;
-  font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
-.scm-ans b{color:var(--fg);font-weight:500}
-.rv.on .scm-ans{opacity:0;animation:scmAns 7s infinite}
 @keyframes scmAns{0%,48%{opacity:0}58%,100%{opacity:1}}
 
 /* act mini (step 3) — priced action rows */
 .scm-acts{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.scm-acts .ar{display:flex;align-items:center;gap:9px;border:1px solid var(--line-soft);border-radius:7px;padding:7px 10px}
-.scm-acts .ar .pri{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.12em;color:var(--signal);
-  border:1px solid color-mix(in srgb,var(--signal) 40%,transparent);border-radius:5px;padding:2px 6px;flex:none}
-.scm-acts .ar p{margin:0;font-size:11.5px;color:var(--fg);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.scm-acts .ar .imp{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--signal);flex:none}
-
-@media(prefers-reduced-motion:reduce){
-  .rv.on .scm-modl .mr,.rv.on .scm-modl .mr::before,.rv.on .scm-modl .mr .tag2,
-  .rv.on .scm-chart .bar,.rv.on .scm-chart .fc,.rv.on .scm-sched .sr2 .st.live::before,
-  .rv.on .scm-up .fill,.rv.on .scm-up .lbl .busy,.rv.on .scm-up .lbl .done,
-  .rv.on .scm-askr .q,.rv.on .scm-askr .cur,.rv.on .scm-ans{animation:none}
-  .rv.on .scm-askr .q{width:auto}
-  .rv.on .scm-ans{opacity:1}
-}
 
 
 /* drift float for scm minis */
 .rv.on .sc-drift{animation:scDrift 7s ease-in-out infinite alternate}
-.rv.on .sc-drift.dr2{animation-duration:9s;animation-delay:.8s}
 @keyframes scDrift{from{transform:translateY(0)}to{transform:translateY(-6px)}}
-@media(prefers-reduced-motion:reduce){.rv.on .sc-drift{animation:none}}
 
 /* scm act anim */
 /* act rows slide in on loop (step 03) */
 .rv.on .scm-acts--anim .ar{opacity:0;animation:scmAct 7s infinite}
-.rv.on .scm-acts--anim .ar:nth-child(2){animation-delay:.9s}
 @keyframes scmAct{0%{opacity:0;transform:translateY(7px)}9%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
-@media(prefers-reduced-motion:reduce){.rv.on .scm-acts--anim .ar{animation:none;opacity:1}}
 
 /* Wordmark second segment — lighter weight so the compound name reads as two
    words without adding a space (the brand stays one word). */
@@ -1107,30 +1004,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 
 /* ── Ledger anatomy — the decision→outcome lifecycle (talonomic-first; port to talonmark after) ── */
 .ledger-sec .sec-head p{max-width:560px}
-.lg-frame{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
-.lg-rail{display:flex;border-bottom:1px solid var(--line-soft)}
-.lg-node{flex:1;min-width:0;padding:13px 8px 11px;text-align:center;cursor:pointer;background:none;border:0;border-right:1px solid var(--line-soft);position:relative;transition:background .3s}
-.lg-node:last-child{border-right:0}
-.lg-node .ln-dot{display:block;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--mut);margin:0 auto 7px;transition:background .3s,border-color .3s,box-shadow .3s}
-.lg-node .ln-t{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);display:block;transition:color .3s}
-.lg-node.on{background:var(--bg2)}
-.lg-node.on .ln-dot{background:var(--signal);border-color:var(--signal);box-shadow:0 0 0 3px color-mix(in srgb,var(--signal) 18%,transparent)}
-.lg-node.on .ln-t{color:var(--fg)}
-.lg-node.done .ln-dot{background:var(--fg);border-color:var(--fg)}
-.lg-stage{padding:22px 24px 20px;min-height:118px}
-.lg-line{display:flex;gap:10px;align-items:flex-start;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
-.lg-line.show{opacity:1;transform:none}
-.lg-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--signal);white-space:nowrap;padding-top:3px}
-.lg-v{font-size:14.5px;line-height:1.55;color:var(--fg)}
-.lg-v b{font-weight:700}
-.lg-v .lgm{font-family:"JetBrains Mono",monospace;font-size:12.5px;background:var(--bg2);border:1px solid var(--line-soft);padding:2px 7px;border-radius:6px;white-space:nowrap}
-.lg-foot{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line-soft);padding:10px 24px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
-.lg-foot .lg-tally{margin-left:auto;color:var(--fg)}
-.lg-prog{height:2px;background:var(--line-soft);position:relative;overflow:hidden}
-.lg-prog i{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--signal)}
-.lg-prog i.run{transition:transform linear;transform:scaleX(1)}
-@media(max-width:700px){.lg-node .ln-t{font-size:8px}.lg-stage{padding:18px 14px;min-height:150px}.lg-foot{padding:10px 14px;flex-wrap:wrap}}
-@media(prefers-reduced-motion:reduce){.lg-line{opacity:1;transform:none;transition:none}.lg-prog{display:none}}
 
 /* step time chips — minute-boxed onboarding (Reaktion pattern) */
 .step h3 .stm{font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:500;letter-spacing:.08em;color:var(--mut);border:1px solid var(--line-2,var(--line));padding:3px 8px;border-radius:999px;vertical-align:2px;margin-left:9px;white-space:nowrap}
@@ -1145,30 +1018,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 
 /* ── agent bench — one card per shipped agent; the work, not the count ── */
 .bench-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.bench-grid .calc{grid-column:span 2;margin-top:0}
-@media(max-width:960px){.bench-grid .calc{grid-column:1/-1}}
-@media(max-width:960px){.bench-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:620px){.bench-grid{grid-template-columns:1fr}}
-.bn-card{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:18px 18px 14px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.bn-name{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg)}
-.bn-name::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);flex:0 0 auto}
-.bn-watch{font-size:13.5px;color:var(--mut);line-height:1.5;margin:0}
-.bn-rec{border:1px solid var(--line-soft);background:var(--bg2);border-radius:8px;padding:10px 12px}
-.bn-rec .bn-tag{display:block;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
-.bn-rec .bn-move{font-size:12.5px;color:var(--fg);line-height:1.45}
-.bn-rec .bn-move b{color:var(--signal)}
-.bn-ledger{border-top:1px solid var(--line-soft);padding-top:9px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
 /* ── honest calculator (arithmetic only, ESTIMATE-labeled) ── */
 .calc{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:26px;margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
-@media(max-width:760px){.calc{grid-template-columns:1fr}}
-.calc-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
-.calc-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}
-.calc-row label{font-size:13px;color:var(--fg);flex:1}
-.calc-row input{width:110px;padding:7px 10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:7px;font-family:"JetBrains Mono",monospace;font-size:13px;text-align:right}
-.calc-row input:focus{outline:2px solid var(--signal);outline-offset:1px}
-.calc-out{text-align:center}
-.calc-out .co-n{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em;color:var(--signal)}
-.calc-out .co-l{font-size:12.5px;color:var(--mut);max-width:300px;margin:8px auto 0;line-height:1.5}
 
 /* ── integrations hub — exports in, product core, artifacts out ── */
 .hub{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:52px;align-items:center;margin-top:14px}
@@ -1190,7 +1041,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 
 /* ── product gallery (real screenshots, SAMPLE data) ── */
 .gal-img{display:block;width:100%;height:auto;border-bottom:1px solid var(--line-soft);background:var(--card)}
-.gal-shot .shot-foot a{color:var(--signal)}
 
 /* animated hub flow — exports → engine → outputs (JS draws paths at layout time) */
 .hub{position:relative}
@@ -1203,22 +1053,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 
 /* sample recommendation card — the product's approve UI, rendered honestly */
 .rec-mock{max-width:640px;margin:0 0 34px;border:1px solid var(--line);background:var(--card)}
-.rec-mock .rm-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line-soft);color:var(--mut);font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
-.rec-mock .rm-bar span:last-child{margin-left:auto}
-.rm-body{padding:18px 20px 16px}
-.rm-head{display:flex;justify-content:space-between;gap:12px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
-.rm-head span:last-child{color:var(--mut)}
-.rm-title{font-family:"Instrument Sans",sans-serif;font-weight:600;font-size:16.5px;letter-spacing:-.01em;margin:0 0 6px;color:var(--fg)}
-.rm-move{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--mut);margin:0 0 12px}
-.rm-move b{color:var(--fg)}
-.rm-proj{font-size:13.5px;color:var(--fg);border:1px solid var(--line-soft);background:var(--bg2);padding:9px 12px;margin-bottom:14px}
-.rm-proj b{color:var(--signal)}
-.rm-proj span{color:var(--mut);font-size:12px}
-.rm-actions{display:flex;align-items:center;gap:10px}
-.rm-btn{font-family:"Instrument Sans",sans-serif;font-size:12.5px;font-weight:600;padding:8px 16px;border:1px solid var(--line);color:var(--fg)}
-.rm-btn--approve{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.rm-note{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
-@media(max-width:640px){.rm-actions{flex-wrap:wrap}.rm-note{margin-left:0}}
 
 /* nav product dropdown — Reaktion-pattern depth, honest anchors */
 .nav-dd{position:relative;display:flex;align-items:center}
@@ -1248,12 +1082,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
   --bg:#F8F7F3;--bg2:#FFFFFF;--card:#FFFFFF;--fg:#111110;
   --mut:rgba(17,17,16,.55);--line:rgba(17,17,16,.16);--line-soft:rgba(17,17,16,.09);--dot:rgba(17,17,16,.10);
 }
-.interlude .sec-head h2,.interlude h3{color:var(--fg)}
-.interlude .sec-head p{color:var(--mut)}
-.feed-duo{position:relative;margin-bottom:24px}
 /* keep the bench copy out of the head's column at mid widths */
 @media(min-width:861px){#bench .sec-head{max-width:min(640px,50%);margin-bottom:36px}}
-.feed-duo .rec-mock{margin:0}
 /* head = live canvas render (crisp). Rendered at the SAME 430:340 aspect, so the
    silhouette is unchanged — drawBust just draws denser at this size, crisp, never
    upscaled-soft (no PNG, no transform:scale). Right column, bottom-aligned so it
@@ -1263,15 +1093,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
    CSS-scaled 1.4 as one bitmap — same picture, not re-rendered. Absolutely placed
    so the card sizes on its own; anchored bottom-right, scales up-left, right edge
    pushed past the content edge, bottom at the card line. Neck cut kept (no mask). */
-.art--bust{position:absolute;right:-64px;bottom:35px;width:430px;height:340px;
-  transform:scale(1.17) !important;transform-origin:100% 100%;image-rendering:auto;pointer-events:none}
-@media(max-width:1120px){.art--bust{transform:scale(1.10) !important;right:-24px}}
-.art--oort{width:320px;height:320px;display:block;justify-self:end;align-self:center;transform:translateY(-35px)}
-@media(max-width:860px){
-  .feed-duo{position:static}
-  .art--bust{position:static;transform:scale(1) !important;width:min(360px,84%);height:auto;aspect-ratio:430/340;margin:8px auto 0}
-  .art--oort{width:240px;height:240px;justify-self:center;margin-top:8px}
-}
 .interlude--engine{padding:64px 0 72px}
 .interlude--engine .wrap{position:relative}
 .eng-stream{position:absolute;left:4%;right:4%;height:1px;pointer-events:none;opacity:.45;
@@ -1281,8 +1102,6 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 @media (prefers-reduced-motion: reduce){.eng-stream{animation:none}}
 /* eyebrow hairline draws in on reveal */
 .sec-head .eyebrow::before{transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.22,.8,.24,1) .15s}
-.sec-head.rv.on .eyebrow::before{transform:scaleX(1)}
-@media (prefers-reduced-motion: reduce){.sec-head .eyebrow::before{transform:none;transition:none}}
 
 /* Perf: let the browser skip layout/paint for offscreen lower sections.
    Only sections BELOW the falcon dock (#bench) — keeps dock scroll math intact.
@@ -1296,7 +1115,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 .clip-stage{opacity:0;transform:translateY(6px);transition:opacity .5s ease,transform .5s ease;
   padding:clamp(14px,2vw,22px);min-height:430px;display:flex;flex-direction:column;justify-content:center}
 .clip-stage.show{opacity:1;transform:none}
-.clip-stage .sc-panel{padding:clamp(16px,2.2vw,26px)}
+.clip-stage .sc-panel{padding:clamp(16px,2.2vw,26px);padding-top:38px}
 .clip-stage .sc-kpis{margin-bottom:12px}
 .clip-video{width:100%;display:block;border-radius:10px;border:1px solid var(--line-soft);background:#000}
 .clip-lg{border:1px solid var(--line);background:var(--card);border-radius:12px;overflow:hidden}
