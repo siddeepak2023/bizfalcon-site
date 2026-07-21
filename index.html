@@ -1158,16 +1158,16 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 }
 .interlude .sec-head h2,.interlude h3{color:var(--fg)}
 .interlude .sec-head p{color:var(--mut)}
-.feed-duo{position:relative;margin-bottom:24px}
+/* head = own grid column (right), in-flow so it can't overlap the card. Layout
+   only — drawBust / dots / canvas render untouched. */
+.feed-duo{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:stretch;margin-bottom:24px}
 @media(min-width:861px){#bench .sec-head{max-width:min(640px,50%);margin-bottom:36px}}
 .feed-duo .rec-mock{margin:0}
-.art--bust{position:absolute;right:-64px;bottom:35px;width:430px;height:340px;
-  transform:scale(1.12) !important;transform-origin:100% 100%;image-rendering:auto;pointer-events:none}
-@media(max-width:1120px){.art--bust{transform:scale(1.05) !important;right:-24px}}
+.art--bust{width:100%;height:100%;min-height:340px;display:block;align-self:end;pointer-events:none}
 .art--oort{width:320px;height:320px;display:block;justify-self:end;align-self:center;transform:translateY(-35px)}
 @media(max-width:860px){
-  .feed-duo{position:static}
-  .art--bust{position:static;transform:scale(1) !important;width:min(360px,84%);height:auto;aspect-ratio:430/340;margin:8px auto 0}
+  .feed-duo{grid-template-columns:1fr}
+  .art--bust{height:auto;aspect-ratio:430/340;min-height:260px;margin:8px auto 0}
   .art--oort{width:240px;height:240px;justify-self:center;margin-top:8px}
 }
 /* product shot frame */
@@ -1351,9 +1351,9 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
             <div class="demo-q" id="demoQ"></div>
             <div class="demo-code" id="demoCode"></div>
             <div class="demo-tiles" id="demoTiles">
-              <div class="tile"><b data-count="2">0</b><s>SKUs below 20% margin</s></div>
-              <div class="tile neg"><b data-count="3206" data-prefix="~$">~$0</b><s>Recoverable / mo</s></div>
-              <div class="tile"><b data-count="1588">0</b><s>Orders computed</s></div>
+              <div class="tile"><b data-count="2">0</b><s>SKUs at/below 20% margin</s></div>
+              <div class="tile neg"><b data-count="31.0" data-prefix="~$" data-suffix="K" data-decimals="1">~$0</b><s>Recoverable / mo</s></div>
+              <div class="tile"><b data-count="24623">0</b><s>Orders computed</s></div>
             </div>
           </div>
           <div class="demo-foot"><span>PYTHON · EXECUTED IN-BROWSER</span><a href="#method">SHOW THE MATH ▸</a></div>
@@ -1462,19 +1462,19 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="lg-line" id="lgLine"><span class="lg-k" id="lgK"></span><span class="lg-v" id="lgV"></span></div>
       </div>
       <div class="lg-prog" aria-hidden="true"><i id="lgProg"></i></div>
-      <div class="lg-foot"><span>ILLUSTRATIVE EXAMPLE · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">ILLUSTRATIVE: PROJECTED +$540 · REALIZED +$498 · 92%</span></div>
+      <div class="lg-foot"><span>ILLUSTRATIVE EXAMPLE · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">ILLUSTRATIVE: PROJECTED reallocate $41.9K · REALIZED — fills from your exports</span></div>
     </div>
   </div>
 </section>
 <script>
 (function(){
   var stages=[
-    ["Detected","Margin Sentinel flagged Meta campaign <b>Prospecting — Broad</b>: CPA up 18% week-over-week, contribution margin negative on 9 of the last 14 days."],
-    ["Exact change","<span class=\"lgm\">Cut daily budget · Meta Ads Manager — Prospecting — Broad: $200 → $176/day (−12%)</span>"],
-    ["Projected","<b>+$540/mo</b> contribution margin · confidence 78% · the formula behind the number is attached to the card."],
+    ["Detected","Margin Sentinel flagged <b>Pinterest — Lifestyle Pins</b>: returning <b>0.90×</b> on spend while Google returns <b>4.82×</b> — the channel is losing money on every dollar."],
+    ["Exact change","<span class=\"lgm\">Reallocate budget · move the $41.9K off Pinterest — Lifestyle Pins toward the higher-return channel</span>"],
+    ["Projected","<b>$41.9K</b> in spend reallocated from a 0.90× channel to a 4.82× one · the formula behind the number is attached to the card."],
     ["Approved","You approved it. The change is yours to apply — one click copies the exact move. Nothing executes without you."],
-    ["Measured","Each new export you drop is scored against the projection: CPA, spend, and margin."],
-    ["Realized","<b>+$498/mo</b> measured over 30 days — 92% of projection. The outcome is stored on the ledger, next to its projection."]
+    ["Measured","Each new export you drop is scored against the projection: MER, spend, and contribution by channel."],
+    ["Realized","Your realized number lands here, scored against the projection over 30 days. The ledger fills from your data — not a demo figure."]
   ];
   var frame=document.getElementById("lgFrame"); if(!frame) return;
   var nodes=frame.querySelectorAll(".lg-node"),k=document.getElementById("lgK"),v=document.getElementById("lgV"),
@@ -1520,10 +1520,10 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
     <div class="rec-mock" aria-label="Sample recommendation card as it appears in the product">
       <div class="rm-bar"><span>agent feed — one card</span><span>SAMPLE DATA · LIVE PRODUCT UI</span></div>
       <div class="rm-body">
-        <div class="rm-head"><span>MARGIN SENTINEL · PROFITFALCON</span><span>CONFIDENCE 78%</span></div>
-        <p class="rm-title">Cut daily budget — Prospecting — Broad</p>
-        <p class="rm-move">Meta Ads Manager → campaign budget: <b>$200 → $176/day (−12%)</b></p>
-        <div class="rm-proj">Projected <b>+$540/mo</b> contribution margin <span>· the formula is attached to the card</span></div>
+        <div class="rm-head"><span>MARGIN SENTINEL · PROFITFALCON</span><span>SAMPLE STORE</span></div>
+        <p class="rm-title">Reallocate spend — Lifestyle Pins</p>
+        <p class="rm-move">Pinterest returns <b>0.90×</b> vs Google's 4.82× — move the $41.9K to the higher-return channel</p>
+        <div class="rm-proj">Reallocatable <b>$41.9K</b> in spend <span>· the formula is attached to the card</span></div>
         <div class="rm-actions"><span class="rm-btn rm-btn--approve">Approve</span><span class="rm-btn">Dismiss</span><span class="rm-note">Nothing executes without you</span></div>
       </div>
     </div>
@@ -1534,42 +1534,42 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="bn-name">Margin Sentinel<span class="bn-prod">PF</span></div>
         <p class="bn-watch">Watches paid campaigns for spend that returns less than it costs — MER, CPA drift, contribution margin by campaign.</p>
         <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
-          <span class="bn-move">Cut daily budget · Meta Ads Manager — Prospecting — Broad: <b>$200 → $176/day</b> · projected +$540/mo</span></div>
+          <span class="bn-move">Reallocate spend · Pinterest — Lifestyle Pins returns <b>0.90×</b> vs Google's 4.82× · $41.9K in spend to move</span></div>
         <div class="bn-ledger">Ledger · fills from your approvals</div>
       </div>
       <div class="bn-card">
         <div class="bn-name">Discount Leak<span class="bn-prod">PF</span></div>
         <p class="bn-watch">Watches every discount code for redemptions by customers who were already converting — returning buyers, organic traffic.</p>
         <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
-          <span class="bn-move">Restrict <b>WELCOME10</b> to first-time customers — 57% of its redemptions went to returning buyers · est. +$340/mo</span></div>
+          <span class="bn-move">Across <b>9,713 discounted orders</b>, $436K was given away — FLASH35 alone ran 26.6% off on 2,343 · ~$31.0K/mo recoverable by fencing it</span></div>
         <div class="bn-ledger">Ledger · fills from your approvals</div>
       </div>
       <div class="bn-card">
         <div class="bn-name">Inventory &amp; Reorder<span class="bn-prod">PF</span></div>
         <p class="bn-watch">Watches per-SKU sales velocity against what's on hand and works back from the resupply lead time to a reorder-by date.</p>
-        <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
-          <span class="bn-move">Reorder <b>Blue Hoodie</b> by Aug 2 — 6 days of stock left at current velocity · $2,800 of 30-day revenue at stake</span></div>
+        <div class="bn-rec"><span class="bn-tag">How it works</span>
+          <span class="bn-move">Surfaces a reorder-by date per SKU from sales velocity and resupply lead time — active once your export carries on-hand stock</span></div>
         <div class="bn-ledger">Ledger · fills from your approvals</div>
       </div>
       <div class="bn-card">
         <div class="bn-name">Prospect Audit<span class="bn-prod">CF</span></div>
         <p class="bn-watch">Turns a prospect's ad export into a ranked issue list — evidence, first move, projected impact — and a 30-day plan for the pitch.</p>
         <div class="bn-rec"><span class="bn-tag">Sample finding</span>
-          <span class="bn-move">Pause the bottom ad set on <b>Search — Generic</b> — $1,900/mo of spend at 0.7x ROAS · projected +$1,340/mo</span></div>
+          <span class="bn-move"><b>Ridgeway Coffee:</b> Pinterest at 0.69x ROAS — $11.1K spend returning $7.7K · pause or rework before the pitch</span></div>
         <div class="bn-ledger">Ledger · the audit becomes the client's baseline</div>
       </div>
       <div class="bn-card">
         <div class="bn-name">Client Health<span class="bn-prod">CF</span></div>
         <p class="bn-watch">Ranks your whole book by blended ROAS against breakeven and flags the clients drifting toward a churn conversation.</p>
         <div class="bn-rec"><span class="bn-tag">Sample flag</span>
-          <span class="bn-move"><b>Meridian Retail</b> at 1.4x blended ROAS, below the 2.0x band — book the review before the renewal call happens without you</span></div>
+          <span class="bn-move"><b>Bloom Botanicals</b> at 1.69× blended, below the 2.0× breakeven — book the review before the renewal call happens without you</span></div>
         <div class="bn-ledger">Ledger · fills from your approvals</div>
       </div>
       <div class="bn-card">
         <div class="bn-name">Portfolio Brief<span class="bn-prod">CF</span></div>
         <p class="bn-watch">Opens your day agency-wide: which clients need you, which recommendations are waiting, what revenue is at risk this week.</p>
         <div class="bn-rec"><span class="bn-tag">Sample brief line</span>
-          <span class="bn-move">"2 clients under breakeven · <b>4 recommendations waiting</b> · $3,100/mo of client spend flagged for review."</span></div>
+          <span class="bn-move">"8 clients in the book · median <b>3.32× ROAS</b> · 1 under breakeven · $66K of client revenue flagged for review."</span></div>
         <div class="bn-ledger">Ledger · fills from your approvals</div>
       </div>
     </div>
@@ -1674,7 +1674,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
             <div class="track"><div class="fill"></div></div>
             <div class="lbl">
               <span class="busy">parsing…</span>
-              <span class="done">✓ 1,588 rows · runtime ready</span>
+              <span class="done">✓ 24,623 rows · runtime ready</span>
             </div>
           </div>
         </div>
@@ -1685,7 +1685,7 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="scm" aria-hidden="true">
           <span class="scm-tag">Compute</span>
           <span class="scm-vbadge">Verified</span>
-          <div class="scm-code"><b>df["gross_amount"].sum()</b> → 254845.81</div>
+          <div class="scm-code"><b>df["gross_amount"].sum()</b> → 5199611.44</div>
           <div class="scm-meta"><span>Engine <b>Python · in-browser</b></span></div>
         </div>
       </div>
@@ -1695,8 +1695,8 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="scm" aria-hidden="true">
           <span class="scm-tag">Decide</span>
           <div class="scm-acts scm-acts--anim">
-            <div class="ar"><span class="pri">P1</span><p>Fence FLASH35 deep codes</p><span class="imp">~$3,206/mo</span></div>
-            <div class="ar"><span class="pri">P2</span><p>Reprice Overstock Graphic Tee</p><span class="imp">→ ≥40%</span></div>
+            <div class="ar"><span class="pri">P1</span><p>Fence FLASH35 deep codes</p><span class="imp">~$31.0K/mo</span></div>
+            <div class="ar"><span class="pri">P2</span><p>Reprice Last-Season Insulated Vest</p><span class="imp">→ ≥40%</span></div>
           </div>
         </div>
       </div>
@@ -1729,17 +1729,17 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
         <div class="queue">
           <div class="rec">
             <div class="rec-top"><span>PLAYBOOK AD-SPEND-03 · CLIENTFALCON</span><span class="conf">CONF 0.86</span></div>
-            <p>Pause Meta ad set <b>“Prospecting — Broad”</b> — CPA 2.4× target for 6 straight days. <span class="sv">Est. save $1,180/mo.</span></p>
+            <p>Rework Meta for <b>Bloom Botanicals</b> — 0.82× ROAS, $13.4K spend returning $11.0K. <span class="sv">Reallocate to Email at 4.54×.</span></p>
             <div class="rec-actions"><button type="button">Approve</button><button type="button">Dismiss</button></div>
           </div>
           <div class="rec">
             <div class="rec-top"><span>PLAYBOOK INV-REORDER-01 · PROFITFALCON</span><span class="conf">CONF 0.79</span></div>
-            <p>Reorder SKU <b>BF-204</b> — 12 days of stock left at current sell-through. Lead time is 18 days.</p>
+            <p>Reorder-by dates per SKU from sell-through and lead time — active once your export carries on-hand stock.</p>
             <div class="rec-actions"><button type="button">Approve</button><button type="button">Dismiss</button></div>
           </div>
           <div class="rec">
             <div class="rec-top"><span>PLAYBOOK MARGIN-02 · PROFITFALCON</span><span class="conf">CONF 0.74</span></div>
-            <p>SKU <b>“Overstock Graphic Tee”</b> sells at <span class="sv">16.1% margin</span> — below the 20% target. Recommend a reprice toward ≥40% before scaling spend.</p>
+            <p>SKU <b>“Last-Season Insulated Vest”</b> sells at <span class="sv">17.8% margin</span> — below the 20% target. Recommend a reprice toward ≥40% before scaling spend.</p>
             <div class="rec-actions"><button type="button">Approve</button><button type="button">Dismiss</button></div>
           </div>
         </div>
@@ -1814,8 +1814,8 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 var qEl = document.getElementById("demoQ");
 var codeEl = document.getElementById("demoCode");
 var tilesEl = document.getElementById("demoTiles");
-var Q = "which SKUs lost money in June?";
-var CODE = 'pnl = df.groupby("sku").apply(\n    lambda g: (g.rev - g.cogs - g.ads).sum()\n)\nlosers = pnl[pnl < 0].sort_values()';
+var Q = "which SKUs sit below a healthy margin?";
+var CODE = 'margin = df.groupby("product_name").apply(\n    lambda g: 1 - g.cost.sum() / g.gross_amount.sum()\n)\nlosers = margin[margin < 0.20].sort_values()';
 var demoTimer = null, demoRun = 0;
 
 function typeInto(el, text, speed, done){
