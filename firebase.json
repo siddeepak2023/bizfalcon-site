@@ -2,10 +2,37 @@
   "hosting": {
     "site": "bizfalcon-site",
     "public": ".",
-    "ignore": ["firebase.json", ".firebaserc", "*.md", ".gitignore", ".git"],
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "*.md",
+      ".gitignore",
+      ".git",
+      "CNAME",
+      "_*.html",
+      "test-*.html",
+      "_headmesh.js",
+      "tools"
+    ],
     "headers": [
-      { "source": "**/*.@(js|css|woff2|png|jpg|svg|ico)", "headers": [{ "key": "Cache-Control", "value": "max-age=2592000,immutable" }] },
-      { "source": "index.html", "headers": [{ "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }] }
+      {
+        "source": "**/*.@(js|css|woff2|png|jpg|svg|ico)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=2592000,immutable"
+          }
+        ]
+      },
+      {
+        "source": "index.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      }
     ]
   }
 }
