@@ -1,0 +1,141 @@
+/* company-site only. Everything the shared dusk.css already declares was
+   removed — dusk.css is loaded first and is the single source for it.
+   Generated once by tools/split-inline-css.py; hand-edited after. */
+
+.frame{position:relative}
+.frame i{position:absolute;width:14px;height:14px;border:0 solid var(--fg);opacity:.6}
+.frame i:nth-child(1){top:-1px;left:-1px;border-top-width:1px;border-left-width:1px}
+.frame i:nth-child(2){top:-1px;right:-1px;border-top-width:1px;border-right-width:1px}
+.frame i:nth-child(3){bottom:-1px;left:-1px;border-bottom-width:1px;border-left-width:1px}
+.frame i:nth-child(4){bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
+.hero h1 .est{color:var(--mut);position:relative}
+.hero h1 .est::after{content:"";position:absolute;left:0;right:0;top:54%;height:3px;background:var(--signal)}
+.rail{position:absolute;top:104px;z-index:2;
+  font-family:"JetBrains Mono",monospace;font-size:9.5px;line-height:2.1;
+  letter-spacing:.08em;color:var(--mut);text-transform:uppercase;}
+.rail b{color:var(--fg);font-weight:500}
+.rail .sig{color:var(--signal)}
+.rail--l{left:24px}
+.rail--r{right:24px;text-align:right}
+.rail hr{border:none;border-top:1px solid var(--line-soft);margin:10px 0}
+.sec-row .sec-head{margin-bottom:70px}
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.prod{border:1px solid var(--line);background:var(--card);padding:34px;
+  position:relative;transition:border-color .25s ease;cursor:pointer;}
+.prod:hover{border-color:var(--fg)}
+.prod--hero{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1.1fr;gap:44px;align-items:center}
+.prod-idx{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--mut);display:flex;justify-content:space-between;margin-bottom:26px}
+.prod h3{font-size:26px;margin-bottom:12px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.prod h3 .chip{transform:translateY(-2px)}
+.prod p{color:var(--mut);font-size:15.5px;max-width:46ch}
+.prod-link{margin-top:26px;display:inline-flex;align-items:center;gap:8px;
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg);transition:color .2s ease;text-decoration:none;}
+.prod:hover .prod-link{color:var(--signal)}
+.prod-link::after{content:"→";transition:transform .2s ease}
+.prod:hover .prod-link::after{transform:translateX(4px)}
+.demo{border:1px solid var(--line);background:var(--bg);
+  font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75;}
+.demo-bar{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--line-soft);color:var(--mut);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.demo-bar .dots{display:flex;gap:5px}
+.demo-bar .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
+.demo-bar .dots i:first-child{background:var(--signal)}
+.demo-body{padding:20px 22px;min-height:270px}
+.demo-code .k{color:var(--fg)}
+.demo-foot{padding:12px 22px;border-top:1px solid var(--line-soft);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);display:flex;justify-content:space-between}
+.demo-foot a{color:var(--signal)}
+.mini{margin-top:28px;height:120px;display:flex;align-items:flex-end;gap:6px}
+.mini .bar{flex:1;background:var(--line);position:relative;transition:background .2s ease}
+.mini .bar.hot{background:var(--signal)}
+.prod-shot{display:block;width:100%;border:1px solid var(--line);border-radius:8px;margin:14px 0 8px}
+.mini-note{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase;margin-top:10px}
+.mini-note em{color:var(--signal);font-style:normal}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.price-card{border:1px solid var(--line);background:var(--card);padding:30px 30px 28px;transition:border-color .25s ease;display:flex;flex-direction:column}
+.price-card .prod-link{margin-top:auto;padding-top:20px}
+.price-card:hover{border-color:var(--fg)}
+.price-card h3{font-size:22px;margin-bottom:14px}
+.price-entry{display:flex;align-items:baseline;gap:10px;margin-bottom:20px}
+.price-entry b{font-size:34px;font-weight:700;letter-spacing:-.02em}
+.price-entry span{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.price-tiers{list-style:none;margin:0 0 6px;padding:0;font-family:"JetBrains Mono",monospace;font-size:12px}
+.price-tiers li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line-soft);color:var(--mut)}
+.price-tiers li span:last-child{color:var(--fg);font-variant-numeric:tabular-nums}
+.price-tiers li.addon{color:var(--signal)}
+.price-tiers li.addon span:last-child{color:var(--signal)}
+.pdfmock{margin-top:28px;height:120px;display:flex;gap:10px;align-items:flex-start}
+.pdfpage{width:86px;height:114px;background:var(--fg);padding:10px 9px;display:flex;flex-direction:column;gap:5px;flex:none}
+.pdfpage i{display:block;height:4px;background:color-mix(in srgb,var(--bg) 22%,transparent)}
+.pdfpage i.hd{height:9px;width:60%;background:var(--signal)}
+.pdfpage i.w40{width:40%}
+.pdfpage i.w70{width:70%}
+.pdfpage i.w55{width:55%}
+.pdfmeta{font-family:"JetBrains Mono",monospace;font-size:9.5px;line-height:2;letter-spacing:.1em;color:var(--mut);text-transform:uppercase}
+.pdfmeta b{color:var(--fg);font-weight:500}
+.agent-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.agent-copy p{color:var(--mut);margin-bottom:20px}
+.agent-copy p strong{color:var(--fg);font-weight:600}
+.ledger{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mut);border:1px solid var(--line-soft);padding:13px 16px;margin-top:30px;
+  display:flex;gap:22px;flex-wrap:wrap;}
+.ledger b{color:var(--fg);font-weight:500}
+.queue{display:flex;flex-direction:column;gap:12px}
+.rec{border:1px solid var(--line);background:var(--card);padding:20px 22px;
+  transition:border-color .25s ease;}
+.rec:hover{border-color:var(--fg)}
+.rec-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.rec-top .conf{color:var(--fg)}
+.rec p{font-size:15px;line-height:1.5}
+.rec p b{font-weight:600}
+.rec p .sv{color:var(--signal);font-weight:600}
+.rec-actions{display:flex;gap:10px;margin-top:16px}
+.rec-actions button{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  padding:9px 16px;min-height:36px;border:1px solid var(--line);color:var(--mut);
+  transition:all .2s ease;cursor:pointer;}
+.rec-actions button:first-child{border-color:var(--fg);color:var(--fg)}
+.rec-actions button:first-child:hover{background:var(--fg);color:var(--bg)}
+.rec-actions button:last-child:hover{border-color:var(--signal);color:var(--signal)}
+.queue-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.studio{overflow:hidden}
+.studio-falcon{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:460px;height:390px;opacity:.5;pointer-events:none}
+.studio-in{position:relative;z-index:2;max-width:620px}
+.studio p{color:var(--mut);margin-bottom:20px}
+.studio p strong{color:var(--fg);font-weight:600}
+.stack-line{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:34px;line-height:2.2}
+.stack-line b{color:var(--fg);font-weight:500}
+.bn-name .bn-prod{margin-left:auto;color:var(--mut);font-size:8.5px;border:1px solid var(--line-soft);padding:2px 6px;border-radius:4px}
+.bn-card .bn-cta{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);text-decoration:none}
+.bn-card .bn-cta:hover{text-decoration:underline}
+.calc2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px}
+.calc2 .calc{grid-template-columns:1fr;margin-top:0}
+
+@media(max-width:900px){
+.price-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:1100px){
+.studio-falcon{display:none}
+.rail{display:none}
+}
+
+@media(max-width:920px){
+.prod--hero{grid-template-columns:1fr}
+.agent-grid{grid-template-columns:1fr;gap:40px}
+.prod-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+.prod{padding:24px}
+}
+
+@media(prefers-reduced-motion:reduce){
+.ticker-track{animation:none}
+.chip .pulse,.caret,.scroll-hint::after{animation:none}
+}
+
+/* the old #bench half-width sec-head reservation and the .rec-mock uncapping
+   both went with the absolute-head layout — dusk.css handles the bench now. */
+
+@media(max-width:1020px){
+.calc2{grid-template-columns:1fr}
+}
