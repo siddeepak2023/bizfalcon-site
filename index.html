@@ -1164,9 +1164,9 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
 .feed-duo{position:relative;margin-bottom:24px}
 @media(min-width:1025px){#bench .sec-head{max-width:min(640px,50%);margin-bottom:36px}}
 .feed-duo .rec-mock{margin:0;max-width:min(520px,52%)}
-.art--bust{position:absolute;right:-64px;bottom:35px;width:430px;height:340px;
-  transform:scale(1.12) !important;transform-origin:100% 100%;image-rendering:auto;pointer-events:none}
-@media(max-width:1120px){.art--bust{transform:scale(1.06) !important;right:-24px}}
+.art--bust{position:absolute;right:-136px;bottom:76px;width:430px;height:340px;
+  transform:scale(1.22) !important;transform-origin:100% 100%;image-rendering:auto;pointer-events:none}
+@media(max-width:1120px){.art--bust{transform:scale(1.10) !important;right:-70px;bottom:48px}}
 .art--oort{width:320px;height:320px;display:block;justify-self:end;align-self:center;transform:translateY(-35px)}
 @media(max-width:1024px){
   .feed-duo{position:static}
@@ -1521,13 +1521,16 @@ body{background:url(textures/halftone-bone.png) repeat fixed 0 0/720px 720px,var
     </div>
 
     <div class="feed-duo rv d1">
-    <div class="rec-mock" aria-label="Sample recommendation card as it appears in the product">
-      <div class="rm-bar"><span>agent feed — one card</span><span>SAMPLE DATA · LIVE PRODUCT UI</span></div>
+    <div class="rec-mock" data-countup aria-label="Operator queue — recommendations awaiting approval (sample data)">
+      <div class="rm-bar"><span>agent feed — operator queue</span><span>SAMPLE DATA · YOU APPROVE</span></div>
       <div class="rm-body">
-        <div class="rm-head"><span>MARGIN SENTINEL · PROFITFALCON</span><span>SAMPLE STORE</span></div>
-        <p class="rm-title">Reallocate spend — Lifestyle Pins</p>
-        <p class="rm-move">Pinterest returns <b>0.90×</b> vs Google's 4.82× — move the $41.9K to the higher-return channel</p>
-        <div class="rm-proj">Reallocatable <b>$41.9K</b> in spend <span>· the formula is attached to the card</span></div>
+        <div class="rm-head"><span>QUEUED → YOUR APPROVAL</span><span>PROFITFALCON · CLIENTFALCON</span></div>
+        <div class="sc-stagger">
+          <div class="sc-act"><span class="a-pri">P1</span><p><b>Fence or kill the deep codes</b> — FLASH35 ran 26.6% off on 2,343 orders; $436,203 given away across 9,713 discounted orders (7.7% of gross)</p><span class="a-imp">~$<b data-count="30993">30,993</b>/mo</span></div>
+          <div class="sc-act"><span class="a-pri">P2</span><p><b>Reallocate the bottom channel</b> — Pinterest returns 0.90× against Google's 4.82×; $41.9K of spend sitting behind the weaker one</p><span class="a-imp">$<b data-count="41900">41,900</b> to move</span></div>
+          <div class="sc-act"><span class="a-pri">P3</span><p><b>Book the client review</b> — Bloom Botanicals blended 1.69×, under the 2.0× breakeven, dragged by Meta at 0.82× on $13.4K</p><span class="a-imp">$<b data-count="66200">66,200</b> at risk</span></div>
+        </div>
+        <div class="rm-proj">One queue across both products <span>· every card carries the formula that produced it</span></div>
         <div class="rm-actions"><span class="rm-btn rm-btn--approve">Approve</span><span class="rm-btn">Dismiss</span><span class="rm-note">Nothing executes without you</span></div>
       </div>
     </div>
