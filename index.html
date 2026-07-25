@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./dusk.css?v=20260725a">
-<link rel="stylesheet" href="./site.css?v=20260725a">
+<link rel="stylesheet" href="./dusk.css?v=20260725b">
+<link rel="stylesheet" href="./site.css?v=20260725b">
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
     if ("serviceWorker" in navigator) {
@@ -41,6 +41,42 @@
 <meta name="twitter:description" content="BizFalcon is an AI product studio. Our analysts write and run real Python on your data — every KPI traceable to the code that produced it.">
 <meta name="twitter:image" content="https://bizfalconai.com/og.png">
 <meta name="twitter:image:alt" content="BizFalcon AI — verified-computation analytics products">
+<!-- BF-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://bizfalconai.com/#organization",
+      "name": "BizFalcon AI",
+      "url": "https://bizfalconai.com/",
+      "email": "hello@bizfalconai.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://bizfalconai.com/falcon-bird-white.png",
+        "width": 1190,
+        "height": 933
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Siddharth Deepak"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bizfalconai.com/#website",
+      "url": "https://bizfalconai.com/",
+      "name": "BizFalcon AI",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://bizfalconai.com/#organization"
+      }
+    }
+  ]
+}
+</script>
+<!-- /BF-LD -->
 </head>
 <body>
 
