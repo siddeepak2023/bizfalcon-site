@@ -12,11 +12,17 @@
       "_*.html",
       "test-*.html",
       "_headmesh.js",
-      "tools"
+      "tools",
+      "media",
+      "shots",
+      "head*.png",
+      "falcon-lines-dark.png",
+      "icon-192.png",
+      "_render-head.html"
     ],
     "headers": [
       {
-        "source": "**/*.@(js|css|woff2|png|jpg|svg|ico)",
+        "source": "**/*.@(js|css|woff2|png|jpg|webp|svg|ico)",
         "headers": [
           {
             "key": "Cache-Control",
