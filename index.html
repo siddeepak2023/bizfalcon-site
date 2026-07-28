@@ -101,7 +101,7 @@
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
-      <a class="btn btn--primary" href="https://talon.bizfalconai.com">Launch Talon — free</a>
+      <a class="btn btn--primary" href="https://profit.bizfalconai.com/teardown">Free profit teardown</a>
     </div>
   </div>
 </header>
@@ -111,18 +111,19 @@
   <canvas class="hero-canvas" id="terrain" aria-hidden="true"></canvas>
 
   <div class="rail rail--r">
-    <b>TALON</b>&nbsp;— DATA&nbsp;ANALYST<br>
     <b>PROFITFALCON</b>&nbsp;— UNIT&nbsp;ECON<br>
-    <b>CLIENTFALCON</b>&nbsp;— AGENCY&nbsp;REPORTS
+    <b>CLIENTFALCON</b>&nbsp;— AGENCY&nbsp;REPORTS<br>
+    <b>TALON</b>&nbsp;— THE&nbsp;ENGINE, FREE
   </div>
 
   <div class="wrap hero-in">
-    <span class="chip hero-chip">Three products, one engine</span>
+    <span class="chip hero-chip">Two products for two buyers, one engine</span>
     <h1>Computed,<br>not <span class="est">estimated</span>.</h1>
     <p class="hero-sub">BizFalcon is an AI product studio. Our products <strong>write and run real Python on your data</strong> — every KPI traceable to the code that produced it — and every recommendation they make is scored in a ledger against what actually happened. No SQL. No black box. Every KPI opens to the code behind it.</p>
     <div class="hero-ctas">
-      <a class="btn btn--primary" href="https://talon.bizfalconai.com">Launch Talon — free</a>
-      <a class="btn btn--ghost" href="https://profit.bizfalconai.com/dashboard?demo=1">Try a live sandbox — no signup</a>
+      <a class="btn btn--primary" href="https://profit.bizfalconai.com/teardown">ProfitFalcon — free teardown</a>
+      <a class="btn btn--primary" href="https://client.bizfalconai.com/">ClientFalcon — free for 1 client</a>
+      <a class="btn btn--ghost" href="https://talon.bizfalconai.com">Or use Talon, the engine, free</a>
     </div>
     <div class="eyebrow" style="margin-top:22px;margin-bottom:0">No card. No demo call.</div>
   </div>
@@ -135,8 +136,8 @@
     <div class="sec-row">
       <div class="sec-head rv" data-dock>
         <div class="eyebrow">Products</div>
-        <h2>Three instruments.<br>One engine.</h2>
-        <p>Everything below runs on the same core: upload data, the analyst writes Python, runs it in your browser, and shows the math behind every answer. The preview is ProfitFalcon itself — six workspace views, switchable in its left sidebar.</p>
+        <h2>Two instruments.<br>One engine.</h2>
+        <p>ProfitFalcon is for the brand; ClientFalcon is for the agency running someone else's. Two buyers, two products, priced on their own. Both run on Talon — the analyst that writes Python, runs it in your browser, and shows the math behind every answer — which you can also use directly, free. The preview below is ProfitFalcon itself.</p>
       </div>
     </div>
 
@@ -150,15 +151,46 @@
     </div>
 
     <div class="prod-grid">
-      <!-- TALON -->
+      <!-- PROFITFALCON — brand side. Leads because it is a paid product with its
+           own buyer, not a packaging of the free one. -->
       <article class="prod prod--hero frame rv"><i></i><i></i><i></i><i></i>
         <div>
-          <div class="prod-idx"><span>01 / FLAGSHIP</span><span>TALON.BIZFALCONAI.COM</span></div>
-          <h3>Talon</h3>
-          <p>The AI data analyst that shows its math. Drop in a spreadsheet, ask in plain English, and watch it write and execute real pandas — KPIs, forecasts, anomaly flags, and decks, each with an audit trail.</p>
-          <a class="prod-link" href="https://talon.bizfalconai.com">Open Talon</a>
-          <a class="prod-link" href="https://talon.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
+          <div class="prod-idx"><span>01 / ECOMMERCE BRANDS</span><span>PROFIT.BIZFALCONAI.COM</span></div>
+          <h3>ProfitFalcon <span class="chip chip--ghost">AI Product Manager — it recommends, you approve every move</span></h3>
+          <p>Unit economics for ecommerce brands. Contribution margin, LTV and per-SKU profit computed straight from your Shopify, WooCommerce or Amazon export — with the runnable SQL beside every number.</p>
+          <p style="margin-top:14px">Start with the free teardown: drop an order export and see where the store leaks, no account and nothing uploaded.</p>
+          <a class="prod-link" href="https://profit.bizfalconai.com/teardown">Free profit teardown</a>
+          <a class="prod-link" href="https://profit.bizfalconai.com/">Open ProfitFalcon</a>
+          <a class="prod-link" href="https://profit.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
         </div>
+        <div>
+          <picture>
+            <source srcset="./shots/screener.webp" type="image/webp">
+            <img class="prod-shot" src="./shots/screener.png" width="1440" height="950" loading="lazy" decoding="async" alt="ProfitFalcon per-SKU screener: every SKU ranked by contribution margin with Star / Bleeder / Sleeper / Leak status, computed from a sample export">
+          </picture>
+          <div class="mini-note">Per-SKU screener · Star / Bleeder / Sleeper / Leak · <em>SAMPLE</em></div>
+        </div>
+      </article>
+
+      <!-- CLIENTFALCON — agency side. Peer of ProfitFalcon, not a sub-product. -->
+      <article class="prod rv d1">
+        <div class="prod-idx"><span>02 / AGENCIES</span><span>CLIENT.BIZFALCONAI.COM</span></div>
+        <h3>ClientFalcon <span class="chip chip--ghost">Campaign Autopilot — it recommends, you approve every move</span></h3>
+        <p>Agency operations for account managers. A prospect's ad export becomes the audit that wins the pitch — and the day they sign, that audit becomes their live baseline. Reports, portfolio health, and a ledger you can show the client.</p>
+        <picture>
+          <source srcset="./shots/audit.webp" type="image/webp">
+          <img class="prod-shot" src="./shots/audit.png" width="1440" height="940" loading="lazy" decoding="async" alt="ClientFalcon prospect audit: evidence-backed findings with projected monthly gains, computed from a sample ad export">
+        </picture>
+        <div class="mini-note">Prospect audit · evidence-backed findings, projected gains · <em>SAMPLE</em></div>
+        <a class="prod-link" href="https://client.bizfalconai.com/">Open ClientFalcon — free for 1 client</a>
+        <a class="prod-link" href="https://client.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
+      </article>
+
+      <!-- TALON — the engine both products run on, free to use directly. -->
+      <article class="prod rv d2">
+        <div class="prod-idx"><span>03 / THE ENGINE</span><span>TALON.BIZFALCONAI.COM</span></div>
+        <h3>Talon <span class="chip chip--ghost">Free — the analyst underneath both</span></h3>
+        <p>The AI data analyst that shows its math. Drop in a spreadsheet, ask in plain English, and watch it write and execute real pandas — KPIs, forecasts, anomaly flags and decks, each with an audit trail. It is the engine ProfitFalcon and ClientFalcon are built on, and it is free to use on its own.</p>
         <div class="demo" aria-label="Talon demo: analyst answers a question by running Python">
           <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span><span>talon — sample session</span></div>
           <div class="demo-body">
@@ -172,34 +204,8 @@
           </div>
           <div class="demo-foot"><span>PYTHON · EXECUTED IN-BROWSER</span><a href="#method">SHOW THE MATH ▸</a></div>
         </div>
-      </article>
-
-      <!-- PROFITFALCON -->
-      <article class="prod rv d1">
-        <div class="prod-idx"><span>02 / ECOMMERCE</span><span>/PROFITFALCON</span></div>
-        <h3>ProfitFalcon <span class="chip chip--ghost">AI Product Manager — it recommends, you approve every move</span></h3>
-        <p>Unit economics for ecommerce brands. LTV, contribution margin, and per-SKU profit computed straight from your Shopify, WooCommerce, or Amazon exports.</p>
-        <picture>
-          <source srcset="./shots/screener.webp" type="image/webp">
-          <img class="prod-shot" src="./shots/screener.png" width="1440" height="950" loading="lazy" decoding="async" alt="ProfitFalcon per-SKU screener: every SKU ranked by contribution margin with Star / Bleeder / Sleeper / Leak status, computed from a sample export">
-        </picture>
-        <div class="mini-note">Per-SKU screener · Star / Bleeder / Sleeper / Leak · <em>SAMPLE</em></div>
-        <a class="prod-link" href="https://profit.bizfalconai.com/">Open ProfitFalcon</a>
-        <a class="prod-link" href="https://profit.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
-      </article>
-
-      <!-- CLIENTFALCON -->
-      <article class="prod rv d2">
-        <div class="prod-idx"><span>03 / AGENCIES</span><span>/CLIENTFALCON</span></div>
-        <h3>ClientFalcon <span class="chip chip--ghost">Campaign Autopilot — it recommends, you approve every move</span></h3>
-        <p>Agency operations for account managers. A prospect's ad export becomes the audit that wins the pitch — and the day they sign, that audit becomes their live baseline. Reports, portfolio health, and a ledger you can show the client.</p>
-        <picture>
-          <source srcset="./shots/audit.webp" type="image/webp">
-          <img class="prod-shot" src="./shots/audit.png" width="1440" height="940" loading="lazy" decoding="async" alt="ClientFalcon prospect audit: evidence-backed findings with projected monthly gains, computed from a sample ad export">
-        </picture>
-        <div class="mini-note">Prospect audit · evidence-backed findings, projected gains · <em>SAMPLE</em></div>
-        <a class="prod-link" href="https://client.bizfalconai.com/">Open ClientFalcon</a>
-        <a class="prod-link" href="https://client.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
+        <a class="prod-link" href="https://talon.bizfalconai.com">Open Talon — free</a>
+        <a class="prod-link" href="https://talon.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
       </article>
     </div>
   </div>
@@ -217,18 +223,6 @@
     </div>
     <div class="price-grid">
       <article class="price-card rv">
-        <div class="prod-idx"><span>TALON · FLAGSHIP</span><span>ANALYST</span></div>
-        <h3>Talon</h3>
-        <div class="price-entry"><b>Free</b><span>paid from $15/mo</span></div>
-        <ul class="price-tiers">
-          <li><span>Free</span><span>$0</span></li>
-          <li><span>Plus</span><span>$15/mo</span></li>
-          <li><span>Pro</span><span>$35/mo</span></li>
-          <li><span>Max</span><span>$149/mo</span></li>
-        </ul>
-        <a class="prod-link" href="https://talon.bizfalconai.com/#pricing">Talon pricing</a>
-      </article>
-      <article class="price-card rv d1">
         <div class="prod-idx"><span>PROFITFALCON · ECOMMERCE</span><span>UNIT ECONOMICS</span></div>
         <h3>ProfitFalcon</h3>
         <div class="price-entry"><b>Free</b><span>paid from $19/mo</span></div>
@@ -241,17 +235,29 @@
         </ul>
         <a class="prod-link" href="https://profit.bizfalconai.com/#pricing">ProfitFalcon pricing</a>
       </article>
-      <article class="price-card rv d2">
+      <article class="price-card rv d1">
         <div class="prod-idx"><span>CLIENTFALCON · AGENCIES</span><span>CLIENT OPS</span></div>
         <h3>ClientFalcon</h3>
-        <div class="price-entry"><b>$19</b><span>/mo entry · Solo</span></div>
+        <div class="price-entry"><b>Free</b><span>paid from $19/mo</span></div>
         <ul class="price-tiers">
+          <li><span>Free</span><span>$0 · 1 client</span></li>
           <li><span>Solo</span><span>$19/mo</span></li>
           <li><span>Agency</span><span>$129/mo</span></li>
           <li><span>Studio</span><span>$129/mo</span></li>
           <li class="addon"><span>Autopilot add-on</span><span>$49/mo</span></li>
         </ul>
         <a class="prod-link" href="https://client.bizfalconai.com/#pricing">ClientFalcon pricing</a>
+      </article>
+      <article class="price-card rv d2">
+        <div class="prod-idx"><span>TALON · THE ENGINE</span><span>ANALYST</span></div>
+        <h3>Talon</h3>
+        <div class="price-entry"><b>Free</b><span>paid from $15/mo</span></div>
+        <ul class="price-tiers">
+          <li><span>Free</span><span>$0</span></li>
+          <li><span>Plus</span><span>$15/mo</span></li>
+          <li><span>Pro</span><span>$35/mo</span></li>
+        </ul>
+        <a class="prod-link" href="https://talon.bizfalconai.com/#pricing">Talon pricing</a>
       </article>
     </div>
     <div class="mini-note rv" style="margin-top:18px">Prices shown are current founding prices — each product page is the source of truth.</div>
@@ -265,7 +271,7 @@
       <div class="sec-head rv">
         <div class="eyebrow">The ledger</div>
         <h2>Every recommendation is scored against what actually happened.</h2>
-        <p>One ledger under all three products. Each move a falcon proposes carries a projected impact, waits for your approval, and gets measured against reality on the ledger. Scores land as outcomes come in — it starts filling from your first approval.</p>
+        <p>One ledger under both products. Each move a falcon proposes carries a projected impact, waits for your approval, and gets measured against reality on the ledger. Scores land as outcomes come in — it starts filling from your first approval.</p>
       </div>
       <canvas class="art art--oort rv d1" data-art="oort" aria-hidden="true"></canvas>
     </div>
@@ -590,8 +596,12 @@
   <div class="wrap rv">
     <div class="eyebrow" style="justify-content:center">No card. No demo call.</div>
     <h2>See your own numbers<br>computed.</h2>
-    <p>Upload a spreadsheet. Get answers with the math attached.</p>
-    <a class="btn btn--primary" href="https://talon.bizfalconai.com">Launch Talon — free</a>
+    <p>Drop an order export or an ad export. Get answers with the math attached.</p>
+    <div class="hero-ctas" style="justify-content:center">
+      <a class="btn btn--primary" href="https://profit.bizfalconai.com/teardown">ProfitFalcon — free teardown</a>
+      <a class="btn btn--primary" href="https://client.bizfalconai.com/">ClientFalcon — free for 1 client</a>
+      <a class="btn btn--ghost" href="https://talon.bizfalconai.com">Talon, the engine, free</a>
+    </div>
   </div>
 </section>
 
@@ -601,13 +611,15 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <div class="foot-logo"><img src="./falcon-bird-white-sm.webp" alt="" width="440" height="345" style="width:20px;height:20px;background:#0A0A0B;border-radius:5px;padding:3px;box-sizing:border-box"><b>BizFalcon AI</b></div>
-        <p>An AI product studio. One analysis engine — Talon — packaged into vertical instruments.</p>
+        <p>An AI product studio. Two products with their own buyers — ProfitFalcon for ecommerce brands, ClientFalcon for agencies — built on Talon, the analysis engine, which is free to use on its own.</p>
       </div>
       <nav class="foot-col" aria-label="Products">
         <h4>Products</h4>
-        <a href="https://talon.bizfalconai.com">Talon</a>
         <a href="https://profit.bizfalconai.com/">ProfitFalcon</a>
+        <a href="https://profit.bizfalconai.com/teardown">Free profit teardown</a>
         <a href="https://client.bizfalconai.com/">ClientFalcon</a>
+        <a href="https://client.bizfalconai.com/compare.html">ClientFalcon vs AgencyAnalytics</a>
+        <a href="https://talon.bizfalconai.com">Talon (free engine)</a>
       </nav>
       <nav class="foot-col" aria-label="Company">
         <h4>Company</h4>
