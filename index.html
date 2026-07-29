@@ -7,14 +7,14 @@
 <meta name="theme-color" content="#F8F7F3">
 <title>BizFalcon AI — Computed, not estimated</title>
 <meta name="description" content="BizFalcon is an AI product studio. Our analysts write and run real Python on your data — every KPI traceable to the code that produced it.">
-<link rel="icon" href="favicon.ico?v=20260725c">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260725c">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260725c">
+<link rel="icon" href="favicon.ico?v=20260728a">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260728a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260728a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Hanken+Grotesk:wght@400;700&family=Inter+Tight:wght@800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./dusk.css?v=20260725c">
-<link rel="stylesheet" href="./site.css?v=20260725c">
+<link rel="stylesheet" href="./dusk.css?v=20260728a">
+<link rel="stylesheet" href="./site.css?v=20260728a">
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
     if ("serviceWorker" in navigator) {
@@ -123,7 +123,7 @@
     <div class="hero-ctas">
       <a class="btn btn--primary" href="https://profit.bizfalconai.com/teardown">ProfitFalcon — free teardown</a>
       <a class="btn btn--primary" href="https://client.bizfalconai.com/">ClientFalcon — free for 1 client</a>
-      <a class="btn btn--ghost" href="https://talon.bizfalconai.com">Or use Talon, the engine, free</a>
+      <a class="btn btn--ghost" href="https://talon.bizfalconai.com">Talon, the engine, free</a>
     </div>
     <div class="eyebrow" style="margin-top:22px;margin-bottom:0">No card. No demo call.</div>
   </div>
@@ -639,11 +639,18 @@
   </div>
 </footer>
 
-<script defer src="./dusk-art.js?v=20260725c"></script>
+<script defer src="./dusk-art.js?v=20260728a"></script>
 <script>
-(function(){
+/* Waits for DOMContentLoaded because dusk-art.js is deferred: deferred scripts run
+   before that event, so window.DUSK is guaranteed by the time this fires. This file
+   used to carry its own typeInto/countUp copies, and the copy had drifted — it read
+   data-prefix but ignored data-suffix and data-decimals, and parseInt("31.0") gave
+   31, so "~$31.0K recoverable" rendered as "~$31". Use the shared helpers only. */
+document.addEventListener("DOMContentLoaded", function(){
 "use strict";
-var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var D = window.DUSK;
+if (!D) return;
+var reduceMotion = D.reduceMotion;
 
 /* ---------- TALON DEMO SEQUENCE ---------- */
 var qEl = document.getElementById("demoQ");
@@ -651,64 +658,33 @@ var codeEl = document.getElementById("demoCode");
 var tilesEl = document.getElementById("demoTiles");
 var Q = "which SKUs sit below a healthy margin?";
 var CODE = 'margin = df.groupby("product_name").apply(\n    lambda g: 1 - g.cost.sum() / g.gross_amount.sum()\n)\nlosers = margin[margin < 0.20].sort_values()';
-var demoTimer = null, demoRun = 0;
+var runRef = { v: 0, t: null };
 
-function typeInto(el, text, speed, done){
-  var i = 0, run = demoRun;
-  el.innerHTML = '<span class="caret"></span>';
-  (function tick(){
-    if (run !== demoRun) return;
-    if (i <= text.length) {
-      el.innerHTML = text.slice(0, i).replace(/\n/g, "<br>") + '<span class="caret"></span>';
-      i++;
-      demoTimer = setTimeout(tick, speed);
-    } else {
-      el.innerHTML = text.replace(/\n/g, "<br>");
-      done && done();
-    }
-  })();
-}
-function countUp(){
-  tilesEl.classList.add("show");
-  tilesEl.querySelectorAll("b").forEach(function(b){
-    var target = parseInt(b.getAttribute("data-count"), 10);
-    var prefix = b.getAttribute("data-prefix") || "";
-    if (reduceMotion) { b.textContent = prefix + target.toLocaleString(); return; }
-    var t0 = performance.now(), run = demoRun;
-    (function step(now){
-      if (run !== demoRun) return;
-      var p = Math.min(1, (now - t0) / 900);
-      var eased = 1 - Math.pow(1 - p, 3);
-      b.textContent = prefix + Math.round(target * eased).toLocaleString();
-      if (p < 1) requestAnimationFrame(step);
-    })(t0);
-  });
-}
 function runDemo(){
-  demoRun++;
-  clearTimeout(demoTimer);
+  runRef.v++;
+  clearTimeout(runRef.t);
   tilesEl.classList.remove("show");
   qEl.textContent = ""; codeEl.textContent = "";
   if (reduceMotion) {
     qEl.textContent = Q;
     codeEl.innerHTML = CODE.replace(/\n/g, "<br>");
-    countUp();
+    D.countUp(tilesEl, runRef);
     return;
   }
-  typeInto(qEl, Q, 34, function(){
-    demoTimer = setTimeout(function(){
-      typeInto(codeEl, CODE, 9, function(){
-        demoTimer = setTimeout(function(){
-          countUp();
-          demoTimer = setTimeout(runDemo, 5200); /* loop */
+  D.typeInto(qEl, Q, 34, function(){
+    runRef.t = setTimeout(function(){
+      D.typeInto(codeEl, CODE, 9, function(){
+        runRef.t = setTimeout(function(){
+          D.countUp(tilesEl, runRef);
+          runRef.t = setTimeout(runDemo, 5200); /* loop */
         }, 350);
-      });
+      }, runRef);
     }, 420);
-  });
+  }, runRef);
 }
 new IntersectionObserver(function(en){
   if (en[0].isIntersecting) { runDemo(); }
-  else { demoRun++; clearTimeout(demoTimer); }
+  else { runRef.v++; clearTimeout(runRef.t); }
 }, { threshold: 0.35 }).observe(document.querySelector(".demo"));
 
 /* ---------- MOCK APPROVE/DISMISS (visual only) ---------- */
