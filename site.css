@@ -165,3 +165,10 @@
    i.e. squashed to a third of its correct width (aspect 0.46 vs 1.52). object-fit
    cannot help — the box itself was the wrong shape. */
 .prod-shot{height:auto}
+
+/* Previews are now the click target for their product — they were decorative before,
+   which wasted the largest, most obviously clickable element in each card. */
+.prod-shot-link{display:block;text-decoration:none}
+.prod-shot-link .prod-shot{transition:opacity .18s ease,transform .18s ease}
+.prod-shot-link:hover .prod-shot{opacity:.92;transform:translateY(-2px)}
+.prod-shot-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}

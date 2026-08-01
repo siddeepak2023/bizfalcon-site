@@ -164,10 +164,12 @@
           <a class="prod-link" href="https://profit.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
         </div>
         <div>
-          <picture>
+          <a class="prod-shot-link" href="https://profit.bizfalconai.com/" aria-label="Open the live product">
+        <picture>
             <source srcset="./shots/screener.webp" type="image/webp">
             <img class="prod-shot" src="./shots/screener.png" width="1440" height="950" loading="lazy" decoding="async" alt="ProfitFalcon per-SKU screener: every SKU ranked by contribution margin with Star / Bleeder / Sleeper / Leak status, computed from a sample export">
           </picture>
+        </a>
           <div class="mini-note">Per-SKU screener · Star / Bleeder / Sleeper / Leak · <em>SAMPLE</em></div>
         </div>
       </article>
@@ -177,10 +179,12 @@
         <div class="prod-idx"><span>02 / AGENCIES</span><span>CLIENT.BIZFALCONAI.COM</span></div>
         <h3>ClientFalcon <span class="chip chip--ghost">Campaign Autopilot — it recommends, you approve every move</span></h3>
         <p>Agency operations for account managers. A prospect's ad export becomes the audit that wins the pitch — and the day they sign, that audit becomes their live baseline. Reports, portfolio health, and a ledger you can show the client.</p>
+        <a class="prod-shot-link" href="https://client.bizfalconai.com/" aria-label="Open the live product">
         <picture>
           <source srcset="./shots/audit.webp" type="image/webp">
           <img class="prod-shot" src="./shots/audit.png" width="1440" height="940" loading="lazy" decoding="async" alt="ClientFalcon prospect audit: evidence-backed findings with projected monthly gains, computed from a sample ad export">
         </picture>
+        </a>
         <div class="mini-note">Prospect audit · evidence-backed findings, projected gains · <em>SAMPLE</em></div>
         <a class="prod-link" href="https://client.bizfalconai.com/">Open ClientFalcon — free for 1 client</a>
         <a class="prod-link" href="https://client.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
@@ -191,28 +195,18 @@
         <div class="prod-idx"><span>03 / THE ENGINE</span><span>TALON.BIZFALCONAI.COM</span></div>
         <h3>Talon <span class="chip chip--ghost">Free — the analyst underneath both</span></h3>
         <p>The AI data analyst that shows its math. Drop in a spreadsheet, ask in plain English, and watch it write and execute real pandas — KPIs, forecasts, anomaly flags and decks, each with an audit trail. It is the engine ProfitFalcon and ClientFalcon are built on, and it is free to use on its own.</p>
-        <div class="demo" aria-label="Talon demo: analyst answers a question by running Python">
-          <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span><span>talon — sample session</span></div>
-          <div class="demo-body">
-            <div class="demo-q" id="demoQ"></div>
-            <div class="demo-code" id="demoCode"></div>
-            <div class="demo-tiles" id="demoTiles">
-              <div class="tile"><b data-count="2">0</b><s>SKUs at/below 20% margin</s></div>
-              <div class="tile neg"><b data-count="31.0" data-prefix="~$" data-suffix="K" data-decimals="1">~$0</b><s>Recoverable / mo</s></div>
-              <div class="tile"><b data-count="24623">0</b><s>Orders computed</s></div>
-            </div>
-          </div>
-          <div class="demo-foot"><span>PYTHON · EXECUTED IN-BROWSER</span><a href="#method">SHOW THE MATH ▸</a></div>
-        </div>
-        <!-- Talon was the only one of the three products with no screenshot: a live
-             demo terminal and nothing else. The demo is the better proof, but a
-             visitor scanning the page saw two products with a picture and one
-             without, which reads as the third being less real. -->
+        <!-- All three products now present the same way: one screenshot that links
+             to the live product. The Talon demo terminal that used to sit here was
+             removed on the founder's call — it animated on a timer, so a visitor who
+             scrolled past mid-sequence saw a half-typed query, and it was the only
+             product block that behaved differently from its two siblings. -->
+        <a class="prod-shot-link" href="https://talon.bizfalconai.com" aria-label="Open the live product">
         <picture>
           <img class="prod-shot" src="./shots/dashboard.png" width="2880" height="1880"
                loading="lazy" decoding="async"
                alt="Talon: a KPI dashboard computed from an uploaded spreadsheet, where every figure opens to the Python that produced it">
         </picture>
+        </a>
         <div class="mini-note">Computed dashboard · every KPI opens to its code · <em>SAMPLE</em></div>
         <a class="prod-link" href="https://talon.bizfalconai.com">Open Talon — free</a>
         <a class="prod-link" href="https://talon.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
@@ -664,40 +658,11 @@ var D = window.DUSK;
 if (!D) return;
 var reduceMotion = D.reduceMotion;
 
-/* ---------- TALON DEMO SEQUENCE ---------- */
-var qEl = document.getElementById("demoQ");
-var codeEl = document.getElementById("demoCode");
-var tilesEl = document.getElementById("demoTiles");
-var Q = "which SKUs sit below a healthy margin?";
-var CODE = 'margin = df.groupby("product_name").apply(\n    lambda g: 1 - g.cost.sum() / g.gross_amount.sum()\n)\nlosers = margin[margin < 0.20].sort_values()';
-var runRef = { v: 0, t: null };
-
-function runDemo(){
-  runRef.v++;
-  clearTimeout(runRef.t);
-  tilesEl.classList.remove("show");
-  qEl.textContent = ""; codeEl.textContent = "";
-  if (reduceMotion) {
-    qEl.textContent = Q;
-    codeEl.innerHTML = CODE.replace(/\n/g, "<br>");
-    D.countUp(tilesEl, runRef);
-    return;
-  }
-  D.typeInto(qEl, Q, 34, function(){
-    runRef.t = setTimeout(function(){
-      D.typeInto(codeEl, CODE, 9, function(){
-        runRef.t = setTimeout(function(){
-          D.countUp(tilesEl, runRef);
-          runRef.t = setTimeout(runDemo, 5200); /* loop */
-        }, 350);
-      }, runRef);
-    }, 420);
-  }, runRef);
-}
-new IntersectionObserver(function(en){
-  if (en[0].isIntersecting) { runDemo(); }
-  else { runRef.v++; clearTimeout(runRef.t); }
-}, { threshold: 0.35 }).observe(document.querySelector(".demo"));
+/* The Talon demo sequence lived here. Removed with its markup: the observer
+   ended in `.observe(document.querySelector(".demo"))`, and once the element was
+   gone that call throws TypeError on null — which would have killed every
+   handler registered BELOW it in this same DOMContentLoaded block, including the
+   approve/dismiss mocks. Dead UI code that still runs is not dead. */
 
 /* ---------- MOCK APPROVE/DISMISS (visual only) ---------- */
 document.querySelectorAll(".rec-actions button").forEach(function(btn){
