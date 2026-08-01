@@ -204,6 +204,16 @@
           </div>
           <div class="demo-foot"><span>PYTHON · EXECUTED IN-BROWSER</span><a href="#method">SHOW THE MATH ▸</a></div>
         </div>
+        <!-- Talon was the only one of the three products with no screenshot: a live
+             demo terminal and nothing else. The demo is the better proof, but a
+             visitor scanning the page saw two products with a picture and one
+             without, which reads as the third being less real. -->
+        <picture>
+          <img class="prod-shot" src="./shots/dashboard.png" width="2880" height="1880"
+               loading="lazy" decoding="async"
+               alt="Talon: a KPI dashboard computed from an uploaded spreadsheet, where every figure opens to the Python that produced it">
+        </picture>
+        <div class="mini-note">Computed dashboard · every KPI opens to its code · <em>SAMPLE</em></div>
         <a class="prod-link" href="https://talon.bizfalconai.com">Open Talon — free</a>
         <a class="prod-link" href="https://talon.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
       </article>
@@ -548,7 +558,6 @@
           <span>OUTCOMES <b>TRACKED 7/30D</b></span>
         </div>
         <p style="margin-top:14px"><a href="#ledger" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal)">See the full lifecycle ↑</a></p>
-        <canvas class="art art--dome art--eclipse" data-art="eclipse" aria-hidden="true"></canvas>
       </div>
       <div class="rv d1">
         <div class="queue-head">
@@ -602,6 +611,9 @@
       <a class="btn btn--primary" href="https://client.bizfalconai.com/">ClientFalcon — free for 1 client</a>
       <a class="btn btn--ghost" href="https://talon.bizfalconai.com">Talon, the engine, free</a>
     </div>
+    <!-- The eclipse closes the page. It used to sit mid-document inside §04, where a
+         250px dome interrupted the approval-queue copy instead of ending anything. -->
+    <canvas class="art art--dome art--eclipse art--eclipse-close" data-art="eclipse" aria-hidden="true"></canvas>
   </div>
 </section>
 

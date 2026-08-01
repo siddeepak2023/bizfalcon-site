@@ -139,3 +139,29 @@
 @media(max-width:1020px){
 .calc2{grid-template-columns:1fr}
 }
+
+/* ── hero CTA row: one centred line ────────────────────────────────────────────
+   dusk.css gives .hero-ctas `max-width:56ch`, which is right for a left-aligned
+   column but wrong here: the hero centres its text, three buttons exceed 56ch, and
+   they wrapped 2 + 1 with the third landing hard left — flex items do not inherit
+   text-align, so it read as a layout bug rather than a wrap. Centre the row and let
+   it size to its content; it still wraps on narrow screens, just symmetrically. */
+.hero .hero-ctas,
+.cta-sec .hero-ctas{justify-content:center;max-width:none;margin-inline:auto}
+
+/* ── the bust is bottom-aligned against a much taller card ─────────────────────
+   .feed-duo uses align-items:end so the bust's baseline meets the card's. When the
+   sample agent-feed card grew, the bust's grid cell grew with it and the extra
+   height became dead space ABOVE the head. Centring it in the cell splits that gap
+   instead of stacking it all on top. */
+.feed-duo .art--bust{align-self:center}
+
+/* The closing eclipse gets room to read as an ending rather than a divider. */
+.art--eclipse-close{margin-top:56px;margin-bottom:-40px;height:280px}
+
+/* ── product screenshots were stretched ────────────────────────────────────────
+   .prod-shot sets width:100% but never height:auto, so the intrinsic height="950"
+   attribute kept winning: screener.webp rendered 442x950 against a natural 1440x950,
+   i.e. squashed to a third of its correct width (aspect 0.46 vs 1.52). object-fit
+   cannot help — the box itself was the wrong shape. */
+.prod-shot{height:auto}
