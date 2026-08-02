@@ -7,14 +7,14 @@
 <meta name="theme-color" content="#F8F7F3">
 <title>BizFalcon AI — Computed, not estimated</title>
 <meta name="description" content="BizFalcon is an AI product studio. Our analysts write and run real Python on your data — every KPI traceable to the code that produced it.">
-<link rel="icon" href="favicon.ico?v=20260728a">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260728a">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260728a">
+<link rel="icon" href="favicon.ico?v=20260802a">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260802a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260802a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Hanken+Grotesk:wght@400;700&family=Inter+Tight:wght@800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./dusk.css?v=20260802a">
-<link rel="stylesheet" href="./site.css?v=20260728a">
+<link rel="stylesheet" href="./site.css?v=20260802a">
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
     if ("serviceWorker" in navigator) {
@@ -125,7 +125,9 @@
       <a class="btn btn--primary" href="https://client.bizfalconai.com/">ClientFalcon — free for 1 client</a>
       <a class="btn btn--ghost" href="https://talon.bizfalconai.com">BizFalcon Analyst, the engine, free</a>
     </div>
-    <div class="eyebrow" style="margin-top:22px;margin-bottom:0">No card. No demo call.</div>
+    <!-- Centred with the CTA row above it. The row was centred when the 2+1 wrap was
+         fixed; this line was left behind, so it sat hard left under centred buttons. -->
+    <div class="eyebrow" style="margin-top:22px;margin-bottom:0;justify-content:center">No card. No demo call.</div>
   </div>
 
 </section>
@@ -161,7 +163,7 @@
           <p style="margin-top:14px">Start with the free teardown: drop an order export and see where the store leaks, no account and nothing uploaded.</p>
           <a class="prod-link" href="https://profit.bizfalconai.com/teardown">Free profit teardown</a>
           <a class="prod-link" href="https://profit.bizfalconai.com/">Open ProfitFalcon</a>
-          <a class="prod-link" href="https://profit.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
+          <a class="prod-link" href="https://profit.bizfalconai.com/?install=1"><svg class="btn-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg> Desktop app</a>
         </div>
         <div>
           <a class="prod-shot-link" href="https://profit.bizfalconai.com/" aria-label="Open the live product">
@@ -187,7 +189,7 @@
         </a>
         <div class="mini-note">Prospect audit · evidence-backed findings, projected gains · <em>SAMPLE</em></div>
         <a class="prod-link" href="https://client.bizfalconai.com/">Open ClientFalcon — free for 1 client</a>
-        <a class="prod-link" href="https://client.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
+        <a class="prod-link" href="https://client.bizfalconai.com/?install=1"><svg class="btn-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg> Desktop app</a>
       </article>
 
       <!-- TALON — the engine both products run on, free to use directly. -->
@@ -209,7 +211,7 @@
         </a>
         <div class="mini-note">Computed dashboard · every KPI opens to its code · <em>SAMPLE</em></div>
         <a class="prod-link" href="https://talon.bizfalconai.com">Open Analyst — free</a>
-        <a class="prod-link" href="https://talon.bizfalconai.com/?install=1">&#x2913; Desktop app</a>
+        <a class="prod-link" href="https://talon.bizfalconai.com/?install=1"><svg class="btn-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg> Desktop app</a>
       </article>
     </div>
   </div>
@@ -645,7 +647,7 @@
   </div>
 </footer>
 
-<script defer src="./dusk-art.js?v=20260728a"></script>
+<script defer src="./dusk-art.js?v=20260802a"></script>
 <script>
 /* Waits for DOMContentLoaded because dusk-art.js is deferred: deferred scripts run
    before that event, so window.DUSK is guaranteed by the time this fires. This file
