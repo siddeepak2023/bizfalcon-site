@@ -172,11 +172,3 @@
 .prod-shot-link .prod-shot{transition:opacity .18s ease,transform .18s ease}
 .prod-shot-link:hover .prod-shot{opacity:.92;transform:translateY(-2px)}
 .prod-shot-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
-
-/* Button glyph. Replaced `&#x2913;` (⤓), which renders as a hairline next to bold
-   button text — a text arrow asked to do an icon's job. Sized to the cap height so it
-   sits on the text baseline rather than floating. */
-.btn .btn-ico,
-.btn-ico{width:15px;height:15px;display:inline-block;vertical-align:-0.12em;margin-right:.4em;flex:none}
-/* Explicit px, not 1em: something in the button stack resolved 1em to 2em and the
-   glyph rendered at 29px beside 14.5px text. Measured, then pinned. */
