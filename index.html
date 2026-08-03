@@ -7,14 +7,14 @@
 <meta name="theme-color" content="#F8F7F3">
 <title>BizFalcon AI — Computed, not estimated</title>
 <meta name="description" content="BizFalcon is an AI product studio. Our analysts write and run real Python on your data — every KPI traceable to the code that produced it.">
-<link rel="icon" href="favicon.ico?v=20260802d">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260802d">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260802d">
+<link rel="icon" href="favicon.ico?v=20260802e">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260802e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260802e">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Hanken+Grotesk:wght@400;700&family=Inter+Tight:wght@800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./dusk.css?v=20260802d">
-<link rel="stylesheet" href="./site.css?v=20260802d">
+<link rel="stylesheet" href="./dusk.css?v=20260802e">
+<link rel="stylesheet" href="./site.css?v=20260802e">
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
     if ("serviceWorker" in navigator) {
@@ -232,9 +232,13 @@
              product block that behaved differently from its two siblings. -->
         <a class="prod-shot-link" href="https://talon.bizfalconai.com" aria-label="Open the live product">
         <picture>
-          <img class="prod-shot" src="./shots/dashboard.png" width="2880" height="1880"
+          <!-- Was shots/dashboard.png -- a PROFITFALCON screenshot, its sidebar reading
+                 "ProfitFalcon / Sample store". The Analyst card advertised the wrong
+                 product. shots/analyst.png is a real capture of the Analyst workspace,
+                 taken by e2e/capture-analyst-shot.mjs against the emulator. -->
+            <img class="prod-shot" src="./shots/analyst.png" width="2880" height="1880"
                loading="lazy" decoding="async"
-               alt="BizFalcon Analyst: a KPI dashboard computed from an uploaded spreadsheet, where every figure opens to the Python that produced it">
+               alt="BizFalcon Analyst workspace: the analysis composer with starter prompts, saved analyses and the model picker">
         </picture>
         </a>
         <div class="mini-note">Computed dashboard · every KPI opens to its code · <em>SAMPLE</em></div>
@@ -768,7 +772,7 @@
   </div>
 </footer>
 
-<script defer src="./dusk-art.js?v=20260802d"></script>
+<script defer src="./dusk-art.js?v=20260802e"></script>
 <script>
 /* Waits for DOMContentLoaded because dusk-art.js is deferred: deferred scripts run
    before that event, so window.DUSK is guaranteed by the time this fires. This file
