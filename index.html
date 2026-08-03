@@ -87,14 +87,42 @@
       <img src="falcon-bird-white-sm.webp" alt="" width="440" height="345">
       BizFalcon&nbsp;AI
     </a>
+    <!-- Was seven flat #anchors on a single page, which is what made this read as a
+         landing page rather than a company site. Now the same Products/Solutions/
+         Company shape the competitive set uses (Hex: Platform/Solutions/Enterprise/
+         Resources; Reaktion: Product/Solutions/Integrations/Pricing/Cases), reusing
+         the .nav-dd machinery already in dusk.css so nothing new is invented. -->
     <nav class="nav-links" aria-label="Primary">
-      <a href="#products">Products</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button" aria-haspopup="true" aria-expanded="false">Products <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dd-menu" role="menu">
+          <a href="https://profit.bizfalconai.com/" role="menuitem">ProfitFalcon — ecommerce</a>
+          <a href="https://client.bizfalconai.com/" role="menuitem">ClientFalcon — agencies</a>
+          <a href="https://talon.bizfalconai.com/" role="menuitem">BizFalcon Analyst — free</a>
+          <a href="#products" role="menuitem">All products</a>
+        </div>
+      </div>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button" aria-haspopup="true" aria-expanded="false">Solutions <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dd-menu" role="menu">
+          <a href="https://profit.bizfalconai.com/" role="menuitem">Ecommerce brand</a>
+          <a href="https://client.bizfalconai.com/" role="menuitem">Agency</a>
+          <a href="https://talon.bizfalconai.com/" role="menuitem">Any spreadsheet</a>
+          <a href="https://talon.bizfalconai.com/solutions" role="menuitem">By industry</a>
+        </div>
+      </div>
       <a href="#pricing">Pricing</a>
       <a href="#ledger">Ledger</a>
       <a href="#bench">Agents</a>
-      <a href="#method">Method</a>
-      <a href="#approve">Approve</a>
-      <a href="#studio">Studio</a>
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button" aria-haspopup="true" aria-expanded="false">Company <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dd-menu" role="menu">
+          <a href="https://talon.bizfalconai.com/about" role="menuitem">About</a>
+          <a href="https://talon.bizfalconai.com/security" role="menuitem">Security</a>
+          <a href="https://talon.bizfalconai.com/help" role="menuitem">Docs</a>
+          <a href="https://talon.bizfalconai.com/blog" role="menuitem">Blog</a>
+        </div>
+      </div>
     </nav>
     <div class="nav-right">
       <button class="theme-btn" id="themeToggle" aria-label="Toggle light and dark theme">
@@ -586,7 +614,7 @@
 <section id="studio" class="studio">
   <div class="wrap studio-in">
     <div class="eyebrow rv">Studio</div>
-    <h2 class="rv" style="font-size:clamp(2rem,4.4vw,3.2rem);margin-bottom:24px">Built by one.<br>Shipped like ten.</h2>
+    <h2 class="rv" style="font-size:clamp(2rem,4.4vw,3.2rem);margin-bottom:24px">No sales team in the price.<br>Shipped like ten.</h2>
     <p class="rv d1">BizFalcon is a one-person studio — <strong>one founder, one AI engineering loop</strong>, design to deploy. That isn’t a caveat; it’s the method. Small surface, shared engine, everything tested before it ships.</p>
     <p class="rv d1">No demos pretending to be products. Every product here is live software with real infrastructure, real billing, and a real test suite standing behind it.</p>
     <div class="stack-line rv d2">
@@ -698,5 +726,31 @@ document.querySelectorAll(".rec-actions button").forEach(function(btn){
 });
 </script>
 
+<script>
+(function(){
+  /* Shared with talonomic/talonmark: every .nav-dd, opening one closes the rest. */
+  var dds=[].slice.call(document.querySelectorAll(".nav-dd")); if(!dds.length) return;
+  function closeAll(except){
+    dds.forEach(function(dd){
+      if(dd===except) return;
+      dd.classList.remove("open");
+      var b=dd.querySelector(".nav-dd-btn"); if(b) b.setAttribute("aria-expanded","false");
+    });
+  }
+  dds.forEach(function(dd){
+    var btn=dd.querySelector(".nav-dd-btn"); if(!btn) return;
+    btn.addEventListener("click",function(e){
+      e.stopPropagation(); closeAll(dd);
+      var open=dd.classList.toggle("open");
+      btn.setAttribute("aria-expanded",open?"true":"false");
+    });
+    dd.querySelectorAll(".nav-dd-menu a").forEach(function(a){
+      a.addEventListener("click",function(){dd.classList.remove("open");btn.setAttribute("aria-expanded","false");});
+    });
+  });
+  document.addEventListener("click",function(){closeAll(null);});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeAll(null);}});
+})();
+</script>
 </body>
 </html>
