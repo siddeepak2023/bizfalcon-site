@@ -185,3 +185,10 @@
 .prod-shot-link .prod-shot{transition:opacity .18s ease,transform .18s ease}
 .prod-shot-link:hover .prod-shot{opacity:.92;transform:translateY(-2px)}
 .prod-shot-link:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+/* The engine's CTA, demoted out of the hero button row. Reads as an aside rather
+   than a third primary competing with the two paid products. */
+.hero-aside{margin:16px 0 0;font-family:"JetBrains Mono",monospace;font-size:11px;
+  letter-spacing:.06em;color:var(--mut);max-width:56ch}
+.hero-aside a{color:var(--fg);border-bottom:1px solid var(--line);padding-bottom:1px}
+.hero-aside a:hover{color:var(--signal);border-color:var(--signal)}
