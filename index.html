@@ -7,14 +7,14 @@
 <meta name="theme-color" content="#F8F7F3">
 <title>BizFalcon AI — Computed, not estimated</title>
 <meta name="description" content="BizFalcon is an AI product studio. Our analysts write and run real Python on your data — every KPI traceable to the code that produced it.">
-<link rel="icon" href="favicon.ico?v=20260802b">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260802b">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260802b">
+<link rel="icon" href="favicon.ico?v=20260802d">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260802d">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260802d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Hanken+Grotesk:wght@400;700&family=Inter+Tight:wght@800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./dusk.css?v=20260802b">
-<link rel="stylesheet" href="./site.css?v=20260802b">
+<link rel="stylesheet" href="./dusk.css?v=20260802d">
+<link rel="stylesheet" href="./site.css?v=20260802d">
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
     if ("serviceWorker" in navigator) {
@@ -246,6 +246,80 @@
 </section>
 
 <!-- ============ PRICING — entry price per product, links to each product's own pricing ============ -->
+
+<!-- ============ MODULES ============ -->
+<!-- Named capability slides with real product screenshots, the shape the competitive
+     set uses (Reaktion runs 3-12 images per module slide; Triple Whale 8 large
+     images; neither has live coded animation, which is ours). The company site
+     previously showed three product cards and stopped, so a visitor could not see
+     what any of them actually DOES.
+
+     Each slide carries BOTH labels: the eyebrow says functionally what it is, the
+     heading keeps the editorial voice. Scannable for someone skimming for
+     capability without flattening the writing.
+
+     Every image here is a real screenshot that already existed in shots/ and was
+     going unused -- nothing is a mockup, and nothing needed new capture. -->
+<section id="modules" class="dotbg">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center">
+      <div class="eyebrow">What the products do</div>
+      <h2>Four screens, one engine.</h2>
+      <p>Every figure on these screens was computed by Python that ran on the data — and every one of them opens to the code that produced it.</p>
+    </div>
+    <div class="mods">
+      <article class="mod rv">
+        <div class="mod-copy">
+          <div class="eyebrow">Per-SKU profit screener</div>
+          <h3>Find the products draining cash.</h3>
+          <p>Revenue minus COGS, fees and ad cost for every SKU, ranked so the quiet losers surface first. Star, Bleeder, Sleeper and Leak are computed, not guessed.</p>
+          <a class="prod-link" href="https://profit.bizfalconai.com/">See it on ProfitFalcon</a>
+        </div>
+        <a class="mod-shot-link" href="https://profit.bizfalconai.com/" aria-label="ProfitFalcon per-SKU screener: every product ranked by contribution margin with computed status tags">
+          <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span>per-sku profit screener</span><span style="margin-left:auto">SAMPLE DATA</span></div>
+          <img class="prod-shot" src="./shots/screener.png" width="1968" height="1298" loading="lazy" decoding="async" alt="ProfitFalcon per-SKU screener: every product ranked by contribution margin with computed status tags">
+        </a>
+      </article>
+      <article class="mod mod--flip rv">
+        <div class="mod-copy">
+          <div class="eyebrow">Client report builder</div>
+          <h3>Friday's reports, by lunch.</h3>
+          <p>Drop an ad export, get exact KPIs, the written why, a prioritised test plan and a white-label PDF carrying your agency's brand. Reusable per client, every month.</p>
+          <a class="prod-link" href="https://client.bizfalconai.com/">See it on ClientFalcon</a>
+        </div>
+        <a class="mod-shot-link" href="https://client.bizfalconai.com/" aria-label="ClientFalcon report builder: agency branding fields beside a generated executive summary, recommendations and test plan">
+          <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span>client report builder</span><span style="margin-left:auto">SAMPLE DATA</span></div>
+          <img class="prod-shot" src="./shots/report-builder.png" width="2880" height="1880" loading="lazy" decoding="async" alt="ClientFalcon report builder: agency branding fields beside a generated executive summary, recommendations and test plan">
+        </a>
+      </article>
+      <article class="mod rv">
+        <div class="mod-copy">
+          <div class="eyebrow">Operator queue</div>
+          <h3>Recommendations you approve, one at a time.</h3>
+          <p>Agents watch for the ways money leaks, price the fix, and queue it. Nothing executes on its own — you approve every move, and each one is scored later against what actually happened.</p>
+          <a class="prod-link" href="https://profit.bizfalconai.com/#bench">See the agent bench</a>
+        </div>
+        <a class="mod-shot-link" href="https://profit.bizfalconai.com/#bench" aria-label="The agent feed: queued recommendations with the dollar impact of each, awaiting operator approval">
+          <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span>operator queue</span><span style="margin-left:auto">SAMPLE DATA</span></div>
+          <img class="prod-shot" src="./shots/agent-feed.png" width="1968" height="1672" loading="lazy" decoding="async" alt="The agent feed: queued recommendations with the dollar impact of each, awaiting operator approval">
+        </a>
+      </article>
+      <article class="mod mod--flip rv">
+        <div class="mod-copy">
+          <div class="eyebrow">Prospect audit</div>
+          <h3>Win the pitch with their own numbers.</h3>
+          <p>Turn any ad export into an evidence-backed audit with projected monthly gains — the document that wins the account, and the baseline you report against afterwards.</p>
+          <a class="prod-link" href="https://client.bizfalconai.com/">Run a free audit</a>
+        </div>
+        <a class="mod-shot-link" href="https://client.bizfalconai.com/" aria-label="ClientFalcon prospect audit: evidence-backed findings with projected monthly gains">
+          <div class="shot-bar"><span class="dots"><i></i><i></i><i></i></span><span>prospect audit</span><span style="margin-left:auto">SAMPLE DATA</span></div>
+          <img class="prod-shot" src="./shots/audit.png" width="2880" height="1880" loading="lazy" decoding="async" alt="ClientFalcon prospect audit: evidence-backed findings with projected monthly gains">
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="wrap">
     <div class="sec-row">
@@ -694,7 +768,7 @@
   </div>
 </footer>
 
-<script defer src="./dusk-art.js?v=20260802b"></script>
+<script defer src="./dusk-art.js?v=20260802d"></script>
 <script>
 /* Waits for DOMContentLoaded because dusk-art.js is deferred: deferred scripts run
    before that event, so window.DUSK is guaranteed by the time this fires. This file
