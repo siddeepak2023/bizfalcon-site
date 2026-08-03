@@ -33,6 +33,12 @@
   color:var(--fg);transition:color .2s ease;text-decoration:none;}
 .prod:hover .prod-link{color:var(--signal)}
 .prod-link::after{content:"→";transition:transform .2s ease}
+/* Adjacent product links were 4px apart — measured. Each one is inline-flex with an
+   `→` ::after, so link N's arrow sat against link N+1's leading icon and the row read
+   as one run-on string ("OPEN PROFITFALCON →↓ DESKTOP APP →"). The parent is
+   display:block with no gap, so only a collapsed whitespace character separated them.
+   Space the siblings rather than restructuring the markup. */
+.prod-link + .prod-link{margin-left:26px}
 .prod:hover .prod-link::after{transform:translateX(4px)}
 .demo{border:1px solid var(--line);background:var(--bg);
   font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75;}
