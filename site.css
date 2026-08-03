@@ -140,13 +140,20 @@
 .calc2{grid-template-columns:1fr}
 }
 
-/* ── hero CTA row: one centred line ────────────────────────────────────────────
-   dusk.css gives .hero-ctas `max-width:56ch`, which is right for a left-aligned
-   column but wrong here: the hero centres its text, three buttons exceed 56ch, and
-   they wrapped 2 + 1 with the third landing hard left — flex items do not inherit
-   text-align, so it read as a layout bug rather than a wrap. Centre the row and let
-   it size to its content; it still wraps on narrow screens, just symmetrically. */
-.hero .hero-ctas,
+/* ── CTA rows ──────────────────────────────────────────────────────────────────
+   The closing .cta-sec DOES centre its text, so its button row is centred to match.
+   The HERO does not, and centring its row was a defect: measured on the live site,
+   text-align computed `start` on the chip, the h1 and the sub, while the button row
+   sat `justify-content:center` -- putting the first button 152px right of the
+   headline it belongs to. Reported twice as "buttons in the wrong place".
+
+   The rule that centred it was written for a premise that is no longer true: its
+   comment says "the hero centres its text". It does not. The wrap it was avoiding
+   does not happen either -- the three buttons sum 800px inside a 1132px row at
+   desktop width, so nothing wraps; `max-width:none` is kept so that stays true.
+   Left on narrow screens is also correct here, because the text beside them is
+   left-aligned. Align the row to the copy, not to the viewport. */
+.hero .hero-ctas{justify-content:flex-start;max-width:none}
 .cta-sec .hero-ctas{justify-content:center;max-width:none;margin-inline:auto}
 
 /* ── the bust is bottom-aligned against a much taller card ─────────────────────
