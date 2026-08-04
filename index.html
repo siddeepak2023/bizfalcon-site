@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Hanken+Grotesk:wght@400;700&family=Inter+Tight:wght@800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./dusk.css?v=20260803k">
+<link rel="stylesheet" href="./dusk.css?v=20260803n">
 <link rel="stylesheet" href="./site.css?v=20260803k">
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
@@ -149,16 +149,23 @@
     <span class="chip hero-chip">AI analytics for ecommerce brands &amp; agencies</span>
     <h1>Computed,<br>not <span class="est">estimated</span>.</h1>
     <p class="hero-sub">BizFalcon builds AI analytics for ecommerce brands and the agencies that run them. Our products <strong>write and run real Python on your data</strong> — every KPI traceable to the code that produced it — and every recommendation they make is scored in a ledger against what actually happened. You never write SQL. Every KPI opens to the query and the Python behind it.</p>
-    <div class="hero-ctas">
-      <a class="btn btn--primary" href="https://profit.bizfalconai.com/teardown">ProfitFalcon — free teardown</a>
-      <a class="btn btn--primary" href="https://client.bizfalconai.com/">ClientFalcon — free for 1 client</a>
+    <!-- The stack is width:fit-content, so it collapses to its widest child -- the two-button
+         row -- and the Analyst button centres on THAT rather than on the viewport. The hero's
+         .hero-ctas is justify-content:flex-start (site.css), so page-centring would land the
+         Analyst far right of the pair. Survives the row wrapping to two lines at narrow widths.
+
+         Why a button again, after a previous pass demoted it to a text line: the objection then
+         was that a ghost button BESIDE two solids read as the weakest of three primaries. On its
+         own row BENEATH them it reads as the alternative to both -- subordinate by position, which
+         is what the engine is. The placement answers the objection instead of ignoring it. -->
+    <div class="hero-cta-stack">
+      <div class="hero-ctas">
+        <a class="btn btn--primary" href="https://profit.bizfalconai.com/teardown">ProfitFalcon — free teardown</a>
+        <a class="btn btn--primary" href="https://client.bizfalconai.com/">ClientFalcon — free for 1 client</a>
+      </div>
+      <a class="btn btn--ghost hero-alt" href="https://talon.bizfalconai.com">BizFalcon Analyst — free</a>
+      <p class="hero-aside">the engine behind both products</p>
     </div>
-    <!-- Centred with the CTA row above it. The row was centred when the 2+1 wrap was
-         fixed; this line was left behind, so it sat hard left under centred buttons. -->
-    <!-- The engine is not a third product competing with the two paid ones. As a
-         boxed ghost button beside two solid buttons it read as the weakest of
-         three primaries; on its own line it reads as what it is -- the free way in. -->
-    <p class="hero-aside">or use <a href="https://talon.bizfalconai.com">BizFalcon Analyst</a>, the engine behind both products, free.</p>
     <div class="eyebrow" style="margin-top:22px;margin-bottom:0;justify-content:flex-start">No card. No demo call.</div>
   </div>
 
@@ -761,7 +768,7 @@
   </div>
 </footer>
 
-<script defer src="./dusk-art.js?v=20260803k"></script>
+<script defer src="./dusk-art.js?v=20260803n"></script>
 <script>
 /* Waits for DOMContentLoaded because dusk-art.js is deferred: deferred scripts run
    before that event, so window.DUSK is guaranteed by the time this fires. This file

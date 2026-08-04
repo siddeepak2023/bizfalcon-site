@@ -193,6 +193,11 @@
 
 /* The engine's CTA, demoted out of the hero button row. Reads as an aside rather
    than a third primary competing with the two paid products. */
+/* Column stack, fit-content: its width IS the CTA row's width, so the Analyst button
+   and its caption centre on the pair of buttons rather than on the page. */
+.hero-cta-stack{display:flex;flex-direction:column;align-items:center;width:fit-content}
+.hero-alt{margin-top:14px}
+.hero-cta-stack .hero-aside{text-align:center}
 .hero-aside{margin:16px 0 0;font-family:"JetBrains Mono",monospace;font-size:11px;
   letter-spacing:.06em;color:var(--mut);max-width:56ch}
 .hero-aside a{color:var(--fg);border-bottom:1px solid var(--line);padding-bottom:1px}
