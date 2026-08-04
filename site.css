@@ -31,7 +31,12 @@
 .prod-link{margin-top:26px;display:inline-flex;align-items:center;gap:8px;
   font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg);transition:color .2s ease;text-decoration:none;}
-.prod:hover .prod-link{color:var(--signal)}
+/* Scoped to the link, not the card. `.prod:hover .prod-link` lit ALL THREE links in a
+   card (index.html:187-189 — teardown, open app, desktop download) whenever the cursor
+   entered the card anywhere, so three different destinations read as one. :focus-visible
+   is included because the old rule gave keyboard users no link feedback at all — tabbing
+   never triggers a parent's :hover. */
+.prod-link:hover,.prod-link:focus-visible{color:var(--signal)}
 .prod-link::after{content:"→";transition:transform .2s ease}
 /* Adjacent product links were 4px apart — measured. Each one is inline-flex with an
    `→` ::after, so link N's arrow sat against link N+1's leading icon and the row read
@@ -39,7 +44,7 @@
    display:block with no gap, so only a collapsed whitespace character separated them.
    Space the siblings rather than restructuring the markup. */
 .prod-link + .prod-link{margin-left:26px}
-.prod:hover .prod-link::after{transform:translateX(4px)}
+.prod-link:hover::after,.prod-link:focus-visible::after{transform:translateX(4px)}
 .demo{border:1px solid var(--line);background:var(--bg);
   font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75;}
 .demo-bar{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--line-soft);color:var(--mut);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
