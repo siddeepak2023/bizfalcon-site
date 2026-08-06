@@ -353,16 +353,27 @@
         <div class="lg-line" id="lgLine"><span class="lg-k" id="lgK"></span><span class="lg-v" id="lgV"></span></div>
       </div>
       <div class="lg-prog" aria-hidden="true"><i id="lgProg"></i></div>
-      <div class="lg-foot"><span>ILLUSTRATIVE EXAMPLE · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">ILLUSTRATIVE: PROJECTED reallocate $41.9K · REALIZED — fills from your exports</span></div>
+      <!-- Was "ILLUSTRATIVE", which was the honest label while the figures traced to
+           nothing. They are computed from the marketing-attribution sample now, so it
+           says SAMPLE like the other surfaces. -->
+      <div class="lg-foot"><span>SAMPLE RECOMMENDATION · MARGIN SENTINEL · PROFITFALCON</span><span class="lg-tally">LEDGER: PROJECTED reallocate $11.1K · REALIZED — fills from your exports</span></div>
     </div>
   </div>
 </section>
 <script>
 (function(){
   var stages=[
-    ["Detected","Margin Sentinel flagged <b>Pinterest — Lifestyle Pins</b>: returning <b>0.90×</b> on spend while Google returns <b>4.82×</b> — the channel is losing money on every dollar."],
-    ["Exact change","<span class=\"lgm\">Reallocate budget · move the $41.9K off Pinterest — Lifestyle Pins toward the higher-return channel</span>"],
-    ["Projected","<b>$41.9K</b> in spend reallocated from a 0.90× channel to a 4.82× one · the formula behind the number is attached to the card."],
+    /* Computed from the marketing-attribution sample and mirrored in
+       frontend/src/components/showcase/cascade.ts (CASCADE_CHANNELS), where
+       cascade.test.ts asserts every value against the engine. The previous copy said
+       Pinterest returned 0.90x against Google's 4.82x and reallocated $41.9K. None of
+       the three traced to any sample: Pinterest returns 0.69x, Google 3.20x, and
+       Pinterest's spend is $11.1K. Google is not even the best channel -- Klaviyo
+       Email returns 6.87x, more than double -- so "toward the higher-return channel"
+       was pointing at the wrong one. */
+    ["Detected","Margin Sentinel flagged <b>Pinterest</b>: returning <b>0.69×</b> on spend while Klaviyo Email returns <b>6.87×</b> — below 1.0×, the channel loses money on every dollar."],
+    ["Exact change","<span class=\"lgm\">Reallocate budget · move the $11.1K off Pinterest toward Klaviyo Email (6.87×) and Google Ads (3.20×)</span>"],
+    ["Projected","<b>$11.1K</b> in spend reallocated from a 0.69× channel to a 6.87× one · the formula behind the number is attached to the card."],
     ["Approved","You approved it. The change is yours to apply — one click copies the exact move. Nothing executes without you."],
     ["Measured","Each new export you drop is scored against the projection: MER, spend, and contribution by channel."],
     ["Realized","Your realized number lands here, scored against the projection over 30 days. The ledger fills from your data — not a demo figure."]
@@ -416,8 +427,14 @@
       <div class="rm-body">
         <div class="rm-head"><span>QUEUED → YOUR APPROVAL</span><span>PROFITFALCON · CLIENTFALCON</span></div>
         <div class="sc-stagger">
-          <div class="sc-act"><span class="a-pri">P1</span><p><b>Fence or kill the deep codes</b> — FLASH35 ran 26.6% off on 1,641 orders; $436,203 given away across 9,713 discounted orders (7.7% of gross)</p><span class="a-imp">~$<b data-count="30993">30,993</b>/mo</span></div>
-          <div class="sc-act"><span class="a-pri">P2</span><p><b>Reallocate the bottom channel</b> — Pinterest returns 0.90× against Google's 4.82×; $41.9K of spend sitting behind the weaker one</p><span class="a-imp">$<b data-count="41900">41,900</b> to move</span></div>
+          <!-- 26.7%, not 26.6% (computed 26.705%). The $30,993 is the two deep codes'
+               combined discount per month, which is what "the deep codes" plural refers
+               to -- it is NOT what fencing recovers, so it is not labelled that way. -->
+          <div class="sc-act"><span class="a-pri">P1</span><p><b>Fence or kill the deep codes</b> — FLASH35 ran 26.7% off on 1,641 orders and COMEBACK 26.4% on 702; $436,203 given away across 9,713 discounted orders (7.7% of gross)</p><span class="a-imp">~$<b data-count="30993">30,993</b>/mo</span></div>
+          <!-- Computed: Pinterest 0.69x, Klaviyo Email 6.87x, Pinterest spend $11.1K.
+               The old 0.90x / 4.82x / $41.9K set traced to no sample, and it named Google
+               as the benchmark when Email returns more than twice as much. -->
+          <div class="sc-act"><span class="a-pri">P2</span><p><b>Reallocate the bottom channel</b> — Pinterest returns 0.69× against Klaviyo Email's 6.87×; $11.1K of spend sitting behind a channel that returns less than it costs</p><span class="a-imp">$<b data-count="11057">11,057</b> to move</span></div>
           <div class="sc-act"><span class="a-pri">P3</span><p><b>Book the client review</b> — Bloom Botanicals blended 1.69×, under the 2.0× breakeven, dragged by Meta at 0.82× on $13.4K</p><span class="a-imp">$<b data-count="66200">66,200</b> at risk</span></div>
         </div>
         <div class="rm-proj">One queue across both products <span>· every card carries the formula that produced it</span></div>
@@ -430,14 +447,21 @@
         <div class="bn-name">Margin Sentinel<span class="bn-prod">PF</span></div>
         <p class="bn-watch">Watches paid campaigns for spend that returns less than it costs — MER, CPA drift, contribution margin by campaign.</p>
         <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
-          <span class="bn-move">Reallocate spend · Pinterest — Lifestyle Pins returns <b>0.90×</b> vs Google's 4.82× · $41.9K in spend to move</span></div>
+          <!-- The Client Health card lower down already had the computed pair
+               (0.69x, $11.1K); this one had drifted to an invented 0.90x/4.82x/$41.9K
+               set in the same file. Same sample, same numbers now. -->
+          <span class="bn-move"><b>Ridgeway Coffee:</b> reallocate spend · Pinterest returns <b>0.69×</b> vs Klaviyo Email's 6.87× · $11.1K in spend to move</span></div>
         <div class="bn-ledger">Ledger · fills from your approvals</div>
       </div>
       <div class="bn-card">
         <div class="bn-name">Discount Leak<span class="bn-prod">PF</span></div>
         <p class="bn-watch">Watches every discount code for redemptions by customers who were already converting — returning buyers, organic traffic.</p>
         <div class="bn-rec"><span class="bn-tag">Sample recommendation</span>
-          <span class="bn-move">Across <b>9,713 discounted orders</b>, $436K was given away — FLASH35 alone ran 26.6% off on 1,641 · ~$31.0K/mo recoverable by fencing it</span></div>
+          <!-- "~$31.0K/mo recoverable by fencing it [FLASH35]" was wrong twice: it
+               attributed both deep codes' total to FLASH35, and fencing a code to first
+               orders recovers only its REPEAT slice -- which for FLASH35 is zero. The
+               repeat-heavy code is COMEBACK, and fencing it returns ~$7.3K/mo. -->
+          <span class="bn-move">Across <b>9,713 discounted orders</b>, $436K was given away — COMEBACK ran 26.4% off on 702, <b>82.6%</b> of them to repeat buyers · ~$7.3K/mo recoverable by fencing it</span></div>
         <div class="bn-ledger">Ledger · fills from your approvals</div>
       </div>
       <div class="bn-card">
