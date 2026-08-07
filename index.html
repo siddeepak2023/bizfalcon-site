@@ -7,14 +7,14 @@
 <meta name="theme-color" content="#F8F7F3">
 <title>BizFalcon AI — Computed, not estimated</title>
 <meta name="description" content="BizFalcon builds AI analytics for ecommerce brands and the agencies that run them. Our analysts write and run real Python on your data — every KPI traceable to the code that produced it.">
-<link rel="icon" href="favicon.ico?v=20260806l">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260806l">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260806l">
+<link rel="icon" href="favicon.ico?v=20260807a">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=20260807a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260807a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Hanken+Grotesk:wght@400;700&family=Inter+Tight:wght@800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./dusk.css?v=20260806l">
-<link rel="stylesheet" href="./site.css?v=20260806l">
+<link rel="stylesheet" href="./dusk.css?v=20260807a">
+<link rel="stylesheet" href="./site.css?v=20260807a">
   <script>
     /* Belt-and-suspenders with sw.js: drop any root-scoped worker from the old SPA-at-root setup so this page is not forwarded to /dashboard. */
     if ("serviceWorker" in navigator) {
@@ -92,7 +92,7 @@
          Company shape the competitive set uses (Hex: Platform/Solutions/Enterprise/
          Resources; Reaktion: Product/Solutions/Integrations/Pricing/Cases), reusing
          the .nav-dd machinery already in dusk.css so nothing new is invented. -->
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
       <div class="nav-dd">
         <button class="nav-dd-btn" type="button" aria-haspopup="true" aria-expanded="false">Products <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dd-menu" role="menu">
@@ -133,6 +133,13 @@
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
       <a class="btn btn--primary" href="https://profit.bizfalconai.com/teardown">Free profit teardown</a>
+      <!-- Below 920px .nav-links was display:none with no replacement, so all 15
+           destinations above were unreachable on a phone. This is the control that
+           reveals them; dusk-art.js toggles .nav--open on the header. -->
+      <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <svg class="nb-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg class="nb-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -794,7 +801,7 @@
   </div>
 </footer>
 
-<script defer src="./dusk-art.js?v=20260806l"></script>
+<script defer src="./dusk-art.js?v=20260807a"></script>
 <script>
 /* Waits for DOMContentLoaded because dusk-art.js is deferred: deferred scripts run
    before that event, so window.DUSK is guaranteed by the time this fires. This file
