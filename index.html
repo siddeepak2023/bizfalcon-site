@@ -185,7 +185,11 @@
 <section id="products" class="dotbg">
   <div class="wrap">
     <div class="sec-row">
-      <div class="sec-head rv" data-dock>
+      <!-- data-dock-clearance is how far above the landmark the claws sit. It was
+           unset here, so it fell back to CLAW_CLEARANCE=8 (dusk-art.js:122) and
+           the falcon docked lower on this site than on either sibling — talonmark
+           sets 32. 48 lifts it clear of the heading instead of resting on it. -->
+      <div class="sec-head rv" data-dock data-dock-clearance="48">
         <div class="eyebrow">Products</div>
         <h2>Two products.<br>One engine.</h2>
         <p>ProfitFalcon is for the brand; ClientFalcon is for the agency running someone else's. Two buyers, two products, priced on their own. Both run on BizFalcon Analyst — which writes Python, runs it in your browser, and shows the math behind every answer — and which you can also use directly, free.</p>
